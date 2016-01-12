@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+
+    <script type="text/javascript" src="js/x-tag-core.js"></script>
+    <script type="text/javascript" src="js/x-material.js"></script>
+    <script type="text/javascript" src="js/x-material-button.js"></script>
+    <script type="text/javascript" src="js/x-material-simple.js"></script>
+    <script type="text/javascript" src="js/x-material-toolbar.js"></script>
+    <script type="text/javascript">
+        var theme = makeTheme("blue-grey", true, "dark");
+    </script>
+    <link rel="stylesheet" type="text/css" href="styles/x-material.css">
+</head>
+<body>
+
+<m-toolbar id="toolbar" text="Settings" nav-icon="arrow_back" primary></m-toolbar>
+<div style="height: 56px;"></div>
+
+<m-card elevation="2" class="margin-reset margin-bottom">
+    <m-subhead theme-color="teal" text="Wireless & networks"></m-subhead>
+
+    <m-item-single>
+        <m-icon theme-color="teal">network_wifi</m-icon>
+        Wi-Fi
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">bluetooth</m-icon>
+        Bluetooth
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">data_usage</m-icon>
+        Data usage
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">more_horiz</m-icon>
+        More
+    </m-item-single>
+</m-card>
+
+<m-card elevation="2" class="margin-reset margin-bottom">
+    <m-subhead theme-color="teal" text="Device"></m-subhead>
+
+    <m-item-single>
+        <m-icon theme-color="teal">brightness_medium</m-icon>
+        Display
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">notifications</m-icon>
+        Sound & notification
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">apps</m-icon>
+        Apps
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">storage</m-icon>
+        Storage & USB
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">power</m-icon>
+        Power
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">memory</m-icon>
+        Memory
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">person</m-icon>
+        Users
+    </m-item-single>
+</m-card>
+
+<m-card elevation="2" class="margin-reset margin-bottom">
+    <m-subhead theme-color="teal" text="Personal"></m-subhead>
+
+    <m-item-single>
+        <m-icon theme-color="teal">location_on</m-icon>
+        Location
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">lock</m-icon>
+        Security
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">account_box</m-icon>
+        Accounts
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">language</m-icon>
+        Language & input
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">backup</m-icon>
+        Backup & reset
+    </m-item-single>
+</m-card>
+
+<m-card elevation="2" class="margin-reset margin-bottom">
+    <m-subhead theme-color="teal" text="System"></m-subhead>
+
+    <m-item-single>
+        <m-icon theme-color="teal">access_time</m-icon>
+        Date & time
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">accessibility</m-icon>
+        Accessibility
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">print</m-icon>
+        Printing
+    </m-item-single>
+    <m-divider partial></m-divider>
+
+    <m-item-single>
+        <m-icon theme-color="teal">info_outline</m-icon>
+        About
+    </m-item-single>
+</m-card>
+
+<script type="text/javascript">
+    // Set the background
+    document.body.style.backgroundColor = theme.background;
+    document.body.classList.add("fouc");
+
+    xtag.addEvent(document.getElementById("toolbar"), "tap:delegate(m-icon.nav)",
+            function() {
+                location.href = "index.html";
+            });
+</script>
+
+</body>
+</html>

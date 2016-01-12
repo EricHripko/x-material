@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+
+    <script type="text/javascript" src="js/x-tag-core.js"></script>
+    <script type="text/javascript" src="js/x-material.js"></script>
+    <script type="text/javascript" src="js/x-material-button.js"></script>
+    <script type="text/javascript" src="js/x-material-simple.js"></script>
+    <script type="text/javascript" src="js/x-material-toolbar.js"></script>
+    <script type="text/javascript" src="js/x-material-text-field.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/x-material.css">
+</head>
+<body>
+    <m-toolbar id="toolbar" text="New Chat" nav-icon="arrow_back" primary>
+
+    </m-toolbar>
+    <div style="height: 56px;"></div>
+
+    <br>
+
+    <m-text-field text="" hint="Input text"></m-text-field>
+
+    <br>
+    <m-subhead text="Recent chat"></m-subhead>
+    <m-item-single>
+        <m-image-view>A</m-image-view>
+        Abbey Christensen
+    </m-item-single>
+    <m-item-single>
+        <m-image-view>A</m-image-view>
+        Alex Nelson
+    </m-item-single>
+    <m-item-single>
+        <m-image-view>M</m-image-view>
+        Mary Johnson
+    </m-item-single>
+    <m-item-single>
+        <m-image-view>P</m-image-view>
+        Peter Carlsson
+    </m-item-single>
+    <m-item-single>
+        <m-image-view>T</m-image-view>
+        Trevor Hansen
+    </m-item-single>
+
+    <script type="text/javascript">
+        // Set the background
+        document.body.style.backgroundColor = theme.background;
+        document.body.classList.add("fouc");
+
+        /*xtag.addEvent(document.getElementById("test"), "tap",
+            function() {
+                var el = document.createElement("m-item-single");
+                el.displayText = "<m-icon theme-color=\"teal\">more_horiz</m-icon>More";
+                document.body.insertBefore(el, document.body.lastElementChild.previousElementSibling);
+                el = document.createElement("m-divider");
+                el.setAttribute("partial");
+                document.body.insertBefore(el, document.body.lastElementChild.previousElementSibling);
+            });*/
+    </script>
+</body>
+</html>
