@@ -340,8 +340,7 @@ m-text-field > div.border-default {
 
     width: 100%;
 
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom: 1px solid;
 }
 
 m-text-field > div.border-active {
@@ -351,8 +350,7 @@ m-text-field > div.border-active {
 
     width: 0;
 
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom: 2px solid;
 
     transition: left ease-in-out 200ms, width ease-in-out 200ms;
 }
