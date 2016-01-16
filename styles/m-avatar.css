@@ -1,0 +1,18 @@
+m-avatar {
+    display: block;
+    width: 40px;
+    height: 40px;
+    float: left;
+
+    line-height: 40px;
+    text-align: center;
+
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    border: none;
+    border-radius: 100%;
+
+    animation: fade-in 200ms;
+}

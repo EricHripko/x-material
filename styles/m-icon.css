@@ -1,0 +1,7 @@
+m-icon {
+    display: block;
+
+    float: left;
+    /* Fix for IE fonts in IE */
+    font-feature-settings: 'liga';
+}

@@ -1,0 +1,51 @@
+m-item-single {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 48px;
+
+    margin: 0;
+    padding: 0 16px;
+
+    vertical-align: top;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+
+    box-sizing: border-box;
+}
+
+.fouc m-item-single {
+    animation: appear 200ms;
+}
+
+m-item-single > m-text-view {
+    height: 48px;
+    line-height: 48px;
+}
+
+m-item-single m-avatar {
+    margin-top: 4px;
+    margin-right: 16px;
+}
+
+m-item-single m-icon {
+    margin-right: 32px;
+}
+
+m-item-single m-icon > .material-icons {
+    margin-top: 12px;
+}
+
+m-item-single m-icon.action {
+    position: absolute;
+    top: 0;
+    right: 16px;
+
+    float: none;
+    margin-right: 0;
+}

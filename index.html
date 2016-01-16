@@ -10,46 +10,78 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
 
     <script type="text/javascript" src="js/x-tag-core.js"></script>
-    <script type="text/javascript" src="js/x-material.js"></script>
-    <script type="text/javascript" src="js/x-material-button.js"></script>
-    <script type="text/javascript" src="js/x-material-simple.js"></script>
-    <script type="text/javascript" src="js/x-material-toolbar.js"></script>
-    <script type="text/javascript" src="js/x-material-text-field.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/x-material.css">
+    <script type="text/javascript" src="js/m-core.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-core.css">
 
+    <script type="text/javascript" src="js/m-button.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-button.css">
+
+    <script type="text/javascript" src="js/m-toolbar.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-toolbar.css">
+
+    <script type="text/javascript" src="js/m-text-field.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-text-field.css">
+
+    <script type="text/javascript" src="js/m-icon.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-icon.css">
+
+    <script type="text/javascript" src="js/m-text-view.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-text-view.css">
+
+    <script type="text/javascript" src="js/m-item-single.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-item-single.css">
+
+    <script type="text/javascript" src="js/m-avatar.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-avatar.css">
+
+    <script type="text/javascript" src="js/m-subhead.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-subhead.css">
 </head>
 <body>
-    <m-toolbar id="toolbar" text="New Chat" nav-icon="menu" primary>
 
-    </m-toolbar>
-    <div style="height: 56px;"></div>
+<m-toolbar id="toolbar" text="New Chat" nav-icon="menu" primary>
 
-    <br>
+</m-toolbar>
+<div style="height: 56px;"></div>
 
-    <m-text-field text="" hint="Input text" primary></m-text-field>
+<m-subhead text="Recent chat"></m-subhead>
+<m-item-single>
+    <m-avatar>A</m-avatar>
+    Abbey Christensen
+    <m-icon theme-color="teal" class="action">chat_bubble</m-icon>
+</m-item-single>
+<m-item-single>
+    <m-avatar>A</m-avatar>
+    Alex Nelson
+    <m-icon theme-color="teal" class="action">chat_bubble</m-icon>
+</m-item-single>
+<m-item-single>
+    <m-avatar>M</m-avatar>
+    Mary Johnson
+    <m-icon class="action">chat_bubble</m-icon>
+</m-item-single>
+<m-item-single>
+    <m-avatar>P</m-avatar>
+    Peter Carlsson
+    <m-icon class="action">chat_bubble</m-icon>
+</m-item-single>
+<m-item-single>
+    <m-avatar>T</m-avatar>
+    Trevor Hansen
+    <m-icon class="action">chat_bubble</m-icon>
+</m-item-single>
 
-    <br>
-    <m-subhead text="Recent chat"></m-subhead>
-    <m-item-single>
-        <m-image-view>A</m-image-view>
-        Abbey Christensen
-    </m-item-single>
-    <m-item-single>
-        <m-image-view>A</m-image-view>
-        Alex Nelson
-    </m-item-single>
-    <m-item-single>
-        <m-image-view>M</m-image-view>
-        Mary Johnson
-    </m-item-single>
-    <m-item-single>
-        <m-image-view>P</m-image-view>
-        Peter Carlsson
-    </m-item-single>
-    <m-item-single>
-        <m-image-view>T</m-image-view>
-        Trevor Hansen
-    </m-item-single>
+<m-divider style="margin-top: 8px;"></m-divider>
+
+<m-subhead text="Previous chats"></m-subhead>
+<m-item-single>
+    <m-avatar>B</m-avatar>
+    Britta Holt
+</m-item-single>
+<m-item-single>
+    <m-avatar>S</m-avatar>
+    Sandra Adams
+</m-item-single>
 
 </body>
 </html>

@@ -190,85 +190,21 @@ xtag.mixins["m-element"] = {
     }
 };
 
-xtag.register("m-subhead", {
-    mixins: ["m-element"],
-    lifecycle: {
-        created: function() {
-            // Create a text view to go inside the element
-            this.textView = document.createElement("m-text-view");
-            this.textView.textStyle = "body2";
-            // Insert it
-            this.textContent = "";
-            this.appendChild(this.textView);
-            // Setup styles
-            this.textView.textColor = "secondary";
-        }
-    },
-    accessors: {
-        text: {
-            attribute: {},
-            get: function() {
-                return this.textView.textContent;
-            },
-            set: function(value) {
-                this.textView.textContent = value;
-            }
-        }
-    },
-    methods: {
-        render: function () {
-            if(hasValue(this.themeColor)) {
-                this.textView.style.color = colors[this.themeColor][500];
-                return;
-            }
-
-            this.textView.textColor = "secondary";
-        }
-    }
-});
-
-
-xtag.register("m-item-single", {
+// Define simple components
+xtag.register("m-ink", {});
+xtag.register("m-divider", {
     lifecycle: {
         created: function () {
-            // Create a text view to go inside the element
-            this.text = document.createElement("m-text-view");
-            this.text.innerHTML = this.innerHTML;
-            this.text.textStyle = "subheading";
-            // Insert it
-            this.innerHTML = "";
-            this.appendChild(this.text);
             // Setup styles
-            this.text.style.color = xm.current.text;
-            this.pressedColor = xm.current.elevatedPressed;
-        }
-    },
-    accessors: {
-        displayText: {
-            get: function() {
-                return this.text.innerHTML;
-            },
-            set: function(value) {
-                this.text.innerHTML = value;
-            }
-        }
-    },
-    methods: {
-        resetAnimation: function () {
-            xm.ripple.reset(this);
-        }
-    },
-    events: {
-        tapstart: function (e) {
-            // Animate ripple
-            xm.ripple.make(e, this);
-        },
-        tapend: function () {
-            this.resetAnimation();
-        },
-        leave: function () {
-            this.resetAnimation();
+            this.style.borderBottom = "solid 1px " + xm.current.divider;
         }
     }
 });
-
+xtag.register("m-card", {
+    lifecycle: {
+        created: function () {
+            // Setup styles
+            this.style.backgroundColor = xm.current.card;
+        }
+    }
+});

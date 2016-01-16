@@ -5,3 +5,6 @@ The library is built on top of x-tag and provides lightweight web components for
 
 ## Demo
 See the live demonstration [here](http://erichripko.github.io/x-material).
+
+## Browser Support
+Chrome, Firefox, Safari, IE 10+

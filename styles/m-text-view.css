@@ -1,0 +1,59 @@
+m-text-view {
+    font-family: 'Roboto', sans-serif;
+}
+
+m-text-view[text-style=display4], input.display4 {
+    font-weight: 300;
+    font-size: 112px;
+}
+
+m-text-view[text-style=display3], input.display3 {
+    font-weight: 400;
+    font-size: 56px;
+}
+
+m-text-view[text-style=display2], input.display2 {
+    font-weight: 400;
+    font-size: 45px;
+}
+
+m-text-view[text-style=display1], input.display1 {
+    font-weight: 400;
+    font-size: 34px;
+}
+
+m-text-view[text-style=headline], input.headline {
+    font-weight: 400;
+    font-size: 24px;
+}
+
+m-text-view[text-style=title], input.title {
+    font-weight: 400;
+    font-size: 20px;
+}
+
+m-text-view[text-style=subheading], input.subheading {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+m-text-view[text-style=body2], input.body2 {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+m-text-view, m-text-view[text-style=body1], input.body1 {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+m-text-view[text-style=caption], input.caption {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+m-text-view[text-style=button] {
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+}
