@@ -2,6 +2,12 @@
 var xm = {};
 xm.ripple = {};
 
+// Set the background for the screen when ready
+document.addEventListener("DOMContentLoaded", function () {
+    document.body.style.backgroundColor = xm.current.background;
+    document.body.classList.add("fouc");
+});
+
 // Material colour palette
 var colors = {
     red: {
@@ -95,8 +101,24 @@ xm.Theme = function(color, style, toolbarStyle) {
     this.color = color;
 };
 
+// Get the user-configured with a fallback
+xm.getTheme = function () {
+    // Have a go at detecting the theme
+    function metaValue(name) {
+        var metas = document.getElementsByName(name);
+        return metas.length > 0 ? metas[0].content : undefined;
+    }
+
+    // Set default options if nothing found
+    var primary = metaValue("xm:primary") || "indigo";
+    var style = metaValue("xm:style") || "light";
+    var toolbar = metaValue("xm:toolbar") || "dark";
+
+    return new xm.Theme(primary, style, toolbar);
+};
+
 // Setup the default current theme
-xm.current = new xm.Theme("teal", "light", "dark");
+xm.current = xm.getTheme();
 
 // Reset the ripple in the element
 xm.ripple.reset = function (element) {
