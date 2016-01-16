@@ -36,10 +36,10 @@ xtag.register("m-toolbar", {
         text: {
             attribute: {},
             get: function() {
-                return this.textView.innerText;
+                return this.textView.textContent;
             },
             set: function(value) {
-                this.textView.innerText = value;
+                this.textView.textContent = value;
             }
         },
         navIcon: {
@@ -61,10 +61,10 @@ xtag.register("m-toolbar", {
                     // Setup events
                     var themeColor = this.themeColor;
                     xtag.addEvents(this.icon, {
-                        tapstart: function () {
+                        tapstart: function (e) {
                             // Animate ripple
                             this.pressedColor = colors[themeColor][400];
-                            xm.ripple.make(this);
+                            xm.ripple.make(e, this);
                         },
                         tapend: function() {
                             xm.ripple.reset(this);

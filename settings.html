@@ -11,7 +11,7 @@
     <script type="text/javascript" src="js/x-material-simple.js"></script>
     <script type="text/javascript" src="js/x-material-toolbar.js"></script>
     <script type="text/javascript">
-        var theme = makeTheme("blue-grey", true, "dark");
+        xm.current = new xm.Theme("blue-grey", "light", "dark");
     </script>
     <link rel="stylesheet" type="text/css" href="styles/x-material.css">
 </head>
@@ -154,7 +154,7 @@
 
 <script type="text/javascript">
     // Set the background
-    document.body.style.backgroundColor = theme.background;
+    document.body.style.backgroundColor = xm.current.background;
     document.body.classList.add("fouc");
 
     xtag.addEvent(document.getElementById("toolbar"), "tap:delegate(m-icon.nav)",

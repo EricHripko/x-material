@@ -1,12 +1,13 @@
 xtag.register("m-button", {
+    mixins: ["m-element"],
     lifecycle: {
         created: function() {
             // Create a text view to go inside the element
             this.text = document.createElement("m-text-view");
-            this.text.innerText = this.innerText;
+            this.text.textContent = this.textContent;
             this.text.setAttribute("text-style", "button");
             // Insert it
-            this.innerText = "";
+            this.textContent = "";
             this.appendChild(this.text);
             // Setup default properties
             this.defaultElevation = 2;
@@ -15,15 +16,6 @@ xtag.register("m-button", {
         }
     },
     accessors: {
-        elevation: {
-            attribute: {},
-            get: function() {
-                return this._elevation;
-            },
-            set: function(value) {
-                this._elevation = value;
-            }
-        },
         flat: {
             attribute: {},
             get: function() {
@@ -32,17 +24,6 @@ xtag.register("m-button", {
             set: function(value) {
                 this._flat = value;
                 this.defaultElevation = hasValue(value) ? 0 : 2;
-                this.render();
-            }
-        },
-        primary: {
-            attribute: {},
-            get: function() {
-                return this._primary;
-            },
-            set: function(value) {
-                this._primary = value;
-                this.themeColor = hasValue(value) ? theme.color : undefined;
                 this.render();
             }
         },
@@ -58,20 +39,10 @@ xtag.register("m-button", {
         },
         displayText: {
             get: function() {
-                return this.text.innerText;
+                return this.text.textContent;
             },
             set: function(value) {
-                this.text.innerText = value;
-            }
-        },
-        themeColor: {
-            attribute: {},
-            get: function() {
-                return this._themeColor;
-            },
-            set: function(value) {
-                this._themeColor = value;
-                this.render();
+                this.text.textContent = value;
             }
         }
     },
@@ -128,13 +99,13 @@ xtag.register("m-button", {
         }
     },
     events: {
-        tapstart: function() {
+        tapstart: function(e) {
             // Disable events
             if(hasValue(this.disabled))
                 return;
 
             // Animate ripple
-            xm.ripple.make(this);
+            xm.ripple.make(e, this);
 
             if(!hasValue(this.flat))
                 this.elevation = 8;

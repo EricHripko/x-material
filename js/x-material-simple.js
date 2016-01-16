@@ -23,7 +23,6 @@ xtag.register("m-text-view", {
                         break;
                     case "secondary":
                         this.style.color = xm.current.textSecondary;
-                        alert(xm.current.textSecondary);
                         break;
                     case "disabled":
                         this.style.color = xm.current.disabled;
@@ -38,7 +37,7 @@ xtag.register("m-divider", {
     lifecycle: {
         created: function () {
             // Setup styles
-            this.style.borderBottom = "solid 1px " + theme.divider;
+            this.style.borderBottom = "solid 1px " + xm.current.divider;
         }
     }
 });
@@ -46,7 +45,7 @@ xtag.register("m-card", {
     lifecycle: {
         created: function () {
             // Setup styles
-            this.style.backgroundColor = theme.card;
+            this.style.backgroundColor = xm.current.card;
         }
     }
 });
@@ -76,53 +75,44 @@ xtag.register("m-image-view", {
                 this._themeColor = value;
                 this.style.backgroundColor = colors[this.themeColor][300];
             }
-        },
+        }
     }
 });
 
 xtag.register("m-icon", {
+    mixins: ["m-element"],
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element
             this.icon = document.createElement("i");
-            this.icon.innerText = this.innerText;
+            this.icon.textContent = this.textContent;
             this.icon.classList.add("material-icons");
             // Insert it
-            this.innerText = "";
+            this.textContent = "";
             this.appendChild(this.icon);
             // Setup styles
             this.icon.style.color = xm.current.iconActive;
         }
     },
     accessors: {
-        themeColor: {
-            attribute: {},
-            get: function() {
-                return this._themeColor;
-            },
-            set: function(value) {
-                this._themeColor = value;
-                this.icon.style.color = colors[this.themeColor][500];
-            }
-        },
-        primary: {
-            attribute: {},
-            get: function() {
-                return this._primary;
-            },
-            set: function(value) {
-                this._primary = value;
-                this.themeColor = xm.current.color;
-            }
-        },
         src: {
             attribute: {},
             get: function() {
-                return this.icon.innerText;
+                return this.icon.textContent;
             },
             set: function(value) {
-                this.icon.innerText = value;
+                this.icon.textContent = value;
             }
+        }
+    },
+    methods: {
+        render: function() {
+            if(hasValue(this.themeColor)) {
+                this.icon.style.color = colors[this.themeColor][500];
+                return;
+            }
+
+            this.icon.style.color = xm.current.iconActive;
         }
     }
 });

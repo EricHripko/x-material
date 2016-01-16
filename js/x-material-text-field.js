@@ -1,4 +1,5 @@
 xtag.register("m-text-field", {
+    mixins: ["m-element"],
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element
@@ -12,7 +13,7 @@ xtag.register("m-text-field", {
             this.activeBorder = document.createElement("div");
             this.activeBorder.classList.add("border-active");
             // Insert it
-            this.innerText = "";
+            this.textContent = "";
             this.appendChild(this.labelView);
             this.appendChild(this.textView);
             this.appendChild(this.defaultBorder);
@@ -39,31 +40,10 @@ xtag.register("m-text-field", {
         hint: {
             attribute: {},
             get: function () {
-                return this.labelView.innerText;
+                return this.labelView.textContent;
             },
             set: function (value) {
-                this.labelView.innerText = value;
-            }
-        },
-        primary: {
-            attribute: {},
-            get: function () {
-                return this._primary;
-            },
-            set: function (value) {
-                this._primary = value;
-                this.themeColor = xm.current.color;
-                this.render();
-            }
-        },
-        themeColor: {
-            attribute: {},
-            get: function () {
-                return this._themeColor;
-            },
-            set: function (value) {
-                this._themeColor = value;
-                this.render();
+                this.labelView.textContent = value;
             }
         }
     },

@@ -38,39 +38,41 @@ var colors = {
 };
 
 // Material theme
-xm.Theme = function(color, isLight, toolbarStyle) {
-    if (isLight) {
-        this.disabledElevatedFore = "rgba(0, 0, 0, 0.26)";
-        this.disabledElevatedBack = "rgba(0, 0, 0, 0.12)";
-        this.disabledFlatFore = "rgba(153, 153, 153, 0.40)";
-        this.flatPressed = "rgba(153, 153, 153, 0.40)";
-        this.elevatedBack = "white";
-        this.elevatedPressed = "rgb(224, 224, 224)";
-        this.background = "#fafafa";
-        this.text = "rgba(0, 0, 0, .87)";
-        this.textSecondary = "rgba(0, 0, 0, 0.54)";
-        this.iconActive = "rgba(0, 0, 0, 0.54)";
-        this.iconInactive = "rgba(0, 0, 0, 0.26)";
-        this.divider = "rgba(0, 0, 0, 0.12)";
-        this.card = "white";
+xm.Theme = function(color, style, toolbarStyle) {
+    // Setup general styles
+    switch (style) {
+        default:
+            this.disabledElevatedFore = "rgba(0, 0, 0, 0.26)";
+            this.disabledElevatedBack = "rgba(0, 0, 0, 0.12)";
+            this.disabledFlatFore = "rgba(153, 153, 153, 0.40)";
+            this.flatPressed = "rgba(153, 153, 153, 0.40)";
+            this.elevatedBack = "white";
+            this.elevatedPressed = "rgb(224, 224, 224)";
+            this.background = "#fafafa";
+            this.text = "rgba(0, 0, 0, .87)";
+            this.textSecondary = "rgba(0, 0, 0, 0.54)";
+            this.iconActive = "rgba(0, 0, 0, 0.54)";
+            this.iconInactive = "rgba(0, 0, 0, 0.26)";
+            this.divider = "rgba(0, 0, 0, 0.12)";
+            this.card = "white";
+            break;
+        case "dark":
+            this.disabledElevatedFore = "rgba(255, 255, 255, 0.30)";
+            this.disabledElevatedBack = "rgba(255, 255, 255, 0.12)";
+            this.disabledFlatFore = "rgba(255, 255, 255, 0.30)";
+            this.flatPressed = "rgba(204, 204, 204, 0.25)";
+            this.elevatedBack = colors[color][500];
+            this.elevatedPressed = colors[color][700];
+            this.background = "#303030";
+            this.text = "white";
+            this.textSecondary = "rgba(255, 255, 255, 0.70)";
+            this.iconActive = "white";
+            this.iconInactive = "rgba(255, 255, 255, 0.30)";
+            this.divider = "rgba(255, 255, 255, 0.12)";
+            this.card = "#424242";
+            break;
     }
-    else {
-        this.disabledElevatedFore = "rgba(255, 255, 255, 0.30)";
-        this.disabledElevatedBack = "rgba(255, 255, 255, 0.12)";
-        this.disabledFlatFore = "rgba(255, 255, 255, 0.30)";
-        this.flatPressed = "rgba(204, 204, 204, 0.25)";
-        this.elevatedBack = colors[color][500];
-        this.elevatedPressed = colors[color][700];
-        this.background = "#303030";
-        this.text = "white";
-        this.textSecondary = "rgba(255, 255, 255, 0.70)";
-        this.iconActive = "white";
-        this.iconInactive = "rgba(255, 255, 255, 0.30)";
-        this.divider = "rgba(255, 255, 255, 0.12)";
-        this.car = "#424242";
-    }
-
-    this.color = color;
+    // Setup toolbar styles
     switch(toolbarStyle) {
         default:
             this.appBarBack = "#212121";
@@ -88,10 +90,13 @@ xm.Theme = function(color, isLight, toolbarStyle) {
             this.appBarIcon = "light";
             break;
     }
+
+    // Set theme primary and accent colours
+    this.color = color;
 };
 
 // Setup the default current theme
-xm.current = new xm.Theme("teal", false, "dark");
+xm.current = new xm.Theme("teal", "light", "dark");
 
 // Reset the ripple in the element
 xm.ripple.reset = function (element) {
@@ -99,7 +104,7 @@ xm.ripple.reset = function (element) {
         element.ink.style.opacity = 0;
 };
 // Create the ripple in the element
-xm.ripple.make = function (element) {
+xm.ripple.make = function (event, element) {
     // Initialise the animation
     if(element.ink)
         element.removeChild(element.ink);
@@ -123,28 +128,16 @@ function hasValue(value) {
     return value !== undefined;
 }
 
-xtag.register("m-subhead", {
-    lifecycle: {
-        created: function() {
-            // Create a text view to go inside the element
-            this.textView = document.createElement("m-text-view");
-            this.textView.textStyle = "body2";
-            // Insert it
-            this.innerText = "";
-            this.appendChild(this.textView);
-            // Setup styles
-            this.textView.textColor = "secondary";
-        }
-    },
+// Mixin that provides the way to access
+xtag.mixins["m-element"] = {
     accessors: {
-        themeColor: {
+        elevation: {
             attribute: {},
             get: function() {
-                return this._themeColor;
+                return this._elevation;
             },
             set: function(value) {
-                this._themeColor = value;
-                this.textView.style.color = colors[this.themeColor][500];
+                this._elevation = value;
             }
         },
         primary: {
@@ -155,16 +148,59 @@ xtag.register("m-subhead", {
             set: function(value) {
                 this._primary = value;
                 this.themeColor = hasValue(value) ? xm.current.color : undefined;
+
+                if(this.render instanceof Function)
+                    this.render();
             }
         },
+        themeColor: {
+            attribute: {},
+            get: function() {
+                return this._themeColor;
+            },
+            set: function(value) {
+                this._themeColor = value;
+
+                if(this.render instanceof Function)
+                    this.render();
+            }
+        }
+    }
+};
+
+xtag.register("m-subhead", {
+    mixins: ["m-element"],
+    lifecycle: {
+        created: function() {
+            // Create a text view to go inside the element
+            this.textView = document.createElement("m-text-view");
+            this.textView.textStyle = "body2";
+            // Insert it
+            this.textContent = "";
+            this.appendChild(this.textView);
+            // Setup styles
+            this.textView.textColor = "secondary";
+        }
+    },
+    accessors: {
         text: {
             attribute: {},
             get: function() {
-                return this.textView.innerText;
+                return this.textView.textContent;
             },
             set: function(value) {
-                this.textView.innerText = value;
+                this.textView.textContent = value;
             }
+        }
+    },
+    methods: {
+        render: function () {
+            if(hasValue(this.themeColor)) {
+                this.textView.style.color = colors[this.themeColor][500];
+                return;
+            }
+
+            this.textView.textColor = "secondary";
         }
     }
 });
@@ -201,9 +237,9 @@ xtag.register("m-item-single", {
         }
     },
     events: {
-        tapstart: function () {
+        tapstart: function (e) {
             // Animate ripple
-            xm.ripple.make(this);
+            xm.ripple.make(e, this);
         },
         tapend: function () {
             this.resetAnimation();
