@@ -157,7 +157,7 @@
     document.body.style.backgroundColor = xm.current.background;
     document.body.classList.add("fouc");
 
-    xtag.addEvent(document.getElementById("toolbar"), "tap:delegate(m-icon.nav)",
+    xtag.addEvent(document.getElementById("toolbar"), "tapend:delegate(m-icon.nav)",
             function() {
                 location.href = "index.html";
             });

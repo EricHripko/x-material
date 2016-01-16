@@ -1,4 +1,5 @@
 xtag.register("m-toolbar", {
+    mixins: ["m-element"],
     lifecycle: {
         created: function() {
             // Create a text view to go inside the element
@@ -7,32 +8,11 @@ xtag.register("m-toolbar", {
             // Insert it
             this.appendChild(this.textView);
             // Setup styles
-            this.setAttribute("elevation", 4);
+            this.elevation = 4;
             this.render();
         }
     },
     accessors: {
-        themeColor: {
-            attribute: {},
-            get: function() {
-                return this._themeColor;
-            },
-            set: function(value) {
-                this._themeColor = value;
-                this.render();
-            }
-        },
-        primary: {
-            attribute: {},
-            get: function() {
-                return this._primary;
-            },
-            set: function(value) {
-                this._primary = value;
-                this.themeColor = xm.current.color;
-                this.render();
-            }
-        },
         text: {
             attribute: {},
             get: function() {
@@ -58,21 +38,6 @@ xtag.register("m-toolbar", {
                     this.icon.src = value;
                     this.icon.themeColor = xm.current.appBarIcon;
 
-                    // Setup events
-                    var themeColor = this.themeColor;
-                    xtag.addEvents(this.icon, {
-                        tapstart: function (e) {
-                            // Animate ripple
-                            this.pressedColor = colors[themeColor][400];
-                            xm.ripple.make(e, this);
-                        },
-                        tapend: function() {
-                            xm.ripple.reset(this);
-                        },
-                        leave: function() {
-                            xm.ripple.reset(this);
-                        }
-                    });
                     this.insertBefore(this.icon, this.textView);
                     return;
                 }
@@ -83,6 +48,19 @@ xtag.register("m-toolbar", {
                     this.icon = undefined;
                 }
             }
+        }
+    },
+    events: {
+        "tapstart:delegate(m-icon)": function (e) {
+            // Animate ripple
+            this.pressedColor = colors[this.parentNode.themeColor][400];
+            xm.ripple.make(e, this);
+        },
+        "tapend:delegate(m-icon)": function (e) {
+            xm.ripple.reset(this);
+        },
+        "leave:delegate(m-icon)": function (e) {
+            xm.ripple.reset(this);
         }
     },
     methods: {
