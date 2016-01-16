@@ -29,7 +29,7 @@ xtag.register("m-toolbar", {
             },
             set: function(value) {
                 this._primary = value;
-                this.themeColor = theme.color;
+                this.themeColor = xm.current.color;
                 this.render();
             }
         },
@@ -56,7 +56,7 @@ xtag.register("m-toolbar", {
                     this.icon = document.createElement("m-icon");
                     this.icon.classList.add("nav");
                     this.icon.src = value;
-                    this.icon.themeColor = theme.appBarIcon;
+                    this.icon.themeColor = xm.current.appBarIcon;
 
                     // Setup events
                     var themeColor = this.themeColor;
@@ -64,13 +64,13 @@ xtag.register("m-toolbar", {
                         tapstart: function () {
                             // Animate ripple
                             this.pressedColor = colors[themeColor][400];
-                            makeRipple(this);
+                            xm.ripple.make(this);
                         },
                         tapend: function() {
-                            resetRipple(this);
+                            xm.ripple.reset(this);
                         },
                         leave: function() {
-                            resetRipple(this);
+                            xm.ripple.reset(this);
                         }
                     });
                     this.insertBefore(this.icon, this.textView);
@@ -87,8 +87,8 @@ xtag.register("m-toolbar", {
     },
     methods: {
         render: function() {
-            this.style.background = hasValue(this.primary) ? colors[this.themeColor][500] : theme.appBarBack;
-            this.textView.style.color = theme.appBarFore;
+            this.style.background = hasValue(this.primary) ? colors[this.themeColor][500] : xm.current.appBarBack;
+            this.textView.style.color = xm.current.appBarFore;
         }
     }
 });

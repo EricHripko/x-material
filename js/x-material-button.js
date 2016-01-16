@@ -82,17 +82,17 @@ xtag.register("m-button", {
                 return;
 
             this.elevation = this.defaultElevation;
-            resetRipple(this);
+            xm.ripple.reset(this);
         },
         render: function() {
             if(hasValue(this.disabled)) {
                 if(hasValue(this.flat)) {
                     this.style.backgroundColor = "transparent";
-                    this.text.style.color = theme.disabledFlatFore;
+                    this.text.style.color = xm.current.disabledFlatFore;
                 }
                 else {
-                    this.style.backgroundColor = theme.disabledElevatedBack;
-                    this.text.style.color = theme.disabledElevatedFore;
+                    this.style.backgroundColor = xm.current.disabledElevatedBack;
+                    this.text.style.color = xm.current.disabledElevatedFore;
                     this.elevation = 0;
                 }
                 return;
@@ -115,13 +115,13 @@ xtag.register("m-button", {
 
             if(hasValue(this.flat)) {
                 this.style.backgroundColor = "transparent";
-                this.text.style.color = theme.text;
-                this.pressedColor = theme.flatPressed;
+                this.text.style.color = xm.current.text;
+                this.pressedColor = xm.current.flatPressed;
             }
             else {
-                this.style.backgroundColor = theme.elevatedBack;
-                this.text.style.color = theme.text;
-                this.pressedColor = theme.elevatedPressed;
+                this.style.backgroundColor = xm.current.elevatedBack;
+                this.text.style.color = xm.current.text;
+                this.pressedColor = xm.current.elevatedPressed;
                 this.elevation = this.defaultElevation;
             }
             this.elevation = this.defaultElevation;
@@ -134,7 +134,7 @@ xtag.register("m-button", {
                 return;
 
             // Animate ripple
-            makeRipple(this);
+            xm.ripple.make(this);
 
             if(!hasValue(this.flat))
                 this.elevation = 8;

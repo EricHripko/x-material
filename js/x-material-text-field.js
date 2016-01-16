@@ -18,10 +18,10 @@ xtag.register("m-text-field", {
             this.appendChild(this.defaultBorder);
             this.appendChild(this.activeBorder);
             // Setup styles
-            this.textView.style.color = theme.text;
-            this.labelView.style.color = theme.textSecondary;
-            this.defaultBorder.style.borderBottomColor = theme.divider;
-            this.activeBorder.style.borderBottomColor = theme.divider;
+            this.textView.style.color = xm.current.text;
+            this.labelView.style.color = xm.current.textSecondary;
+            this.defaultBorder.style.borderBottomColor = xm.current.divider;
+            this.activeBorder.style.borderBottomColor = xm.current.divider;
 
             this.collapsed = false;
         }
@@ -52,7 +52,7 @@ xtag.register("m-text-field", {
             },
             set: function (value) {
                 this._primary = value;
-                this.themeColor = theme.color;
+                this.themeColor = xm.current.color;
                 this.render();
             }
         },
@@ -71,7 +71,7 @@ xtag.register("m-text-field", {
         render: function () {
             this.activeBorder.style.borderBottomColor = hasValue(this.themeColor)
                 ? colors[this.themeColor][500]
-                : theme.divider;
+                : xm.current.divider;
 
             if (this.collapsed) {
                 // Collapse the label
@@ -91,7 +91,7 @@ xtag.register("m-text-field", {
             // Expand the label
             this.labelView.textStyle = "subheading";
             this.labelView.classList.remove("collapsed");
-            this.labelView.style.color = theme.textSecondary;
+            this.labelView.style.color = xm.current.textSecondary;
 
             // Hide the outline
             this.activeBorder.classList.remove("shown");

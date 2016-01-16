@@ -9,6 +9,27 @@ xtag.register("m-text-view", {
             set: function (value) {
                 this._textStyle = value;
             }
+        },
+        textColor: {
+            attribute: {},
+            get: function () {
+                return this._textStyle;
+            },
+            set: function (value) {
+                this._textStyle = value;
+                switch(value) {
+                    default:
+                        this.style.color = xm.current.text;
+                        break;
+                    case "secondary":
+                        this.style.color = xm.current.textSecondary;
+                        alert(xm.current.textSecondary);
+                        break;
+                    case "disabled":
+                        this.style.color = xm.current.disabled;
+                        break;
+                }
+            }
         }
     }
 });
@@ -70,7 +91,7 @@ xtag.register("m-icon", {
             this.innerText = "";
             this.appendChild(this.icon);
             // Setup styles
-            this.icon.style.color = theme.iconActive;
+            this.icon.style.color = xm.current.iconActive;
         }
     },
     accessors: {
@@ -91,7 +112,7 @@ xtag.register("m-icon", {
             },
             set: function(value) {
                 this._primary = value;
-                this.themeColor = theme.color;
+                this.themeColor = xm.current.color;
             }
         },
         src: {

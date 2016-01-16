@@ -1,3 +1,8 @@
+// Create namespaces
+var xm = {};
+xm.ripple = {};
+
+// Material colour palette
 var colors = {
     red: {
         300: "#F44336"
@@ -31,70 +36,70 @@ var colors = {
         500: "rgba(0, 0, 0, .87)"
     }
 };
-var theme = makeTheme("teal", true, "dark");
 
-function makeTheme(color, isLight, toolbarStyle) {
-    var theme;
-    if (isLight)
-        theme = {
-            disabledElevatedFore: "rgba(0, 0, 0, 0.26)",
-            disabledElevatedBack: "rgba(0, 0, 0, 0.12)",
-            disabledFlatFore: "rgba(153, 153, 153, 0.40)",
-            flatPressed: "rgba(153, 153, 153, 0.40)",
-            elevatedBack: "white",
-            elevatedPressed: "rgb(224, 224, 224)",
-            background: "#fafafa",
-            text: "rgba(0, 0, 0, .87)",
-            textSecondary: "rgba(0, 0, 0, 0.54)",
-            iconActive: "rgba(0, 0, 0, 0.54)",
-            iconInactive: "rgba(0, 0, 0, 0.26)",
-            divider: "rgba(0, 0, 0, 0.12)",
-            card: "white"
-        };
-    else
-        theme = {
-            disabledElevatedFore: "rgba(255, 255, 255, 0.30)",
-            disabledElevatedBack: "rgba(255, 255, 255, 0.12)",
-            disabledFlatFore: "rgba(255, 255, 255, 0.30)",
-            flatPressed: "rgba(204, 204, 204, 0.25)",
-            elevatedBack: colors[color][500],
-            elevatedPressed: colors[color][700],
-            background: "#303030",
-            text: "white",
-            textSecondary: "rgba(0, 0, 0, 0.70)",
-            iconActive: "white",
-            iconInactive: "rgba(255, 255, 255, 0.30)",
-            divider: "rgba(255, 255, 255, 0.12)",
-            card: "#424242"
-        };
+// Material theme
+xm.Theme = function(color, isLight, toolbarStyle) {
+    if (isLight) {
+        this.disabledElevatedFore = "rgba(0, 0, 0, 0.26)";
+        this.disabledElevatedBack = "rgba(0, 0, 0, 0.12)";
+        this.disabledFlatFore = "rgba(153, 153, 153, 0.40)";
+        this.flatPressed = "rgba(153, 153, 153, 0.40)";
+        this.elevatedBack = "white";
+        this.elevatedPressed = "rgb(224, 224, 224)";
+        this.background = "#fafafa";
+        this.text = "rgba(0, 0, 0, .87)";
+        this.textSecondary = "rgba(0, 0, 0, 0.54)";
+        this.iconActive = "rgba(0, 0, 0, 0.54)";
+        this.iconInactive = "rgba(0, 0, 0, 0.26)";
+        this.divider = "rgba(0, 0, 0, 0.12)";
+        this.card = "white";
+    }
+    else {
+        this.disabledElevatedFore = "rgba(255, 255, 255, 0.30)";
+        this.disabledElevatedBack = "rgba(255, 255, 255, 0.12)";
+        this.disabledFlatFore = "rgba(255, 255, 255, 0.30)";
+        this.flatPressed = "rgba(204, 204, 204, 0.25)";
+        this.elevatedBack = colors[color][500];
+        this.elevatedPressed = colors[color][700];
+        this.background = "#303030";
+        this.text = "white";
+        this.textSecondary = "rgba(255, 255, 255, 0.70)";
+        this.iconActive = "white";
+        this.iconInactive = "rgba(255, 255, 255, 0.30)";
+        this.divider = "rgba(255, 255, 255, 0.12)";
+        this.car = "#424242";
+    }
 
-    theme.color = color;
+    this.color = color;
     switch(toolbarStyle) {
         default:
-            theme.appBarBack = "#212121";
-            theme.appBarFore = "white";
-            theme.appBarIcon = "dark";
+            this.appBarBack = "#212121";
+            this.appBarFore = "white";
+            this.appBarIcon = "dark";
             break;
         case "light":
-            theme.appBarBack = "#f5f5f5";
-            theme.appBarFore = "rgba(0, 0, 0, .87)";
-            theme.appBarIcon = "dark";
+            this.appBarBack = "#f5f5f5";
+            this.appBarFore = "rgba(0, 0, 0, .87)";
+            this.appBarIcon = "dark";
             break;
         case "dark":
-            theme.appBarBack = "#212121";
-            theme.appBarFore = "white";
-            theme.appBarIcon = "light";
+            this.appBarBack = "#212121";
+            this.appBarFore = "white";
+            this.appBarIcon = "light";
             break;
     }
-    return theme;
-}
+};
 
-function resetRipple(element) {
+// Setup the default current theme
+xm.current = new xm.Theme("teal", false, "dark");
+
+// Reset the ripple in the element
+xm.ripple.reset = function (element) {
     if(element.ink)
         element.ink.style.opacity = 0;
-}
-
-function makeRipple(element) {
+};
+// Create the ripple in the element
+xm.ripple.make = function (element) {
     // Initialise the animation
     if(element.ink)
         element.removeChild(element.ink);
@@ -112,7 +117,7 @@ function makeRipple(element) {
     element.ink.style.left = x + "px";
     element.ink.style.backgroundColor = element.pressedColor;
     element.ink.classList.add("animate");
-}
+};
 
 function hasValue(value) {
     return value !== undefined;
@@ -128,7 +133,7 @@ xtag.register("m-subhead", {
             this.innerText = "";
             this.appendChild(this.textView);
             // Setup styles
-            this.textView.style.color = theme.textSecondary;
+            this.textView.textColor = "secondary";
         }
     },
     accessors: {
@@ -149,7 +154,7 @@ xtag.register("m-subhead", {
             },
             set: function(value) {
                 this._primary = value;
-                this.themeColor = hasValue(value) ? theme.color : undefined;
+                this.themeColor = hasValue(value) ? xm.current.color : undefined;
             }
         },
         text: {
@@ -176,8 +181,8 @@ xtag.register("m-item-single", {
             this.innerHTML = "";
             this.appendChild(this.text);
             // Setup styles
-            this.text.style.color = theme.text;
-            this.pressedColor = theme.elevatedPressed;
+            this.text.style.color = xm.current.text;
+            this.pressedColor = xm.current.elevatedPressed;
         }
     },
     accessors: {
@@ -192,13 +197,13 @@ xtag.register("m-item-single", {
     },
     methods: {
         resetAnimation: function () {
-            resetRipple(this);
+            xm.ripple.reset(this);
         }
     },
     events: {
         tapstart: function () {
             // Animate ripple
-            makeRipple(this);
+            xm.ripple.make(this);
         },
         tapend: function () {
             this.resetAnimation();

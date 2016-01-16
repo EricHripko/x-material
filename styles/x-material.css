@@ -36,18 +36,6 @@ m-text-view {
     font-family: 'Roboto', sans-serif;
 }
 
-m-text-view, m-text-view[text-color=primary], input {
-    color: rgba(0, 0, 0, .87);
-}
-
-m-text-view[text-color=secondary], input.secondary {
-    color: rgba(0, 0, 0, .54);
-}
-
-m-text-view[text-color=disabled], input.disabled {
-    color: rgba(0, 0, 0, .38);
-}
-
 m-text-view[text-style=display4], input.display4 {
     font-weight: 300;
     font-size: 112px;
