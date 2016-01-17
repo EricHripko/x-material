@@ -2,6 +2,7 @@ m-icon {
     display: block;
 
     float: left;
+    font-size: 0;
     /* Fix for IE fonts in IE */
     font-feature-settings: 'liga';
 }
