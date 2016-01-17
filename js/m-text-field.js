@@ -20,11 +20,17 @@ xtag.register("m-text-field", {
             this.appendChild(this.activeBorder);
             // Setup styles
             this.textView.style.color = xm.current.text;
-            this.labelView.style.color = xm.current.textSecondary;
+            this.labelView.style.color = xm.current.textHint;
             this.defaultBorder.style.borderBottomColor = xm.current.divider;
             this.activeBorder.style.borderBottomColor = xm.current.divider;
-
+            // Set the initial state
             this.collapsed = false;
+            this.primary = "";
+
+            this.textView.addEventListener("input", function () {
+                if(!hasValue(this.parentNode.floating))
+                    this.parentNode.labelView.style.visibility = "hidden";
+            });
         }
     },
     accessors: {
@@ -45,14 +51,84 @@ xtag.register("m-text-field", {
             set: function (value) {
                 this.labelView.textContent = value;
             }
+        },
+        disabled: {
+            attribute: {},
+            get: function() {
+                return this._disabled;
+            },
+            set: function(value) {
+                this._disabled = value;
+                this.render();
+            }
+        },
+        floating: {
+            attribute: {},
+            get: function() {
+                return this._floating;
+            },
+            set: function(value) {
+                this._floating = value;
+                this.render();
+            }
         }
     },
     methods: {
         render: function () {
+            if(hasValue(this.floating)) {
+                this.renderFloating();
+                return;
+            }
+
+            this.renderSingle();
+        },
+        renderSingle: function () {
+            // Set disabled border style if necessary
+            this.defaultBorder.style.borderBottomStyle = hasValue(this.disabled) ? "dashed" : "solid";
+            if(hasValue(this.disabled)) {
+                this.labelView.style.color = xm.current.textHint;
+                return;
+            }
+
+            // Animate bottom border
             this.activeBorder.style.borderBottomColor = hasValue(this.themeColor)
                 ? colors[this.themeColor][500]
                 : xm.current.divider;
 
+            if (this.collapsed) {
+                // Display the outline
+                this.activeBorder.classList.add("shown");
+
+                // Display the input
+                this.textView.classList.add("visible");
+                this.textView.style.color = xm.current.text;
+                return;
+            }
+
+            // Recover label
+            if(!this.text) {
+                this.labelView.style.removeProperty("visibility");
+            }
+            // Remove the label and text highlight
+            this.textView.style.color = xm.current.textSecondary;
+
+            // Hide the outline
+            this.activeBorder.classList.remove("shown");
+        },
+        renderFloating: function () {
+            // Set disabled border style if necessary
+            this.defaultBorder.style.borderBottomStyle = hasValue(this.disabled) ? "dashed" : "solid";
+            if(hasValue(this.disabled)) {
+                this.labelView.style.color = xm.current.textHint;
+                return;
+            }
+
+            // Animate bottom border
+            this.activeBorder.style.borderBottomColor = hasValue(this.themeColor)
+                ? colors[this.themeColor][500]
+                : xm.current.divider;
+
+            // Switch to active state
             if (this.collapsed) {
                 // Collapse the label
                 this.labelView.textStyle = "caption";
@@ -65,19 +141,25 @@ xtag.register("m-text-field", {
 
                 // Display the input
                 this.textView.classList.add("visible");
+                this.textView.style.color = xm.current.text;
                 return;
             }
 
-            // Expand the label
-            this.labelView.textStyle = "subheading";
-            this.labelView.classList.remove("collapsed");
-            this.labelView.style.color = xm.current.textSecondary;
+            // Expand the label if no input was given
+            if(!this.text) {
+                this.labelView.textStyle = "subheading";
+                this.labelView.classList.remove("collapsed");
+
+                // Hide the input
+                this.textView.classList.remove("visible");
+            }
+
+            // Remove the label and text highlight
+            this.labelView.style.color = xm.current.textHint;
+            this.textView.style.color = xm.current.textSecondary;
 
             // Hide the outline
             this.activeBorder.classList.remove("shown");
-
-            // Hide the input
-            this.textView.classList.remove("visible");
         }
     },
     events: {
@@ -86,7 +168,7 @@ xtag.register("m-text-field", {
             this.render();
         },
         "blur": function () {
-            this.collapsed = this.text != "";
+            this.collapsed = false;
             this.render();
         }
     }

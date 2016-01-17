@@ -1,16 +1,28 @@
 m-text-field {
     display: block;
     width: 300px;
-    height: 72px;
+    height: 48px;
 
     position: relative;
 }
 
+m-text-field[floating] {
+    height: 72px;
+}
+
+m-text-field[disabled], m-text-field[disabled] input {
+    cursor: not-allowed;
+}
+
 m-text-field > m-text-view.hint {
     position: absolute;
-    top: 36px;
+    top: 14px;
 
     transition: font-size ease-in-out 200ms, color ease-in-out 200ms, top ease-in-out 200ms;
+}
+
+m-text-field[floating] > m-text-view.hint {
+    top: 38px;
 }
 
 m-text-field > m-text-view.hint.collapsed {
@@ -51,7 +63,7 @@ m-text-field > input {
     width: 100%;
 
     opacity: 0;
-    transition: opacity ease-in-out 200ms;
+    transition: opacity ease-in-out 200ms, color ease-in-out 200ms;
 }
 
 m-text-field > input.visible {
