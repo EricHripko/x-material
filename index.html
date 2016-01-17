@@ -37,6 +37,7 @@
         }
 
         #toolbar {
+            position: relative;
             /* Four increments */
             top: 0;
             height: 224px;
@@ -111,7 +112,7 @@
     <br><br>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-text-view text-style="display4">Mat</m-text-view>
                 <br><br>
 
@@ -193,7 +194,7 @@
     <m-text-view text-style="subheading">Raised Buttons</m-text-view>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-button>Button</m-button>
                 <br><br>
 
@@ -230,7 +231,7 @@
     <m-text-view text-style="subheading">Flat Buttons</m-text-view>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-button flat>Button</m-button>
                 <br><br>
 
@@ -273,7 +274,7 @@
     <br><br>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-icon>bluetooth</m-icon>
                 <br><br>
 
@@ -313,7 +314,7 @@
     <br><br>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-avatar>E</m-avatar>
                 <br><br><br>
 
@@ -327,13 +328,13 @@
                 <pre>
 <code class="html">
     &lt;!-- Specify text as placeholder --&gt;
-    &lt;m-image-view&gt;E&lt;/m-image-view&gt;
+    &lt;m-avatar&gt;E&lt;/m-avatar&gt;
 
     &lt;!-- Change background --&gt;
-    &lt;m-image-view&gt;IK&lt;/m-image-view&gt;
+    &lt;m-avatar&gt;IK&lt;/m-avatar&gt;
 
     &lt;!-- Specify the image source --&gt;
-    &lt;m-image-view src="https://avatars2&#8230;"&gt;&lt;/m-image-view&gt;
+    &lt;m-avatar src="https://avatars2&#8230;"&gt;&lt;/m-avatar&gt;
 
 </code>
                 </pre>
@@ -351,7 +352,7 @@
     <br><br>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-card elevation="2">
                     <br><br><br><br><br>
                 </m-card>
@@ -371,6 +372,117 @@
         </tr>
     </table>
 
+    <m-text-view text-style="title">Lists</m-text-view>
+    <br><br>
+    <m-text-view text-style="subheading" text-color="secondary">
+        A list consists of a single continuous column of tessellated sub-divisions of equal width
+        called rows that function as containers for tiles.
+        <br><br>
+        Add <strong>8px</strong> of padding at the top and bottom of a list, except for lists with subheaders,
+        which have their own padding.
+    </m-text-view>
+    <br><br>
+    <table class="doc-example">
+        <tr>
+            <td class="doc-example--live" width="40%">
+                <m-card elevation="2" style="padding-bottom: 8px; text-align: left;">
+                    <m-subhead text="Recent chat"></m-subhead>
+                    <m-item-single>
+                        <m-avatar>A</m-avatar>
+                        Abbey Christensen
+                        <m-icon theme-color="indigo" class="action">chat_bubble</m-icon>
+                    </m-item-single>
+                    <m-item-single>
+                        <m-avatar>A</m-avatar>
+                        Alex Nelson
+                        <m-icon theme-color="indigo" class="action">chat_bubble</m-icon>
+                    </m-item-single>
+                    <m-item-single>
+                        <m-avatar>M</m-avatar>
+                        Mary Johnson
+                        <m-icon class="action">chat_bubble</m-icon>
+                    </m-item-single>
+                    <m-item-single>
+                        <m-avatar>P</m-avatar>
+                        Peter Carlsson
+                        <m-icon class="action">chat_bubble</m-icon>
+                    </m-item-single>
+                    <m-item-single>
+                        <m-avatar>T</m-avatar>
+                        Trevor Hansen
+                        <m-icon class="action">chat_bubble</m-icon>
+                    </m-item-single>
+                </m-card>
+                <br>
+                <m-card elevation="2" style="padding-bottom: 8px; text-align: left;">
+                    <m-subhead theme-color="teal" text="Wireless & networks"></m-subhead>
+
+                    <m-item-single>
+                        <m-icon theme-color="teal">network_wifi</m-icon>
+                        Wi-Fi
+                    </m-item-single>
+                    <m-divider partial></m-divider>
+
+                    <m-item-single>
+                        <m-icon theme-color="teal">bluetooth</m-icon>
+                        Bluetooth
+                    </m-item-single>
+                    <m-divider partial></m-divider>
+
+                    <m-item-single>
+                        <m-icon theme-color="teal">data_usage</m-icon>
+                        Data usage
+                    </m-item-single>
+                    <m-divider partial></m-divider>
+
+                    <m-item-single>
+                        <m-icon theme-color="teal">more_horiz</m-icon>
+                        More
+                    </m-item-single>
+                </m-card>
+
+            </td>
+            <td width="66%">
+                <pre>
+<code class="html">
+    &lt;!--
+        You can use avatars to deliver the content.
+        Put icons to indicate a secondary action.
+    --&gt;
+    &lt;m-card
+        elevation="2"
+        style="padding-bottom: 8px;"&gt;
+    &lt;m-subhead text="Recent chat"&gt;&lt;/m-subhead&gt;
+    &#8230;
+    &lt;m-item-single&gt;
+        &lt;m-avatar&gt;T&lt;/m-avatar&gt;
+        Trevor Hansen
+        &lt;m-icon class="action">chat_bubble&lt;/m-icon&gt;
+    &lt;/m-item-single&gt;
+    &lt;/m-card&gt;
+
+    &lt;!--
+        You can use icons to deliver the content.
+        Put dividers to increase readability.
+    --&gt;
+    &lt;m-card
+        elevation="2"
+        style="padding-bottom: 8px;"&gt;
+    &lt;m-subhead text="Recent chat"&gt;&lt;/m-subhead&gt;
+    &#8230;
+    &lt;m-divider partial&gt;&lt;/m-divider&gt;
+    &lt;m-item-single&gt;
+        &lt;m-icon theme-color="teal"&gt;more_horiz&lt;/m-icon&gt;
+        More
+    &lt;/m-item-single&gt;
+    &lt;/m-card&gt;
+
+</code>
+                </pre>
+            </td>
+        </tr>
+    </table>
+
     <m-text-view text-style="title">Toolbar</m-text-view>
     <br><br>
     <m-text-view text-style="subheading" text-color="secondary">
@@ -379,7 +491,7 @@
     <br><br>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-toolbar text="Title" style="text-align:left;"></m-toolbar>
                 <br>
 
@@ -410,7 +522,7 @@
     <br><br>
     <table class="doc-example">
         <tr>
-            <td class="doc-example--live" with="33%">
+            <td class="doc-example--live" width="33%">
                 <m-text-field primary style="text-align:left;"></m-text-field>
                 <br>
 
@@ -452,7 +564,7 @@
     hint="Input text"
     input-icon="phone"
     &lt;/m-text-field&gt;
-    
+
     &lt;!-- An input with a floating hint and an icon --&gt;
     &lt;m-text-field
         hint="Input text"
