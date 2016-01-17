@@ -2,18 +2,24 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="xm:primary" content="blue">
+    <meta name="xm:style" content="light">
+    <meta name="xm:toolbar" content="mixed">
+
     <!-- Load fonts -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+
     <!-- Load x-material -->
-    <script type="text/javascript" src="x-tag-core.js"></script>
-    <script type="text/javascript" src="demo.js"></script>
-    <script type="text/javascript">theme = makeTheme("blue", true, "light");</script>
-    <link rel="stylesheet" type="text/css" href="demo.css">
+    <script type="text/javascript" src="js/x-tag-core.js"></script>
+    <script type="text/javascript" src="js/x-material.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/x-material.min.css">
+
     <!-- Highlight -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/monokai-sublime.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+
     <!-- Documentation styles -->
     <style type="text/css">
         code {
@@ -32,6 +38,7 @@
 
         #toolbar {
             /* Four increments */
+            top: 0;
             height: 224px;
 
             text-align: center;
@@ -69,14 +76,18 @@
             display: inline-block;
             text-align: justify;
         }
+
+        m-text-field {
+            width: 200px;
+        }
     </style>
 </head>
 <body>
 
-<m-toolbar id="toolbar">
-    <m-text-view class="doc-title doc-margin" text-style="display3">x-material</m-text-view>
+<m-toolbar id="toolbar" primary>
+    <m-text-view class="doc-title doc-margin" text-style="display3" text-color="primary">x-material</m-text-view>
     <br>
-    <m-text-view class="doc-title" text-style="display2">Material components for web</m-text-view>
+    <m-text-view class="doc-title" text-style="display2" text-color="secondary">Material components for web</m-text-view>
 </m-toolbar>
 
 <div class="doc-content">
@@ -303,13 +314,13 @@
     <table class="doc-example">
         <tr>
             <td class="doc-example--live" with="33%">
-                <m-image-view>E</m-image-view>
+                <m-avatar>E</m-avatar>
                 <br><br><br>
 
-                <m-image-view theme-color="red">IK</m-image-view>
+                <m-avatar theme-color="red">IK</m-avatar>
                 <br><br><br>
 
-                <m-image-view src="https://avatars2.githubusercontent.com/u/707679?v=3&s=40"></m-image-view>
+                <m-avatar src="https://avatars2.githubusercontent.com/u/707679?v=3&s=40"></m-avatar>
                 <br><br><br>
             </td>
             <td width="66%">
@@ -400,21 +411,54 @@
     <table class="doc-example">
         <tr>
             <td class="doc-example--live" with="33%">
-                <m-text-field hint="Input text" primary style="text-align:left;"></m-text-field>
+                <m-text-field primary style="text-align:left;"></m-text-field>
                 <br>
 
-                <m-text-field primary style="text-align:left;"></m-text-field>
-                <br><br>
+                <m-text-field hint="Input text" style="text-align:left;"></m-text-field>
+                <br>
+
+                <m-text-field hint="Input text" floating style="text-align:left;"></m-text-field>
+                <br>
+
+                <m-text-field hint="Input text" disabled style="text-align:left;"></m-text-field>
+                <br>
+
+                <m-text-field hint="Phone" input-icon="phone" style="text-align:left;"></m-text-field>
+                <br>
+
+                <m-text-field hint="Phone" input-icon="phone" floating style="text-align:left;"></m-text-field>
+                <br>
             </td>
             <td width="66%">
                 <pre>
 <code class="html">
-    &lt;!-- An input with a hint --&gt;
-    &lt;m-text-field hint="Input text" primary&gt;&lt;/m-text-field&gt;
-
     &lt;!-- An input with no hint --&gt;
-    &lt;m-text-field primary&gt;&lt;/m-text-field&gt;
+    &lt;m-text-field&gt;&lt;/m-text-field&gt;
 
+    &lt;!-- An input with a hint --&gt;
+    &lt;m-text-field hint="Input text"&gt;
+    &lt;/m-text-field&gt;
+
+    &lt;!-- An input with a floating hint --&gt;
+    &lt;m-text-field hint="Input text" floating&gt;
+    &lt;/m-text-field&gt;
+
+    &lt;!-- Disabled input with a hint --&gt;
+    &lt;m-text-field hint="Input text" disabled&gt;
+    &lt;/m-text-field&gt;
+
+    &lt;!-- An input with a floating hint and an icon --&gt;
+    &lt;m-text-field
+    hint="Input text"
+    input-icon="phone"
+    &lt;/m-text-field&gt;
+    
+    &lt;!-- An input with a floating hint and an icon --&gt;
+    &lt;m-text-field
+        hint="Input text"
+        input-icon="phone"
+        floating&gt;
+    &lt;/m-text-field&gt;
 
 </code>
                 </pre>
@@ -424,9 +468,6 @@
 
 
 <script type="text/javascript">
-    // Set the background and display elements
-    document.body.style.backgroundColor = theme.background;
-    document.body.classList.add("fouc");
     // Enable syntax highlighting
     hljs.initHighlightingOnLoad();
 </script>
