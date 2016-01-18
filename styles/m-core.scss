@@ -1,0 +1,107 @@
+@import "m-import.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  transition: box-shadow $m-anim-quick;
+}
+
+*[elevation="2"] {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+*[elevation="3"] {
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+}
+*[elevation="4"] {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+}
+*[elevation="6"] {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.2), 0 3px 5px -1px rgba(0, 0, 0, 0.12);
+}
+*[elevation="8"] {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.2), 0 5px 5px -3px rgba(0, 0, 0, 0.12);
+}
+*[elevation="16"] {
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0  6px 30px 5px rgba(0, 0, 0, 0.2), 0  8px 10px -5px rgba(0, 0, 0, 0.12);
+}
+*[elevation="24"] {
+  box-shadow: 0  9px 46px  8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px  3px rgba(0, 0, 0, 0.12);
+}
+
+input {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/*
+ * Element that provides 'spilling ink' effect.
+ */
+m-ink {
+  position: absolute;
+  display: block;
+  width: 100px;
+  height: 100px;
+
+  border-radius: 100%;
+  transform: scale(0);
+  transition: transform $m-anim-slow, opacity $m-anim-slow;
+
+  &.animate {
+    opacity: 0.5;
+    transform: scale(2.5);
+  }
+}
+
+m-divider {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 0;
+
+  float: right;
+  box-sizing: border-box;
+
+  &[partial] {
+    width: calc(100% - mu(9));
+    margin-left: mu(9);
+  }
+}
+
+.fouc m-divider {
+  animation: enlarge-right 200ms;
+}
+
+m-card {
+  display: block;
+  margin: mu(1);
+
+  z-index: 2;
+
+  &.margin-reset { margin: 0; }
+  &.margin-bottom { margin-bottom: mu(1); }
+}
+
+@keyframes appear {
+  from {
+    top: 50px;
+    opacity: 0;
+    height: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes enlarge-right {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}

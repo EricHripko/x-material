@@ -1,0 +1,148 @@
+@import "m-import.scss";
+$full-width: ':not([floating]):not(.with-icon).full-width';
+
+m-text-field {
+  display: block;
+  width: mu(50);
+  height: mu(6);
+
+  position: relative;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+
+  /*
+   * Icon.
+   */
+  & > m-icon {
+    position: absolute;
+    left: mu(2);
+    bottom: (mu(6) - $m-icon-size) / 2;
+  }
+
+  & > m-icon i.material-icons {
+    transition: color $m-anim-quick;
+  }
+
+  /*
+   * Hint text.
+   */
+  & > m-text-view.hint {
+    position: absolute;
+    top: mu(1.5) + 2px;
+
+    transition: font-size $m-anim-quick, color $m-anim-quick, top $m-anim-quick;
+  }
+
+  /*
+   * Input control.
+   */
+  & > input {
+    position: absolute;
+    bottom: mu(2);
+
+    width: 100%;
+
+    opacity: 0;
+    transition: opacity $m-anim-quick, color ease-in-out $m-anim-quick;
+  }
+
+  & > input.visible {
+    opacity: 1;
+  }
+
+  /*
+   * Border underneath.
+   */
+  & > div.border-default {
+    position: absolute;
+    bottom: mu(1);
+
+    width: 100%;
+
+    border-bottom: 1px solid;
+  }
+
+  & > div.border-active {
+    position: absolute;
+    bottom: mu(1);
+    left: 50%;
+
+    width: 0;
+
+    border-bottom: 2px solid;
+
+    transition: left $m-anim-quick, width $m-anim-quick;
+  }
+
+  & > div.border-active.shown {
+    left: 0;
+    width: 100%;
+  }
+
+  /*
+   * Offset the input contents to the right to make space for an icon.
+   */
+  &.with-icon {
+    & > m-text-view.hint {
+      left: mu(7);
+    }
+
+    & > input, & > div.border-default, & > div.border-active.shown {
+      left: mu(7);
+      width: calc(100% - mu(7));
+    }
+  }
+
+  /*
+   * Expand the control slightly when in full-width mode.
+   */
+  &#{$full-width} {
+    height: mu(7);
+
+    & > m-text-view.hint {
+      top: mu(2) + 2px;
+    }
+
+    & > input {
+      bottom: mu(2.5);
+    }
+
+    & > div {
+      display: none;
+    }
+  }
+
+  /*
+   * Change the size of the control when in floating mode.
+   */
+  &[floating] {
+    height: mu(9);
+
+    & > m-text-view.hint {
+      top: mu(4.5) + 2px;
+
+      &.collapsed {
+        top: mu(2);
+      }
+    }
+  }
+
+  /*
+   * Show prohibited cursor and border when in disabled mode.
+   */
+  &[disabled] {
+    cursor: not-allowed;
+
+    & > input {
+      cursor: not-allowed;
+    }
+
+    & > div.border-default {
+      border-bottom-style: dashed;
+    }
+  }
+}

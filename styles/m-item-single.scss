@@ -1,0 +1,53 @@
+@import "m-import.scss";
+
+m-item-single {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: $m-item-single-height;
+
+  margin: 0;
+  padding: 0 mu(2);
+
+  vertical-align: top;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+
+  box-sizing: border-box;
+
+  & > m-text-view {
+    height: $m-item-single-height;
+    line-height: $m-item-single-height;
+  }
+
+  & m-avatar {
+    margin-top: ($m-item-single-height - $m-avatar-size) / 2;
+    margin-right: mu(2);
+  }
+
+  & m-icon {
+    margin-right: mu(4);
+
+    & > .material-icons {
+      margin-top: ($m-item-single-height - $m-icon-size) / 2;
+    }
+  }
+
+  & m-icon.action {
+    position: absolute;
+    top: 0;
+    right: mu(2);
+
+    float: none;
+    margin-right: 0;
+  }
+}
+
+.fouc m-item-single {
+  animation: appear 200ms;
+}

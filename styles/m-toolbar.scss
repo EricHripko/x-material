@@ -1,0 +1,55 @@
+@import "m-import.scss";
+
+m-toolbar {
+  display: block;
+  position: relative;
+  height: $m-toolbar-height;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+
+  transition: background-color ease-in-out 200ms, color ease-in-out 200ms;
+
+  z-index: 4;
+
+  &[primary] {
+    position: fixed;
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  & > m-text-view {
+    height: $m-toolbar-height;
+    line-height: $m-toolbar-height;
+
+    margin-left: mu(2);
+  }
+
+  & > m-icon + m-text-view {
+    margin-left: mu(9);
+  }
+
+  & > m-icon {
+    position: absolute;
+    top: mu(1);
+    left: mu(1);
+
+    overflow: hidden;
+    height: $m-icon-touch;
+    width: $m-icon-touch;
+    line-height: $m-icon-touch;
+
+    text-align: center;
+
+    border-radius: 100%;
+    z-index: 4;
+
+    & > .material-icons {
+      line-height: $m-icon-touch;
+    }
+  }
+}

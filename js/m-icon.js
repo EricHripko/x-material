@@ -16,16 +16,31 @@ xtag.register("m-icon", {
     accessors: {
         src: {
             attribute: {},
-            get: function() {
+            get: function () {
                 return this.icon.textContent;
             },
-            set: function(value) {
+            set: function (value) {
                 this.icon.textContent = value;
+            }
+        },
+        inactive: {
+            attribute: {},
+            get: function () {
+                return this._inactive;
+            },
+            set: function (value) {
+                this._inactive = value;
+                this.render();
             }
         }
     },
     methods: {
         render: function() {
+            if(hasValue(this.inactive)) {
+                this.icon.style.color = xm.current.iconInactive;
+                return;
+            }
+
             if(hasValue(this.themeColor)) {
                 this.icon.style.color = colors[this.themeColor][500];
                 return;

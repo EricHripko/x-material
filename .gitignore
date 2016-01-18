@@ -1,3 +1,8 @@
+# IDE files
 .idea/
+# Build tools and output
 node_modules/
 dist/
+# Compiled SCSS and maps
+styles/*.map
+styles/*.css

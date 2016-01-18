@@ -1,0 +1,19 @@
+@import "m-import.scss";
+
+m-subhead {
+  display: block;
+  height: $m-subhead-height;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+
+  & > m-text-view {
+    margin-left: mu(2);
+
+    height: $m-subhead-height;
+    line-height: $m-subhead-height;
+  }
+}

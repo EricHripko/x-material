@@ -1,0 +1,12 @@
+@function mu($measure) {
+  @return $measure * 8px;
+}
+
+$m-anim-quick: ease-in-out 200ms;
+$m-anim-slow: 0.65s linear;
+$m-item-single-height: mu(6);
+$m-subhead-height: mu(6);
+$m-avatar-size: mu(5);
+$m-icon-size: mu(3);
+$m-icon-touch: mu(5);
+$m-toolbar-height: mu(7);

@@ -1,0 +1,29 @@
+@import "m-import.scss";
+$m-button-height: mu(4.5);
+
+m-button {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  height: mu(4.5);
+
+  padding: 0 mu(2);
+
+  border-radius: 2px;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  transition: box-shadow $m-anim-quick, background-color $m-anim-quick, color $m-anim-quick;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+
+  & > m-text-view {
+    height: $m-button-height;
+    line-height: $m-button-height;
+  }
+}

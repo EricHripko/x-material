@@ -84,6 +84,7 @@ xtag.register("m-text-field", {
                 if(hasValue(value)) {
                     this.icon = document.createElement("m-icon");
                     this.icon.src = value;
+                    this.icon.inactive = hasValue(this.disabled) ? "" : undefined;
                     this.classList.add("with-icon");
 
                     this.insertBefore(this.icon, this.textView);
@@ -109,8 +110,9 @@ xtag.register("m-text-field", {
             this.renderSingle();
         },
         renderSingle: function () {
-            // Set disabled border style if necessary
-            this.defaultBorder.style.borderBottomStyle = hasValue(this.disabled) ? "dashed" : "solid";
+            // Set disabled border style and icon if necessary
+            if(this.icon)
+                this.icon.inactive = hasValue(this.disabled) ? "" : undefined;
             if(hasValue(this.disabled)) {
                 this.labelView.style.color = xm.current.textHint;
                 return;
@@ -150,8 +152,10 @@ xtag.register("m-text-field", {
             this.activeBorder.classList.remove("shown");
         },
         renderFloating: function () {
-            // Set disabled border style if necessary
+            // Set disabled border style and icon if necessary
             this.defaultBorder.style.borderBottomStyle = hasValue(this.disabled) ? "dashed" : "solid";
+            if(this.icon)
+                this.icon.inactive = hasValue(this.disabled) ? "" : undefined;
             if(hasValue(this.disabled)) {
                 this.labelView.style.color = xm.current.textHint;
                 return;

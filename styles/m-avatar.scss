@@ -1,0 +1,25 @@
+@import "m-import.scss";
+
+m-avatar {
+  display: block;
+  width: $m-avatar-size;
+  height: $m-avatar-size;
+  float: left;
+
+  line-height: mu(5);
+  text-align: center;
+
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 20px;
+  border: none;
+  border-radius: 100%;
+
+  animation: fade-in 200ms;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
