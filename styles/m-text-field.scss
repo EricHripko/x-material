@@ -91,9 +91,12 @@ m-text-field {
       left: mu(7);
     }
 
+    & > div.border-active {
+      left: calc(50% + #{mu(3.5)});
+    }
     & > input, & > div.border-default, & > div.border-active.shown {
       left: mu(7);
-      width: calc(100% - mu(7));
+      width: calc(100% - #{mu(7)});
     }
   }
 

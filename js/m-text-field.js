@@ -71,6 +71,15 @@ xtag.register("m-text-field", {
                 this.render();
             }
         },
+        type: {
+            attribute: {},
+            get: function() {
+                return this.textView.type;
+            },
+            set: function(value) {
+                this.textView.type = value;
+            }
+        },
         inputIcon: {
             attribute: {},
             get: function() {

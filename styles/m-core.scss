@@ -63,7 +63,7 @@ m-divider {
   box-sizing: border-box;
 
   &[partial] {
-    width: calc(100% - mu(9));
+    width: calc(100% - #{mu(9)});
     margin-left: mu(9);
   }
 }
