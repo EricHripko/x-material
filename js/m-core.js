@@ -10,11 +10,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Material colour palette
 var colors = {
+    green: {
+        400: "#66BB6A"
+    },
     red: {
-        300: "#F44336"
+        300: "#E57373",
+        400: "#EF5350",
+        500: "#F44336"
     },
     pink: {
         300: "#F06292"
+    },
+    yellow: {
+        300: "#FFF176",
+        400: "#FFEE58",
+        500: "#FFEB3B",
+        700: "#FBC02D"
     },
     indigo: {
         500: "#3F51B5",

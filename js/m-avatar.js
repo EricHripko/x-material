@@ -22,7 +22,7 @@ xtag.register("m-avatar", {
             },
             set: function(value) {
                 this._themeColor = value;
-                this.style.backgroundColor = colors[this.themeColor][300];
+                this.style.backgroundColor = colors[this.themeColor][400];
             }
         }
     }
