@@ -165,20 +165,21 @@ xtag.mixins["m-element"] = {
             }
         },
         primary: {
-            attribute: {},
+            attribute: {
+                boolean: true
+            },
             get: function() {
                 return this._primary;
             },
             set: function(value) {
                 this._primary = value;
-                this.themeColor = hasValue(value) ? xm.current.color : undefined;
+                this.themeColor = value ? xm.current.color : null;
 
                 if(this.render instanceof Function)
                     this.render();
             }
         },
         themeColor: {
-            attribute: {},
             get: function() {
                 return this._themeColor;
             },

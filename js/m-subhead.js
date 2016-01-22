@@ -25,7 +25,7 @@ xtag.register("m-subhead", {
     },
     methods: {
         render: function () {
-            if(hasValue(this.themeColor)) {
+            if(this.themeColor) {
                 this.textView.style.color = colors[this.themeColor][500];
                 return;
             }

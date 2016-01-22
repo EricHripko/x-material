@@ -10,6 +10,7 @@ xtag.register("m-button", {
             this.textContent = "";
             this.appendChild(this.text);
             // Setup default properties
+            this.tabIndex = 0;
             this.defaultElevation = 2;
             this.pressedColor = "#E0E0E0";
             this.render();
@@ -17,18 +18,22 @@ xtag.register("m-button", {
     },
     accessors: {
         flat: {
-            attribute: {},
+            attribute: {
+                boolean: true
+            },
             get: function() {
                 return this._flat;
             },
             set: function(value) {
                 this._flat = value;
-                this.defaultElevation = hasValue(value) ? 0 : 2;
+                this.defaultElevation = value ? 0 : 2;
                 this.render();
             }
         },
         disabled: {
-            attribute: {},
+            attribute: {
+                boolean: true
+            },
             get: function() {
                 return this._disabled;
             },
@@ -49,15 +54,15 @@ xtag.register("m-button", {
     methods: {
         resetElevation: function() {
             // Disable events
-            if(hasValue(this.disabled))
+            if(this.disabled)
                 return;
 
             this.elevation = this.defaultElevation;
             xm.ripple.reset(this);
         },
         render: function() {
-            if(hasValue(this.disabled)) {
-                if(hasValue(this.flat)) {
+            if(this.disabled) {
+                if(this.flat) {
                     this.style.backgroundColor = "transparent";
                     this.text.style.color = xm.current.disabledFlatFore;
                 }
@@ -69,8 +74,8 @@ xtag.register("m-button", {
                 return;
             }
 
-            if(hasValue(this.themeColor)) {
-                if(hasValue(this.flat)) {
+            if(this.themeColor) {
+                if(this.flat) {
                     this.style.backgroundColor = "transparent";
                     this.text.style.color = colors[this.themeColor][700];
                     this.pressedColor = colors[this.themeColor][700];
@@ -84,7 +89,7 @@ xtag.register("m-button", {
                 return;
             }
 
-            if(hasValue(this.flat)) {
+            if(this.flat) {
                 this.style.backgroundColor = "transparent";
                 this.text.style.color = xm.current.text;
                 this.pressedColor = xm.current.flatPressed;
@@ -101,17 +106,23 @@ xtag.register("m-button", {
     events: {
         tapstart: function(e) {
             // Disable events
-            if(hasValue(this.disabled))
+            if(this.disabled)
                 return;
 
             // Animate ripple
             xm.ripple.make(e, this);
 
-            if(!hasValue(this.flat))
+            if(!this.flat)
                 this.elevation = 8;
         },
         tapend: function() {
             this.resetElevation();
+        },
+        focus: function() {
+            // Change colour
+        },
+        blur: function() {
+            this.render();
         },
         leave: function() {
             this.resetElevation();

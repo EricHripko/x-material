@@ -27,7 +27,7 @@ xtag.register("m-text-field", {
             this.collapsed = false;
 
             this.textView.addEventListener("input", function () {
-                if(!hasValue(this.parentNode.floating))
+                if(!this.parentNode.floating)
                     this.parentNode.labelView.style.visibility = "hidden";
             });
         }
@@ -52,7 +52,9 @@ xtag.register("m-text-field", {
             }
         },
         disabled: {
-            attribute: {},
+            attribute: {
+                boolean: true
+            },
             get: function() {
                 return this._disabled;
             },
@@ -62,7 +64,9 @@ xtag.register("m-text-field", {
             }
         },
         floating: {
-            attribute: {},
+            attribute: {
+                boolean: true
+            },
             get: function() {
                 return this._floating;
             },
@@ -90,10 +94,10 @@ xtag.register("m-text-field", {
             },
             set: function(value) {
                 // Add an icon
-                if(hasValue(value)) {
+                if(value) {
                     this.icon = document.createElement("m-icon");
                     this.icon.src = value;
-                    this.icon.inactive = hasValue(this.disabled) ? "" : undefined;
+                    this.icon.inactive = this.disabled;
                     this.classList.add("with-icon");
 
                     this.insertBefore(this.icon, this.textView);
@@ -111,7 +115,7 @@ xtag.register("m-text-field", {
     },
     methods: {
         render: function () {
-            if(hasValue(this.floating)) {
+            if(this.floating) {
                 this.renderFloating();
                 return;
             }
@@ -121,19 +125,19 @@ xtag.register("m-text-field", {
         renderSingle: function () {
             // Set disabled border style and icon if necessary
             if(this.icon)
-                this.icon.inactive = hasValue(this.disabled) ? "" : undefined;
-            if(hasValue(this.disabled)) {
+                this.icon.inactive = this.disabled;
+            if(this.disabled) {
                 this.labelView.style.color = xm.current.textHint;
                 return;
             }
 
             if (this.collapsed) {
                 // Lazy initialise the theme
-                if(!hasValue(this.themeColor))
+                if(!this.themeColor)
                     this.themeColor = xm.current.color;
 
                 // Display the outline
-                this.activeBorder.style.borderBottomColor = hasValue(this.themeColor)
+                this.activeBorder.style.borderBottomColor = this.themeColor
                     ? colors[this.themeColor][500]
                     : xm.current.divider;
                 this.activeBorder.classList.add("shown");
@@ -143,7 +147,7 @@ xtag.register("m-text-field", {
                 this.textView.style.color = xm.current.text;
 
                 // Highlight the icon if there's one
-                if(hasValue(this.themeColor) && this.icon)
+                if(this.themeColor && this.icon)
                     this.icon.themeColor = this.themeColor;
                 return;
             }
@@ -162,10 +166,10 @@ xtag.register("m-text-field", {
         },
         renderFloating: function () {
             // Set disabled border style and icon if necessary
-            this.defaultBorder.style.borderBottomStyle = hasValue(this.disabled) ? "dashed" : "solid";
+            this.defaultBorder.style.borderBottomStyle = this.disabled ? "dashed" : "solid";
             if(this.icon)
-                this.icon.inactive = hasValue(this.disabled) ? "" : undefined;
-            if(hasValue(this.disabled)) {
+                this.icon.inactive = this.disabled;
+            if(this.disabled) {
                 this.labelView.style.color = xm.current.textHint;
                 return;
             }
@@ -173,17 +177,17 @@ xtag.register("m-text-field", {
             // Switch to active state
             if (this.collapsed) {
                 // Lazy initialise the theme
-                if(!hasValue(this.themeColor))
+                if(!this.themeColor)
                     this.themeColor = xm.current.color;
 
                 // Collapse the label
                 this.labelView.textStyle = "caption";
                 this.labelView.classList.add("collapsed");
-                if(hasValue(this.themeColor))
+                if(this.themeColor)
                     this.labelView.style.color = colors[this.themeColor][500];
 
                 // Display the outline
-                this.activeBorder.style.borderBottomColor = hasValue(this.themeColor)
+                this.activeBorder.style.borderBottomColor = this.themeColor
                     ? colors[this.themeColor][500]
                     : xm.current.divider;
                 this.activeBorder.classList.add("shown");
@@ -193,7 +197,7 @@ xtag.register("m-text-field", {
                 this.textView.style.color = xm.current.text;
 
                 // Highlight the icon if there's one
-                if(hasValue(this.themeColor) && this.icon)
+                if(this.themeColor && this.icon)
                     this.icon.themeColor = this.themeColor;
                 return;
             }

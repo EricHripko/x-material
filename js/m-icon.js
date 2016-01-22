@@ -24,7 +24,9 @@ xtag.register("m-icon", {
             }
         },
         inactive: {
-            attribute: {},
+            attribute: {
+                boolean: true
+            },
             get: function () {
                 return this._inactive;
             },
@@ -36,12 +38,12 @@ xtag.register("m-icon", {
     },
     methods: {
         render: function() {
-            if(hasValue(this.inactive)) {
+            if(this.inactive) {
                 this.icon.style.color = xm.current.iconInactive;
                 return;
             }
 
-            if(hasValue(this.themeColor)) {
+            if(this.themeColor) {
                 this.icon.style.color = colors[this.themeColor][500];
                 return;
             }

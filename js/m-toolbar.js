@@ -32,7 +32,7 @@ xtag.register("m-toolbar", {
             },
             set: function(value) {
                 // Add an icon
-                if(hasValue(value)) {
+                if(value) {
                     this.icon = document.createElement("m-icon");
                     this.icon.classList.add("nav");
                     this.icon.src = value;
@@ -65,7 +65,7 @@ xtag.register("m-toolbar", {
     },
     methods: {
         render: function() {
-            this.style.background = hasValue(this.primary) ? colors[this.themeColor][500] : xm.current.appBarBack;
+            this.style.background = this.primary ? colors[this.themeColor][500] : xm.current.appBarBack;
             this.textView.style.color = xm.current.appBarFore;
         }
     }
