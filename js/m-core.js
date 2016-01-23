@@ -1,11 +1,18 @@
 // Create namespaces
 var xm = {};
 xm.ripple = {};
+xm.focus = {};
+xm.input = {};
 
 // Set the background for the screen when ready
 document.addEventListener("DOMContentLoaded", function () {
     document.body.style.backgroundColor = xm.current.background;
     document.body.classList.add("fouc");
+});
+// Disable space bar scrolling
+window.addEventListener("keydown", function (e) {
+    if(e.keyCode == 32)
+        e.preventDefault();
 });
 
 // Material colour palette
@@ -25,6 +32,7 @@ var colors = {
         300: "#FFF176",
         400: "#FFEE58",
         500: "#FFEB3B",
+        600: "#FDD835",
         700: "#FBC02D"
     },
     indigo: {
@@ -40,6 +48,7 @@ var colors = {
         300: "#4DB6AC",
         400: "#26A69A",
         500: "#009688",
+        600: "#00897B",
         700: "#00796B"
     },
     "blue": {
@@ -149,8 +158,17 @@ xm.ripple.make = function (event, element) {
     // Calculate the positions of the ripple
     var offset = element.getBoundingClientRect();
     element.ink.style.width = element.ink.style.height = Math.max(offset.width, offset.height) + "px";
-    x = event.clientX - offset.left - element.ink.offsetWidth / 2;
-    y = event.clientY - offset.top - element.ink.offsetHeight / 2;
+    // Identify the event source
+    var x,y;
+    if(event.clientX && event.clientY) {
+        x = event.clientX - offset.left - element.ink.offsetWidth / 2;
+        y = event.clientY - offset.top - element.ink.offsetHeight / 2;
+    }
+    else {
+        x = (offset.right - offset.left - element.ink.offsetWidth) / 2;
+        y = (offset.bottom - offset.top - element.ink.offsetHeight) / 2;
+    }
+
 
     // Start the new animation
     element.ink.style.top = y + "px";
@@ -159,11 +177,32 @@ xm.ripple.make = function (event, element) {
     element.ink.classList.add("animate");
 };
 
-function hasValue(value) {
-    return value !== undefined;
-}
+// Reset the focus shade in the element
+xm.focus.reset = function (element) {
+    if(element.shade)
+        element.shade.classList.remove("animate");
+};
+// Create the focus shade in the element
+xm.focus.create = function (element) {
+    // Initialise the animation
+    if(!element.shade) {
+        element.shade = document.createElement("m-focus");
+        element.appendChild(element.shade);
+    }
+};
+xm.focus.make = function (element) {
+    // Create shade if necessary
+    xm.focus.create(element);
+    // Animate
+    element.shade.classList.add("animate");
+};
 
-// Mixin that provides the way to access
+// Returns whether the key pressed should activate the element
+xm.input.isActionKey = function (keyCode) {
+    return keyCode == 32 || keyCode == 13;
+};
+
+// Mixin that provides common logic for all material elements
 xtag.mixins["m-element"] = {
     accessors: {
         elevation: {
@@ -206,6 +245,7 @@ xtag.mixins["m-element"] = {
 
 // Define simple components
 xtag.register("m-ink", {});
+xtag.register("m-focus", {});
 xtag.register("m-divider", {
     lifecycle: {
         created: function () {

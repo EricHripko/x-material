@@ -60,6 +60,9 @@ xtag.register("m-text-field", {
             },
             set: function(value) {
                 this._disabled = value;
+
+                // Make input non-focusable and adjust the appearance
+                this.textView.tabIndex = value ? -1 : 0;
                 this.render();
             }
         },

@@ -10,10 +10,12 @@ xtag.register("m-button", {
             this.textContent = "";
             this.appendChild(this.text);
             // Setup default properties
-            this.tabIndex = 0;
             this.defaultElevation = 2;
             this.pressedColor = "#E0E0E0";
             this.render();
+            // Make focusable
+            this.tabIndex = 0;
+            xm.focus.create(this);
         }
     },
     accessors: {
@@ -39,6 +41,9 @@ xtag.register("m-button", {
             },
             set: function(value) {
                 this._disabled = value;
+
+                // Make button non-focusable and adjust the appearance
+                this.tabIndex = value ? -1 : 0;
                 this.render();
             }
         },
@@ -82,8 +87,8 @@ xtag.register("m-button", {
                 }
                 else {
                     this.style.backgroundColor = colors[this.themeColor][500];
-                    this.text.style.color = "white";
-                    this.pressedColor = colors[this.themeColor][700];
+                    this.text.style.color = xm.current.appBarFore;
+                    this.pressedColor = colors[this.themeColor][600];
                 }
                 this.elevation = this.defaultElevation;
                 return;
@@ -119,13 +124,23 @@ xtag.register("m-button", {
             this.resetElevation();
         },
         focus: function() {
-            // Change colour
+            // Disable events
+            if(this.disabled)
+                return;
+
+            xm.focus.make(this);
         },
         blur: function() {
-            this.render();
+            xm.focus.reset(this);
         },
         leave: function() {
             this.resetElevation();
+        },
+        keyup: function(e) {
+            if(xm.input.isActionKey(e.keyCode)) {
+                xtag.fireEvent(this, "tapstart");
+                xtag.fireEvent(this, "tapend");
+            }
         }
     }
 });
