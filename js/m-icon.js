@@ -1,14 +1,12 @@
 xtag.register("m-icon", {
     mixins: ["m-element"],
+    content: function () {/*
+        <i class="material-icons"></i>
+    */},
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element
-            this.icon = document.createElement("i");
-            this.icon.textContent = this.textContent;
-            this.icon.classList.add("material-icons");
-            // Insert it
-            this.textContent = "";
-            this.appendChild(this.icon);
+            this.icon = this.querySelector("i");
             // Setup styles
             this.icon.style.color = xm.current.iconActive;
         }

@@ -1,12 +1,12 @@
 xtag.register("m-toolbar", {
     mixins: ["m-element"],
+    content: function () {/*
+        <m-text-view text-style="title"></m-text-view>
+    */},
     lifecycle: {
         created: function() {
             // Create a text view to go inside the element
-            this.textView = document.createElement("m-text-view");
-            this.textView.textStyle = "title";
-            // Insert it
-            this.appendChild(this.textView);
+            this.textView = this.querySelector("m-text-view");
             // Setup styles
             this.elevation = 4;
             this.render();

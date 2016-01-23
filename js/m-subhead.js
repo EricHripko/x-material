@@ -1,15 +1,11 @@
 xtag.register("m-subhead", {
     mixins: ["m-element"],
+    content: function () {/*
+        <m-text-view text-style="body2" text-color="secondary"></m-text-view>
+    */},
     lifecycle: {
         created: function() {
-            // Create a text view to go inside the element
-            this.textView = document.createElement("m-text-view");
-            this.textView.textStyle = "body2";
-            // Insert it
-            this.textContent = "";
-            this.appendChild(this.textView);
-            // Setup styles
-            this.textView.textColor = "secondary";
+            this.textView = this.querySelector("m-text-view");
         }
     },
     accessors: {

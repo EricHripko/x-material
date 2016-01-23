@@ -1,14 +1,13 @@
 xtag.register("m-button", {
     mixins: ["m-element"],
+    content: function () {/*
+        <m-text-view text-style="button"></m-text-view>
+    */},
     lifecycle: {
         created: function() {
             // Create a text view to go inside the element
-            this.text = document.createElement("m-text-view");
-            this.text.textContent = this.textContent;
-            this.text.setAttribute("text-style", "button");
-            // Insert it
-            this.textContent = "";
-            this.appendChild(this.text);
+            this.textView = this.querySelector("m-text-view");
+            this.textView.textContent = this.textContent;
             // Setup default properties
             this.defaultElevation = 2;
             this.pressedColor = "#E0E0E0";
@@ -47,12 +46,13 @@ xtag.register("m-button", {
                 this.render();
             }
         },
-        displayText: {
+        text: {
+            attribute: {},
             get: function() {
-                return this.text.textContent;
+                return this.textView.textContent;
             },
             set: function(value) {
-                this.text.textContent = value;
+                this.textView.textContent = value;
             }
         }
     },
@@ -69,11 +69,11 @@ xtag.register("m-button", {
             if(this.disabled) {
                 if(this.flat) {
                     this.style.backgroundColor = "transparent";
-                    this.text.style.color = xm.current.disabledFlatFore;
+                    this.textView.style.color = xm.current.disabledFlatFore;
                 }
                 else {
                     this.style.backgroundColor = xm.current.disabledElevatedBack;
-                    this.text.style.color = xm.current.disabledElevatedFore;
+                    this.textView.style.color = xm.current.disabledElevatedFore;
                     this.elevation = 0;
                 }
                 return;
@@ -82,12 +82,12 @@ xtag.register("m-button", {
             if(this.themeColor in colors) {
                 if(this.flat) {
                     this.style.backgroundColor = "transparent";
-                    this.text.style.color = colors[this.themeColor][500];
+                    this.textView.style.color = colors[this.themeColor][500];
                     this.pressedColor = colors[this.themeColor][600];
                 }
                 else {
                     this.style.backgroundColor = colors[this.themeColor][500];
-                    this.text.style.color = xm.current.appBarFore;
+                    this.textView.style.color = xm.current.appBarFore;
                     this.pressedColor = colors[this.themeColor][600];
                 }
                 this.elevation = this.defaultElevation;
@@ -96,12 +96,12 @@ xtag.register("m-button", {
 
             if(this.flat) {
                 this.style.backgroundColor = "transparent";
-                this.text.style.color = xm.current.text;
+                this.textView.style.color = xm.current.text;
                 this.pressedColor = xm.current.flatPressed;
             }
             else {
                 this.style.backgroundColor = xm.current.elevatedBack;
-                this.text.style.color = xm.current.style == "light" ? xm.current.text : xm.current.appBarFore;
+                this.textView.style.color = xm.current.style == "light" ? xm.current.text : xm.current.appBarFore;
                 this.pressedColor = xm.current.elevatedPressed;
                 this.elevation = this.defaultElevation;
             }

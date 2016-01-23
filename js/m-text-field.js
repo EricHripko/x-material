@@ -1,23 +1,18 @@
 xtag.register("m-text-field", {
     mixins: ["m-element"],
+    content: function () {/*
+        <input class="subheading">
+        <m-text-view text-style="subheading" class="hint"></m-text-view>
+        <div class="border-default"></div>
+        <div class="border-active"></div>
+    */},
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element
-            this.textView = document.createElement("input");
-            this.textView.classList.add("subheading");
-            this.labelView = document.createElement("m-text-view");
-            this.labelView.textStyle = "subheading";
-            this.labelView.classList.add("hint");
-            this.defaultBorder = document.createElement("div");
-            this.defaultBorder.classList.add("border-default");
-            this.activeBorder = document.createElement("div");
-            this.activeBorder.classList.add("border-active");
-            // Insert it
-            this.textContent = "";
-            this.appendChild(this.labelView);
-            this.appendChild(this.textView);
-            this.appendChild(this.defaultBorder);
-            this.appendChild(this.activeBorder);
+            this.textView = this.querySelector("input");
+            this.labelView = this.querySelector("m-text-view");
+            this.defaultBorder = this.querySelector("div.border-default");
+            this.activeBorder = this.querySelector("div.border-active");
             // Setup styles
             this.textView.style.color = xm.current.text;
             this.labelView.style.color = xm.current.textHint;
@@ -25,11 +20,6 @@ xtag.register("m-text-field", {
             this.activeBorder.style.borderBottomColor = xm.current.divider;
             // Set the initial state
             this.collapsed = false;
-
-            this.textView.addEventListener("input", function () {
-                if(!this.parentNode.floating)
-                    this.parentNode.labelView.style.visibility = "hidden";
-            });
         }
     },
     accessors: {
@@ -238,9 +228,14 @@ xtag.register("m-text-field", {
         },
         "tapend": function () {
             // Focus on input when label or icon was clicked
-            if(document.activeElement != this.textView) {
+            if (document.activeElement != this.textView) {
                 this.textView.focus();
             }
+        },
+        'input:delegate(input.subheading)': function (e) {
+            // Hide hint when the user started entering the text
+            if(!e.currentTarget.floating)
+                e.currentTarget.labelView.style.visibility = "hidden";
         }
     }
 });
