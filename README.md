@@ -4,7 +4,7 @@ We aim to create a toolkit of web components that does not require huge framewor
 The library is built on top of x-tag and provides lightweight web components for designing user interfaces according to Material Design specification. The library is very much work in progress and will likely to change public API frequently - it currently cannot be used in production.
 
 ## Demo
-See the live demonstration [here](http://erichripko.github.io/x-material).
+See the live demonstration [here](https://material.isat.xyz/).
 
 ## Browser Support
 Chrome, Firefox, Safari, IE 10+
