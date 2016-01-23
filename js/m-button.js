@@ -82,8 +82,8 @@ xtag.register("m-button", {
             if(this.themeColor) {
                 if(this.flat) {
                     this.style.backgroundColor = "transparent";
-                    this.text.style.color = colors[this.themeColor][700];
-                    this.pressedColor = colors[this.themeColor][700];
+                    this.text.style.color = colors[this.themeColor][500];
+                    this.pressedColor = colors[this.themeColor][600];
                 }
                 else {
                     this.style.backgroundColor = colors[this.themeColor][500];
@@ -101,7 +101,7 @@ xtag.register("m-button", {
             }
             else {
                 this.style.backgroundColor = xm.current.elevatedBack;
-                this.text.style.color = xm.current.text;
+                this.text.style.color = xm.current.style == "light" ? xm.current.text : xm.current.appBarFore;
                 this.pressedColor = xm.current.elevatedPressed;
                 this.elevation = this.defaultElevation;
             }

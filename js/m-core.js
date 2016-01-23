@@ -121,6 +121,7 @@ xm.Theme = function(color, style, toolbarStyle) {
 
     // Set theme primary and accent colours
     this.color = color;
+    this.style = style;
 };
 
 // Get the user-configured with a fallback
