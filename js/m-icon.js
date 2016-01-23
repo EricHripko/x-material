@@ -43,7 +43,7 @@ xtag.register("m-icon", {
                 return;
             }
 
-            if(this.themeColor) {
+            if(this.themeColor in colors) {
                 this.icon.style.color = colors[this.themeColor][500];
                 return;
             }

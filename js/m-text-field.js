@@ -189,7 +189,7 @@ xtag.register("m-text-field", {
                 // Collapse the label
                 this.labelView.textStyle = "caption";
                 this.labelView.classList.add("collapsed");
-                if(this.themeColor)
+                if(this.themeColor in colors)
                     this.labelView.style.color = colors[this.themeColor][500];
 
                 // Display the outline

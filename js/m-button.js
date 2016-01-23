@@ -79,7 +79,7 @@ xtag.register("m-button", {
                 return;
             }
 
-            if(this.themeColor) {
+            if(this.themeColor in colors) {
                 if(this.flat) {
                     this.style.backgroundColor = "transparent";
                     this.text.style.color = colors[this.themeColor][500];

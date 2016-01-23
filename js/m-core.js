@@ -52,7 +52,9 @@ var colors = {
         700: "#00796B"
     },
     "blue": {
+        400: "#42A5F5",
         500: "#2196F3",
+        600: "#1E88E5",
         700: "#1976D2"
     },
     "light": {
@@ -224,13 +226,15 @@ xtag.mixins["m-element"] = {
             },
             set: function(value) {
                 this._primary = value;
-                this.themeColor = value ? xm.current.color : null;
+                if(value)
+                    this.themeColor = xm.current.color;
 
                 if(this.render instanceof Function)
                     this.render();
             }
         },
         themeColor: {
+            attribute: {},
             get: function() {
                 return this._themeColor;
             },
