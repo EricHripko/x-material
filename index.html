@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <meta name="xm:primary" content="teal">
+    <meta name="xm:primary" content="blue">
     <meta name="xm:style" content="light">
     <meta name="xm:toolbar" content="mixed">
 
@@ -39,50 +39,52 @@
 </head>
 <body>
 
-<m-toolbar id="toolbar" text="New Chat" nav-icon="menu" primary>
-
+<m-toolbar id="toolbar" text="New Chat" nav-icon="menu" opaque primary class="fixed">
 </m-toolbar>
 <div style="height: 56px;"></div>
 
 <br>
-<m-button>Button</m-button>
-<br>
-<m-text-field hint="Phone" class="full-width" input-icon="phone" floating style="float: right;"></m-text-field>
+<m-text-field type="text" hint="Phone*" floating input-icon="phone" validation-rule="^(?=\s*\S).*$" validation-message="Phone number is incorrect."></m-text-field>
+<m-text-field hint="Email" invalid input-icon="email" validation-message="Phone number is incorrect."></m-text-field>
+<m-text-field type="text" hint="Phone" input-icon="phone" disabled max-length=50></m-text-field>
 
 <br>
-<m-text-field hint="Phone" class="full-width" input-icon="phone"></m-text-field>
+<m-card style="width: 440px; height: 300px;" elevation=2>
+    <m-toolbar nav-icon="arrow_back" text="Compose"></m-toolbar>
+    <m-text-field hint="To" class="full-width" max-length=50></m-text-field>
+    <m-divider></m-divider>
+    <m-text-field hint="Subject" class="full-width"></m-text-field>
+    <m-divider></m-divider>
+    <m-text-view style="display: block; padding: 20px;" text-style="subheading" text-color="disabled">Body</m-text-view>
+</m-card>
 
-<br>
-<m-text-field hint="Phone" floating class="full-width" style="float: right;" disabled></m-text-field>
+<m-button text="Sign in"></m-button>
 
-<br>
-<m-text-field hint="Phone" class="full-width"></m-text-field>
-
-<m-subhead text="Recent chat"></m-subhead>
+<m-subhead text="Recent chat" theme-color="teal"></m-subhead>
 <m-item-single>
-    <m-avatar>A</m-avatar>
+    <m-avatar theme-color="red">A</m-avatar>
     Abbey Christensen
-    <m-icon theme-color="teal" class="action">chat_bubble</m-icon>
+    <m-icon src="chat_bubble" primary class="action"></m-icon>
 </m-item-single>
 <m-item-single>
     <m-avatar>A</m-avatar>
     Alex Nelson
-    <m-icon theme-color="teal" class="action">chat_bubble</m-icon>
+    <m-icon src="chat_bubble" primary class="action"></m-icon>
 </m-item-single>
 <m-item-single>
     <m-avatar>M</m-avatar>
     Mary Johnson
-    <m-icon class="action">chat_bubble</m-icon>
+    <m-icon src="chat_bubble" class="action"></m-icon>
 </m-item-single>
 <m-item-single>
     <m-avatar>P</m-avatar>
     Peter Carlsson
-    <m-icon class="action">chat_bubble</m-icon>
+    <m-icon src="chat_bubble" class="action"></m-icon>
 </m-item-single>
 <m-item-single>
     <m-avatar>T</m-avatar>
     Trevor Hansen
-    <m-icon class="action">chat_bubble</m-icon>
+    <m-icon src="chat_bubble" class="action"></m-icon>
 </m-item-single>
 
 <m-divider style="margin-top: 8px;"></m-divider>
