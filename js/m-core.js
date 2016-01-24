@@ -17,25 +17,31 @@ window.addEventListener("keydown", function (e) {
 
 // Material colour palette
 var colors = {
-    green: {
-        400: "#66BB6A"
+    "green": {
+        400: "#66BB6A",
+        500: "#4CAF50",
+        600: "#43A047"
     },
-    red: {
+    "red": {
         300: "#E57373",
         400: "#EF5350",
         500: "#F44336"
     },
-    pink: {
+    "pink": {
         300: "#F06292"
     },
-    yellow: {
+    "pink-accent": {
+        500: "#F50057",
+        600: "#C51162"
+    },
+    "yellow": {
         300: "#FFF176",
         400: "#FFEE58",
         500: "#FFEB3B",
         600: "#FDD835",
         700: "#FBC02D"
     },
-    indigo: {
+    "indigo": {
         500: "#3F51B5",
         700: "#303F9F"
     },

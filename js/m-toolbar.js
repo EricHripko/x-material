@@ -83,10 +83,10 @@ xtag.register("m-toolbar", {
             this.textView.style.color = opaque ? xm.current.appBarFore : xm.current.text;
             this.style.backgroundColor = this.themeColor in colors ? colors[this.themeColor][500] : fallback;
             this.textView.textStyle = this.classList.contains("fixed") ? "title" : "subheading";
-            if (this.elevation > 0)
-                this.style.removeProperty("borderBottom");
-            else
-                this.style.borderBottom = "solid 1px " + xm.current.divider;
+            this.style.borderBottom = this.elevation > 0 ? "none" : "solid 1px " + xm.current.divider;
+            // Icon rendering
+            if(this.icon)
+                this.icon.themeColor = opaque ? xm.current.appBarIcon : "dark";
         }
     }
 });

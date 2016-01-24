@@ -134,10 +134,16 @@ xtag.register("m-button", {
         leave: function() {
             this.resetElevation();
         },
+        keydown: function(e) {
+            if(xm.input.isActionKey(e.keyCode) && !this.focused) {
+                xtag.fireEvent(this, "tapstart");
+                this.focused = true;
+            }
+        },
         keyup: function(e) {
             if(xm.input.isActionKey(e.keyCode)) {
-                xtag.fireEvent(this, "tapstart");
                 xtag.fireEvent(this, "tapend");
+                this.focused = false;
             }
         }
     }

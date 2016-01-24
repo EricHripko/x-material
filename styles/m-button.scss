@@ -19,6 +19,8 @@ m-button {
   cursor: pointer;
   transition: box-shadow $m-anim-quick, background-color $m-anim-quick, color $m-anim-quick;
 
+  z-index: 1;
+
   &[disabled] {
     cursor: not-allowed;
   }

@@ -1,0 +1,44 @@
+@import "m-import.scss";
+
+$m-fab-size: mu(7);
+$m-fab-mini-size: mu(5);
+
+@mixin m-fab($size) {
+  width: $size;
+  height: $size;
+
+  & > m-icon {
+    margin-top: ($size - $m-icon-size) / 2;
+    margin-left: ($size - $m-icon-size) / 2;
+  }
+
+  & > m-focus {
+    border-radius: 100%;
+    overflow: hidden;
+
+    z-index: 0;
+  }
+}
+
+m-fab {
+  @include m-fab($m-fab-size);
+  display: block;
+
+  position: relative;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+
+  overflow: hidden;
+  outline: none;
+  border-radius: 100%;
+
+  z-index: 4;
+
+  &.mini {
+    @include m-fab($m-fab-mini-size);
+  }
+}

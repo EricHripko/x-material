@@ -6,6 +6,11 @@
   transition: box-shadow $m-anim-quick;
 }
 
+/*
+ * Elevation data sourced from https://github.com/google/material-design-lite.
+ * No changes made apart from using shadow colours without variables.
+ * Please refer to the LICENSE in the linked repository for details.
+ */
 *[elevation="2"] {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
@@ -20,6 +25,9 @@
 }
 *[elevation="8"] {
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.2), 0 5px 5px -3px rgba(0, 0, 0, 0.12);
+}
+*[elevation="12"] {
+  box-shadow: 0 12px 17px 2px rgba(0, 0, 0, 0.14), 0  9px 22px 3px rgba(0, 0, 0, 0.2), 0  4px 7px -4px rgba(0, 0, 0, 0.12);
 }
 *[elevation="16"] {
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0  6px 30px 5px rgba(0, 0, 0, 0.2), 0  8px 10px -5px rgba(0, 0, 0, 0.12);
@@ -47,10 +55,8 @@ m-ink {
   transform: scale(0);
   transition: transform $m-anim-slow, opacity $m-anim-slow;
 
-  opacity: 0.5;
-
   &.animate {
-    opacity: 0.5;
+    opacity: 0.6;
     transform: scale(2.5);
   }
 }
