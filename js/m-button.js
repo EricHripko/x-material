@@ -1,8 +1,6 @@
 xtag.register("m-button", {
     mixins: ["m-element"],
-    content: function () {/*
-        <m-text-view text-style="button"></m-text-view>
-    */},
+    content: "<m-text-view text-style='button'></m-text-view>",
     lifecycle: {
         created: function() {
             // Create a text view to go inside the element

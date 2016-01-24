@@ -1,13 +1,12 @@
 xtag.register("m-text-field", {
     mixins: ["m-element"],
-    content: function () {/*
-        <input class="subheading">
-        <m-text-view text-style="subheading" class="hint"></m-text-view>
-        <div class="border-default"></div>
-        <div class="border-active"></div>
-        <m-text-view text-style="caption" text-color="disabled" class="counter"></m-text-view>
-        <m-text-view text-style="caption" text-color="disabled" class="message"></m-text-view>
-    */},
+    content:
+        "<input class='subheading'>\
+        <m-text-view text-style='subheading' class='hint'></m-text-view>\
+        <div class='border-default'></div>\
+        <div class='border-active'></div>\
+        <m-text-view text-style='caption' text-color='disabled' class='counter'></m-text-view>\
+        <m-text-view text-style='caption' text-color='disabled' class='message'></m-text-view>",
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element

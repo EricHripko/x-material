@@ -1,8 +1,6 @@
 xtag.register("m-icon", {
     mixins: ["m-element"],
-    content: function () {/*
-        <i class="material-icons"></i>
-    */},
+    content: "<i class='material-icons'></i>",
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element

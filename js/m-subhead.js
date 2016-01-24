@@ -1,8 +1,6 @@
 xtag.register("m-subhead", {
     mixins: ["m-element"],
-    content: function () {/*
-        <m-text-view text-style="body2" text-color="secondary"></m-text-view>
-    */},
+    content: "<m-text-view text-style='body2' text-color='secondary'></m-text-view>",
     lifecycle: {
         created: function() {
             this.textView = this.querySelector("m-text-view");
