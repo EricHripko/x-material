@@ -4,7 +4,7 @@ $full-width: ':not([floating]):not(.with-icon).full-width';
 m-text-field {
   display: block;
   width: mu(50);
-  height: mu(6);
+  height: mu(8);
 
   position: relative;
 
@@ -20,7 +20,7 @@ m-text-field {
   & > m-icon {
     position: absolute;
     left: mu(2);
-    bottom: (mu(6) - $m-icon-size) / 2;
+    bottom: (mu(10) - $m-icon-size) / 2;
   }
 
   & > m-icon i.material-icons {
@@ -34,7 +34,22 @@ m-text-field {
     position: absolute;
     top: mu(1.5) + 2px;
 
-    transition: font-size $m-anim-quick, color $m-anim-quick, top $m-anim-quick;
+    opacity: 1;
+
+    transition: font-size $m-anim-quick, color $m-anim-quick, top $m-anim-quick, opacity $m-anim-quick;
+
+    /*
+     * Asterisk.
+     */
+    & > sup.asterisk {
+      margin-left: 1px;
+
+      transition: color $m-anim-quick;
+    }
+  }
+
+  & > m-text-view.hidden {
+    opacity: 0;
   }
 
   /*
@@ -42,16 +57,16 @@ m-text-field {
    */
   & > input {
     position: absolute;
-    bottom: mu(2);
+    bottom: mu(4);
 
     width: 100%;
 
     opacity: 0;
     transition: opacity $m-anim-quick, color ease-in-out $m-anim-quick;
-  }
 
-  & > input.visible {
-    opacity: 1;
+    &.visible {
+      opacity: 1;
+    }
   }
 
   /*
@@ -59,7 +74,7 @@ m-text-field {
    */
   & > div.border-default {
     position: absolute;
-    bottom: mu(1);
+    bottom: mu(3);
 
     width: 100%;
 
@@ -68,14 +83,14 @@ m-text-field {
 
   & > div.border-active {
     position: absolute;
-    bottom: mu(1);
+    bottom: mu(3);
     left: 50%;
 
     width: 0;
 
     border-bottom: 2px solid;
 
-    transition: left $m-anim-quick, width $m-anim-quick;
+    transition: left $m-anim-quick, width $m-anim-quick,  border $m-anim-quick;
   }
 
   & > div.border-active.shown {
@@ -84,10 +99,42 @@ m-text-field {
   }
 
   /*
+   * Validation character counter.
+   */
+  & > m-text-view.counter {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    display: block;
+
+    transition: color $m-anim-quick;
+  }
+
+  & > m-text-view.message {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: block;
+    opacity: 0;
+
+    transition: color $m-anim-quick, opacity $m-anim-quick;
+
+    &.visible {
+      opacity: 1;
+    }
+  }
+
+  /*
    * Offset the input contents to the right to make space for an icon.
    */
   &.with-icon {
     & > m-text-view.hint {
+      left: mu(7);
+    }
+
+    & > m-text-view.message {
       left: mu(7);
     }
 
@@ -106,6 +153,9 @@ m-text-field {
   &#{$full-width} {
     height: mu(7);
 
+    margin-left: mu(2.5);
+    margin-right: mu(2.5);
+
     & > m-text-view.hint {
       top: mu(2) + 2px;
     }
@@ -114,8 +164,17 @@ m-text-field {
       bottom: mu(2.5);
     }
 
-    & > div {
+    & > div.border-default, & > div.border-active {
       display: none;
+    }
+
+    & > m-text-view.counter {
+      height: mu(7);
+      line-height: mu(7);
+    }
+
+    &[max-length] > input {
+      width: calc(100% - 52px);
     }
   }
 
@@ -123,13 +182,20 @@ m-text-field {
    * Change the size of the control when in floating mode.
    */
   &[floating] {
-    height: mu(9);
+    height: mu(11);
 
     & > m-text-view.hint {
       top: mu(4.5) + 2px;
 
       &.collapsed {
         top: mu(2);
+
+        /*
+         * Highlight the asterisk.
+         */
+        & > sup.asterisk {
+          color: #F44336;
+        }
       }
     }
   }
@@ -146,6 +212,10 @@ m-text-field {
 
     & > div.border-default {
       border-bottom-style: dashed;
+    }
+
+    & > m-text-view.message, & > m-text-view.counter {
+      display: none;
     }
   }
 }

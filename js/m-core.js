@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // Disable space bar scrolling
 window.addEventListener("keydown", function (e) {
-    if(e.keyCode == 32)
+    if(e.keyCode == 32 && e.target.tagName.toLowerCase() != "input")
         e.preventDefault();
 });
 

@@ -102,6 +102,7 @@ m-card {
   margin: mu(1);
   border-radius: 2px;
 
+  overflow: hidden;
   z-index: 2;
 
   &.margin-reset { margin: 0; }

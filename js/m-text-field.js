@@ -5,14 +5,18 @@ xtag.register("m-text-field", {
         <m-text-view text-style="subheading" class="hint"></m-text-view>
         <div class="border-default"></div>
         <div class="border-active"></div>
+        <m-text-view text-style="caption" text-color="disabled" class="counter"></m-text-view>
+        <m-text-view text-style="caption" text-color="disabled" class="message"></m-text-view>
     */},
     lifecycle: {
         created: function () {
             // Create a text view to go inside the element
             this.textView = this.querySelector("input");
-            this.labelView = this.querySelector("m-text-view");
+            this.labelView = this.querySelector("m-text-view.hint");
             this.defaultBorder = this.querySelector("div.border-default");
             this.activeBorder = this.querySelector("div.border-active");
+            this.counter = this.querySelector("m-text-view.counter");
+            this.message = this.querySelector("m-text-view.message");
             // Setup styles
             this.textView.style.color = xm.current.text;
             this.labelView.style.color = xm.current.textHint;
@@ -38,7 +42,10 @@ xtag.register("m-text-field", {
                 return this.labelView.textContent;
             },
             set: function (value) {
-                this.labelView.textContent = value;
+                if(value[value.length - 1] == "*")
+                    this.labelView.innerHTML = value.substring(0, value.length - 1) + "<sup class=\"asterisk\">*</sup>";
+                else
+                    this.labelView.textContent = value;
             }
         },
         disabled: {
@@ -107,6 +114,53 @@ xtag.register("m-text-field", {
                     this.classList.remove("with-icon");
                 }
             }
+        },
+        maxLength: {
+            attribute: {},
+            get: function () {
+                return this._maxLength;
+            },
+            set: function(value) {
+                this._maxLength = value;
+
+                // Set the initial message
+                if (this.maxLength > 0)
+                    this.counter.innerText = this.textView.value.length + " / " + this.maxLength;
+            }
+        },
+        validationMessage: {
+            attribute: {},
+            get: function () {
+                return this.message.textContent;
+            },
+            set: function(value) {
+                this.message.textContent = value;
+            }
+        },
+        validationRule: {
+            attribute: {},
+            get: function () {
+                return this._rule ? this._rule.toString() : undefined;
+            },
+            set: function(value) {
+                if(value)
+                    this._rule = new RegExp(value);
+            }
+        },
+        invalid: {
+            attribute: {
+                boolean: true
+            },
+            get: function () {
+                return this._invalid;
+            },
+            set: function (value) {
+                // Re-render only if value actually changed
+                if(this._invalid != value) {
+                    this._invalid = value;
+                    this.render();
+                }
+            }
         }
     },
     methods: {
@@ -127,14 +181,28 @@ xtag.register("m-text-field", {
                 return;
             }
 
-            if (this.collapsed) {
+            // Choose red theme colour if input is in invalid state
+            var themeColor = !this.invalid ? this.themeColor : "red";
+
+            // Highlight message and counter in invalid state
+            if(this.invalid) {
+                this.counter.style.color = colors[themeColor][500];
+                this.message.style.color = colors[themeColor][500];
+                this.message.classList.add("visible");
+            }
+            else {
+                this.counter.textColor = "disabled";
+                this.message.classList.remove("visible");
+            }
+
+            if (this.collapsed || this.invalid) {
                 // Lazy initialise the theme
-                if(!this.themeColor)
-                    this.themeColor = xm.current.color;
+                if(!(this.themeColor in colors))
+                    themeColor = this.themeColor = xm.current.color;
 
                 // Display the outline
-                this.activeBorder.style.borderBottomColor = this.themeColor
-                    ? colors[this.themeColor][500]
+                this.activeBorder.style.borderBottomColor = themeColor in colors
+                    ? colors[themeColor][500]
                     : xm.current.divider;
                 this.activeBorder.classList.add("shown");
 
@@ -143,14 +211,14 @@ xtag.register("m-text-field", {
                 this.textView.style.color = xm.current.text;
 
                 // Highlight the icon if there's one
-                if(this.themeColor && this.icon)
-                    this.icon.themeColor = this.themeColor;
+                if(themeColor in colors && this.icon)
+                    this.icon.themeColor = themeColor;
                 return;
             }
 
             // Recover label
             if(!this.text) {
-                this.labelView.style.removeProperty("visibility");
+                this.labelView.classList.remove("hidden");
             }
             // Remove the label and text/icon highlight
             this.textView.style.color = xm.current.textSecondary;
@@ -161,6 +229,9 @@ xtag.register("m-text-field", {
             this.activeBorder.classList.remove("shown");
         },
         renderFloating: function () {
+            // Choose red theme colour if input is in invalid state
+            var themeColor = !this.invalid ? this.themeColor : "red";
+
             // Set disabled border style and icon if necessary
             this.defaultBorder.style.borderBottomStyle = this.disabled ? "dashed" : "solid";
             if(this.icon)
@@ -170,21 +241,32 @@ xtag.register("m-text-field", {
                 return;
             }
 
+            // Highlight message and counter in invalid state
+            if(this.invalid) {
+                this.counter.style.color = colors[themeColor][500];
+                this.message.style.color = colors[themeColor][500];
+                this.message.classList.add("visible");
+            }
+            else {
+                this.counter.textColor = "disabled";
+                this.message.classList.remove("visible");
+            }
+
             // Switch to active state
-            if (this.collapsed) {
+            if (this.collapsed || this.invalid) {
                 // Lazy initialise the theme
-                if(!this.themeColor)
-                    this.themeColor = xm.current.color;
+                if(!(this.themeColor in colors))
+                    themeColor = this.themeColor = xm.current.color;
 
                 // Collapse the label
                 this.labelView.textStyle = "caption";
                 this.labelView.classList.add("collapsed");
-                if(this.themeColor in colors)
-                    this.labelView.style.color = colors[this.themeColor][500];
+                if(themeColor in colors)
+                    this.labelView.style.color = colors[themeColor][500];
 
                 // Display the outline
-                this.activeBorder.style.borderBottomColor = this.themeColor
-                    ? colors[this.themeColor][500]
+                this.activeBorder.style.borderBottomColor = themeColor in colors
+                    ? colors[themeColor][500]
                     : xm.current.divider;
                 this.activeBorder.classList.add("shown");
 
@@ -193,8 +275,8 @@ xtag.register("m-text-field", {
                 this.textView.style.color = xm.current.text;
 
                 // Highlight the icon if there's one
-                if(this.themeColor && this.icon)
-                    this.icon.themeColor = this.themeColor;
+                if(themeColor in colors && this.icon)
+                    this.icon.themeColor = themeColor;
                 return;
             }
 
@@ -233,9 +315,33 @@ xtag.register("m-text-field", {
             }
         },
         'input:delegate(input.subheading)': function (e) {
+            var component = e.currentTarget;
             // Hide hint when the user started entering the text
-            if(!e.currentTarget.floating)
-                e.currentTarget.labelView.style.visibility = "hidden";
+            if (!component.floating)
+                component.labelView.classList.add("hidden");
+
+            // Whether the input is valid
+            var valid = true;
+
+            // Update counter and verify length
+            if (component.maxLength > 0) {
+                var current = this.value.length;
+                component.counter.innerText = current + " / " + component.maxLength;
+
+                if (current > component.maxLength)
+                    valid = false;
+            }
+
+
+            // Run the validation
+            if (component._rule instanceof RegExp) {
+                // Highlight the error
+                if (!component._rule.test(this.value))
+                    valid = false;
+            }
+
+            // Identify whether the input is valid
+            component.invalid = !valid;
         }
     }
 });

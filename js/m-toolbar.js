@@ -8,11 +8,23 @@ xtag.register("m-toolbar", {
             // Create a text view to go inside the element
             this.textView = this.querySelector("m-text-view");
             // Setup styles
-            this.elevation = 4;
+            this.defaultElevation = 4;
             this.render();
         }
     },
     accessors: {
+        opaque: {
+            attribute: {
+                boolean: true
+            },
+            get: function() {
+                return this._opaque;
+            },
+            set: function(value) {
+                this._opaque = value;
+                this.render();
+            }
+        },
         text: {
             attribute: {},
             get: function() {
@@ -65,8 +77,18 @@ xtag.register("m-toolbar", {
     },
     methods: {
         render: function() {
-            this.style.background = this.primary ? colors[this.themeColor][500] : xm.current.appBarBack;
-            this.textView.style.color = xm.current.appBarFore;
+            // Identify rendering options
+            var opaque = this.opaque || this.themeColor in colors;
+            var fallback = opaque ? xm.current.appBarBack : "transparent";
+            // Perform rendering
+            this.elevation = this.opaque ? this.defaultElevation : 0;
+            this.textView.style.color = opaque ? xm.current.appBarFore : xm.current.text;
+            this.style.backgroundColor = this.themeColor in colors ? colors[this.themeColor][500] : fallback;
+            this.textView.textStyle = this.classList.contains("fixed") ? "title" : "subheading";
+            if (this.elevation > 0)
+                this.style.removeProperty("borderBottom");
+            else
+                this.style.borderBottom = "solid 1px " + xm.current.divider;
         }
     }
 });

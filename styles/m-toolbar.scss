@@ -13,15 +13,6 @@ m-toolbar {
 
   transition: background-color ease-in-out 200ms, color ease-in-out 200ms;
 
-  z-index: 4;
-
-  &[primary] {
-    position: fixed;
-    width: 100%;
-
-    box-sizing: border-box;
-  }
-
   & > m-text-view {
     height: $m-toolbar-height;
     line-height: $m-toolbar-height;
@@ -46,10 +37,21 @@ m-toolbar {
     text-align: center;
 
     border-radius: 100%;
-    z-index: 4;
 
     & > .material-icons {
       line-height: $m-icon-touch;
+    }
+  }
+
+  &.fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 4;
+
+    box-sizing: border-box;
+
+    & > m-icon {
+      z-index: 4;
     }
   }
 }

@@ -24,7 +24,7 @@ xtag.register("m-text-view", {
                         this.style.color = xm.current.textSecondary;
                         break;
                     case "disabled":
-                        this.style.color = xm.current.disabled;
+                        this.style.color = xm.current.textHint;
                         break;
                 }
             }
