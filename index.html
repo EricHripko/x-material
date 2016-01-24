@@ -41,12 +41,23 @@
         }
 
         #toolbar {
-            position: relative;
-            /* Four increments */
             top: 0;
-            height: 224px;
+            height: 410px;
+            z-index: -1;
 
             text-align: center;
+            transition: box-shadow ease-in-out 200ms, height ease-in-out 200ms;
+        }
+
+        #toolbar m-text-view {
+            transition: opacity ease-in-out 200ms;
+        }
+
+        #divider {
+            position: absolute;
+            left: 0;
+
+            width: 900px;
         }
 
         .doc-title {
@@ -58,8 +69,14 @@
         }
 
         .doc-content {
-            width: 800px;
+            position: relative;
+            width: 900px;
+
             margin: 32px auto;
+            margin-top: 200px;
+            padding: 16px;
+
+            box-sizing: border-box;
         }
 
         .doc-example {
@@ -89,13 +106,13 @@
 </head>
 <body>
 
-<m-toolbar id="toolbar" primary>
+<m-toolbar id="toolbar" primary opaque class="fixed">
     <m-text-view class="doc-title doc-margin" text-style="display3" text-color="primary">x-material</m-text-view>
     <br>
     <m-text-view class="doc-title" text-style="display2" text-color="secondary">Material components for web</m-text-view>
 </m-toolbar>
 
-<div class="doc-content">
+<m-card class="doc-content" elevation=2>
     <m-text-view text-style="title">Introduction</m-text-view>
     <br><br>
     <m-text-view text-style="subheading" text-color="secondary">
@@ -109,7 +126,10 @@
         it currently <strong>cannot</strong> be used in production. You are more than welcome to join the development
         on <a href="https://github.com/EricHripko/x-material" target="_blank">GitHub</a>.
     </m-text-view>
+
     <br><br>
+    <m-divider id="divider"></m-divider>
+    <br>
 
 
     <m-text-view text-style="title">Text View</m-text-view>
@@ -199,32 +219,32 @@
     <table class="doc-example">
         <tr>
             <td class="doc-example--live" width="33%">
-                <m-button>Button</m-button>
+                <m-button text="Button"></m-button>
                 <br><br>
 
-                <m-button primary>Button</m-button>
+                <m-button text="Button" primary></m-button>
                 <br><br>
 
-                <m-button theme-color="blue-grey">Button</m-button>
+                <m-button text="Button" theme-color="blue-grey"></m-button>
                 <br><br>
 
-                <m-button disabled>Button</m-button>
+                <m-button text="Button" disabled></m-button>
                 <br><br>
             </td>
             <td width="66%">
                 <pre>
 <code class="html">
     &lt;!-- Button with no colouring --&gt;
-    &lt;m-button&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button"&gt;&lt;/m-button&gt;
 
     &lt;!-- Coloured button (uses current theme) --&gt;
-    &lt;m-button primary&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" primary&gt;&lt;/m-button&gt;
 
     &lt;!-- Coloured button (custom palette) --&gt;
-    &lt;m-button theme-color="blue-grey"&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" theme-color="blue-grey"&gt;&lt;/m-button&gt;
 
     &lt;!-- Disabled button --&gt;
-    &lt;m-button disabled&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" disabled&gt;&lt;/m-button&gt;
 
 </code>
                 </pre>
@@ -236,32 +256,33 @@
     <table class="doc-example">
         <tr>
             <td class="doc-example--live" width="33%">
-                <m-button flat>Button</m-button>
+                <m-button text="Button" flat></m-button>
                 <br><br>
 
-                <m-button flat primary>Button</m-button>
+                <m-button text="Button" flat primary></m-button>
                 <br><br>
 
-                <m-button flat theme-color="teal">Button</m-button>
+                <m-button text="Button" flat theme-color="teal"></m-button>
                 <br><br>
 
-                <m-button flat disabled>Button</m-button>
+                <m-button text="Button" flat disabled></m-button>
                 <br><br>
             </td>
             <td width="66%">
                 <pre>
 <code class="html">
     &lt;!-- Button with no colouring --&gt;
-    &lt;m-button flat&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" flat&gt;&lt;/m-button&gt;
 
     &lt;!-- Coloured button (uses current theme) --&gt;
-    &lt;m-button flat primary&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" flat primary&gt;&lt;/m-button&gt;
 
     &lt;!-- Coloured button (custom palette) --&gt;
-    &lt;m-button flat theme-color="teal"&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" flat theme-color="teal"&gt;&lt;/m-button&gt;
 
     &lt;!-- Disabled button --&gt;
-    &lt;m-button flat disabled&gt;Button&lt;/m-button&gt;
+    &lt;m-button text="Button" flat disabled&gt;&lt;/m-button&gt;
+
 </code>
                 </pre>
             </td>
@@ -279,26 +300,26 @@
     <table class="doc-example">
         <tr>
             <td class="doc-example--live" width="33%">
-                <m-icon>bluetooth</m-icon>
+                <m-icon src="bluetooth"></m-icon>
                 <br><br>
 
-                <m-icon primary>bluetooth</m-icon>
+                <m-icon src="bluetooth" primary></m-icon>
                 <br><br>
 
-                <m-icon theme-color="indigo">bluetooth</m-icon>
+                <m-icon src="bluetooth" theme-color="indigo"></m-icon>
                 <br><br>
             </td>
             <td width="66%">
                 <pre>
 <code class="html">
     &lt;!-- Default icon colour --&gt;
-    &lt;m-icon&gt;bluetooth&lt;/m-icon&gt;
+    &lt;m-icon src="bluetooth"&gt;&lt;/m-icon&gt;
 
     &lt;!-- Primary theme colour --&gt;
-    &lt;m-icon primary&gt;bluetooth&lt;/m-icon&gt;
+    &lt;m-icon src="bluetooth" primary&gt;&lt;/m-icon&gt;
 
     &lt;!-- Custom colour --&gt;
-    &lt;m-icon theme-color="indigo"&gt;bluetooth&lt;/m-icon&gt;
+    &lt;m-icon src="bluetooth" theme-color="indigo"&gt;&lt;/m-icon&gt;
 
 </code>
                 </pre>
@@ -394,27 +415,27 @@
                     <m-item-single>
                         <m-avatar>A</m-avatar>
                         Abbey Christensen
-                        <m-icon theme-color="indigo" class="action">chat_bubble</m-icon>
+                        <m-icon src="chat_bubble" theme-color="indigo" class="action"></m-icon>
                     </m-item-single>
                     <m-item-single>
                         <m-avatar>A</m-avatar>
                         Alex Nelson
-                        <m-icon theme-color="indigo" class="action">chat_bubble</m-icon>
+                        <m-icon src="chat_bubble" theme-color="indigo" class="action"></m-icon>
                     </m-item-single>
                     <m-item-single>
                         <m-avatar>M</m-avatar>
                         Mary Johnson
-                        <m-icon class="action">chat_bubble</m-icon>
+                        <m-icon class="action" src="chat_bubble"></m-icon>
                     </m-item-single>
                     <m-item-single>
                         <m-avatar>P</m-avatar>
                         Peter Carlsson
-                        <m-icon class="action">chat_bubble</m-icon>
+                        <m-icon class="action" src="chat_bubble"></m-icon>
                     </m-item-single>
                     <m-item-single>
                         <m-avatar>T</m-avatar>
                         Trevor Hansen
-                        <m-icon class="action">chat_bubble</m-icon>
+                        <m-icon class="action" src="chat_bubble"></m-icon>
                     </m-item-single>
                 </m-card>
                 <br>
@@ -422,25 +443,25 @@
                     <m-subhead theme-color="teal" text="Wireless & networks"></m-subhead>
 
                     <m-item-single>
-                        <m-icon theme-color="teal">network_wifi</m-icon>
+                        <m-icon theme-color="teal" src="network_wifi"></m-icon>
                         Wi-Fi
                     </m-item-single>
                     <m-divider partial></m-divider>
 
                     <m-item-single>
-                        <m-icon theme-color="teal">bluetooth</m-icon>
+                        <m-icon theme-color="teal" src="bluetooth"></m-icon>
                         Bluetooth
                     </m-item-single>
                     <m-divider partial></m-divider>
 
                     <m-item-single>
-                        <m-icon theme-color="teal">data_usage</m-icon>
+                        <m-icon theme-color="teal" src="data_usage"></m-icon>
                         Data usage
                     </m-item-single>
                     <m-divider partial></m-divider>
 
                     <m-item-single>
-                        <m-icon theme-color="teal">more_horiz</m-icon>
+                        <m-icon theme-color="teal" src="more_horiz"></m-icon>
                         More
                     </m-item-single>
                 </m-card>
@@ -461,7 +482,7 @@
     &lt;m-item-single&gt;
         &lt;m-avatar&gt;T&lt;/m-avatar&gt;
         Trevor Hansen
-        &lt;m-icon class="action">chat_bubble&lt;/m-icon&gt;
+        &lt;m-icon src="chat_bubble" class="action">&lt;/m-icon&gt;
     &lt;/m-item-single&gt;
     &lt;/m-card&gt;
 
@@ -479,7 +500,7 @@
     &#8230;
     &lt;m-divider partial&gt;&lt;/m-divider&gt;
     &lt;m-item-single&gt;
-        &lt;m-icon theme-color="teal"&gt;more_horiz&lt;/m-icon&gt;
+        &lt;m-icon src="more_horiz" theme-color="teal"&gt;&lt;/m-icon&gt;
         More
     &lt;/m-item-single&gt;
     &lt;/m-card&gt;
@@ -547,6 +568,13 @@
 
                 <m-text-field hint="Phone" input-icon="phone" floating style="text-align:left;"></m-text-field>
                 <br>
+
+                <m-text-field hint="Phone" floating max-length=10 style="text-align:left;"></m-text-field>
+                <br>
+
+                <m-text-field hint="Phone" floating validation-rule="^\d*$" validation-message="Only numbers allowed."
+                              style="text-align:left;"></m-text-field>
+                <br>
             </td>
             <td width="66%">
                 <pre>
@@ -566,7 +594,7 @@
     &lt;m-text-field hint="Input text" disabled&gt;
     &lt;/m-text-field&gt;
 
-    &lt;!-- An input with a floating hint and an icon --&gt;
+    &lt;!-- An input with a hint and an icon --&gt;
     &lt;m-text-field
     hint="Input text"
     input-icon="phone"
@@ -579,16 +607,43 @@
         floating&gt;
     &lt;/m-text-field&gt;
 
+    &lt;!-- An input with a character counter --&gt;
+    &lt;m-text-field hint="Phone"
+        floating
+        max-length=10&gt;
+    &lt;/m-text-field&gt;
+
+    &lt;!-- An input with validation enabled (using RegExp) --&gt;
+    &lt;m-text-field hint="Phone"
+        floating
+        validation-rule="^\d*$"
+        validation-message="Only numbers allowed."&gt;
+    &lt;/m-text-field&gt;
 </code>
                 </pre>
             </td>
         </tr>
-    </table></div>
+    </table></m-card>
 
 
 <script type="text/javascript">
     // Enable syntax highlighting
     hljs.initHighlightingOnLoad();
+
+    window.addEventListener("scroll", function(e) {
+        var hidden = Math.max((50 - document.body.scrollTop) / 50, 0);
+        // Hide title texts
+        var texts = document.querySelectorAll("#toolbar m-text-view");
+        for(var i = 0; i < texts.length; i++) {
+            var text = texts[i];
+            text.style.opacity = hidden;
+        }
+
+        // Expand toolbar
+        var toolbar = document.getElementById("toolbar");
+        toolbar.elevation = hidden > 0 ? 4 : 0;
+        toolbar.style.height = (hidden > 0 ? 410 : screen.height) + "px";
+    });
 </script>
 </body>
 </html>

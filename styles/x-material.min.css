@@ -120,6 +120,7 @@ m-card {
   display: block;
   margin: 8px;
   border-radius: 2px;
+  overflow: hidden;
   z-index: 2; }
   m-card.margin-reset {
     margin: 0; }
@@ -202,7 +203,7 @@ m-subhead {
 m-text-field {
   display: block;
   width: 400px;
-  height: 48px;
+  height: 64px;
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -222,6 +223,9 @@ m-text-field {
    * Border underneath.
    */
   /*
+   * Validation character counter.
+   */
+  /*
    * Offset the input contents to the right to make space for an icon.
    */
   /*
@@ -236,37 +240,63 @@ m-text-field {
   m-text-field > m-icon {
     position: absolute;
     left: 16px;
-    bottom: 12px; }
+    bottom: 28px; }
   m-text-field > m-icon i.material-icons {
     transition: color ease-in-out 200ms; }
   m-text-field > m-text-view.hint {
     position: absolute;
     top: 14px;
-    transition: font-size ease-in-out 200ms, color ease-in-out 200ms, top ease-in-out 200ms; }
+    opacity: 1;
+    transition: font-size ease-in-out 200ms, color ease-in-out 200ms, top ease-in-out 200ms, opacity ease-in-out 200ms;
+    /*
+     * Asterisk.
+     */ }
+    m-text-field > m-text-view.hint > sup.asterisk {
+      margin-left: 1px;
+      transition: color ease-in-out 200ms; }
+  m-text-field > m-text-view.hidden {
+    opacity: 0; }
   m-text-field > input {
     position: absolute;
-    bottom: 16px;
+    bottom: 32px;
     width: 100%;
     opacity: 0;
     transition: opacity ease-in-out 200ms, color ease-in-out ease-in-out 200ms; }
-  m-text-field > input.visible {
-    opacity: 1; }
+    m-text-field > input.visible {
+      opacity: 1; }
   m-text-field > div.border-default {
     position: absolute;
-    bottom: 8px;
+    bottom: 24px;
     width: 100%;
     border-bottom: 1px solid; }
   m-text-field > div.border-active {
     position: absolute;
-    bottom: 8px;
+    bottom: 24px;
     left: 50%;
     width: 0;
     border-bottom: 2px solid;
-    transition: left ease-in-out 200ms, width ease-in-out 200ms; }
+    transition: left ease-in-out 200ms, width ease-in-out 200ms, border ease-in-out 200ms; }
   m-text-field > div.border-active.shown {
     left: 0;
     width: 100%; }
+  m-text-field > m-text-view.counter {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: block;
+    transition: color ease-in-out 200ms; }
+  m-text-field > m-text-view.message {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    opacity: 0;
+    transition: color ease-in-out 200ms, opacity ease-in-out 200ms; }
+    m-text-field > m-text-view.message.visible {
+      opacity: 1; }
   m-text-field.with-icon > m-text-view.hint {
+    left: 56px; }
+  m-text-field.with-icon > m-text-view.message {
     left: 56px; }
   m-text-field.with-icon > div.border-active {
     left: calc(50% + 28px); }
@@ -274,25 +304,39 @@ m-text-field {
     left: 56px;
     width: calc(100% - 56px); }
   m-text-field:not([floating]):not(.with-icon).full-width {
-    height: 56px; }
+    height: 56px;
+    margin-left: 20px;
+    margin-right: 20px; }
     m-text-field:not([floating]):not(.with-icon).full-width > m-text-view.hint {
       top: 18px; }
     m-text-field:not([floating]):not(.with-icon).full-width > input {
       bottom: 20px; }
-    m-text-field:not([floating]):not(.with-icon).full-width > div {
+    m-text-field:not([floating]):not(.with-icon).full-width > div.border-default, m-text-field:not([floating]):not(.with-icon).full-width > div.border-active {
       display: none; }
+    m-text-field:not([floating]):not(.with-icon).full-width > m-text-view.counter {
+      height: 56px;
+      line-height: 56px; }
+    m-text-field:not([floating]):not(.with-icon).full-width[max-length] > input {
+      width: calc(100% - 52px); }
   m-text-field[floating] {
-    height: 72px; }
+    height: 88px; }
     m-text-field[floating] > m-text-view.hint {
       top: 38px; }
       m-text-field[floating] > m-text-view.hint.collapsed {
-        top: 16px; }
+        top: 16px;
+        /*
+         * Highlight the asterisk.
+         */ }
+        m-text-field[floating] > m-text-view.hint.collapsed > sup.asterisk {
+          color: #F44336; }
   m-text-field[disabled] {
     cursor: not-allowed; }
     m-text-field[disabled] > input {
       cursor: not-allowed; }
     m-text-field[disabled] > div.border-default {
       border-bottom-style: dashed; }
+    m-text-field[disabled] > m-text-view.message, m-text-field[disabled] > m-text-view.counter {
+      display: none; }
 
 m-text-view {
   font-family: 'Roboto', sans-serif; }
@@ -351,12 +395,7 @@ m-toolbar {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
-  transition: background-color ease-in-out 200ms, color ease-in-out 200ms;
-  z-index: 4; }
-  m-toolbar[primary] {
-    position: fixed;
-    width: 100%;
-    box-sizing: border-box; }
+  transition: background-color ease-in-out 200ms, color ease-in-out 200ms; }
   m-toolbar > m-text-view {
     height: 56px;
     line-height: 56px;
@@ -372,7 +411,13 @@ m-toolbar {
     width: 40px;
     line-height: 40px;
     text-align: center;
-    border-radius: 100%;
-    z-index: 4; }
+    border-radius: 100%; }
     m-toolbar > m-icon > .material-icons {
       line-height: 40px; }
+  m-toolbar.fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 4;
+    box-sizing: border-box; }
+    m-toolbar.fixed > m-icon {
+      z-index: 4; }
