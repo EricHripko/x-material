@@ -3,6 +3,7 @@ var xm = {};
 xm.ripple = {};
 xm.focus = {};
 xm.input = {};
+xm.wash = {};
 
 // Set the background for the screen when ready
 document.addEventListener("DOMContentLoaded", function () {
@@ -209,6 +210,22 @@ xm.focus.make = function (element) {
 // Returns whether the key pressed should activate the element
 xm.input.isActionKey = function (keyCode) {
     return keyCode == 32 || keyCode == 13;
+};
+
+// Creates an ink wash to cover the screen
+xm.wash.create = function () {
+    if(!xm.wash.instance) {
+        xm.wash.instance = document.createElement("div");
+        xm.wash.instance.classList.add("wash");
+        document.body.appendChild(xm.wash.instance);
+    }
+    xm.wash.instance.style.width = screen.width + "px";
+    xm.wash.instance.style.height = screen.height + "px";
+};
+// Toggle the ink overlay
+xm.wash.toggle = function () {
+    xm.wash.create();
+    xm.wash.instance.classList.toggle("show");
 };
 
 // Mixin that provides common logic for all material elements

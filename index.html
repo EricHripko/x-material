@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="xm:primary" content="blue">
     <meta name="xm:style" content="light">
-    <meta name="xm:toolbar" content="mixed">
+    <meta name="xm:toolbar" content="dark">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -47,8 +47,12 @@
 <div style="height: 56px;"></div>
 
 <br>
-<m-fab style="position: absolute; left: 200px; top: 220px;" src="directions" theme-color="green"></m-fab>
+<m-fab style="margin-left: 50px;" src="add" toggle="clear">
+    <m-fab src="add"></m-fab>
+</m-fab>
 
+<br>
+<m-fab style="margin-left: 50px;" src="add" theme-color="pink-accent" class="mini"></m-fab>
 <br>
 <m-card style="width: 440px; height: 300px;" elevation=2 class="reveal">
     <m-toolbar nav-icon="arrow_back" text="Compose"></m-toolbar>
@@ -59,8 +63,7 @@
     <m-text-view style="display: block; padding: 20px;" text-style="subheading" text-color="disabled">Body</m-text-view>
 </m-card>
 
-
-<m-subhead text="Recent chat"></m-subhead>
+<m-subhead text="Recent chat" theme-color="teal"></m-subhead>
 <m-item-single>
     <m-avatar theme-color="red">A</m-avatar>
     Abbey Christensen

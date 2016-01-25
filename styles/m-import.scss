@@ -2,7 +2,8 @@
   @return $measure * 8px;
 }
 
-$m-anim-quick: ease-in-out 200ms;
+$m-anim-quick-time: 200ms;
+$m-anim-quick: ease-in-out $m-anim-quick-time;
 $m-anim-quick-linear: linear 200ms;
 $m-anim-slow: linear 650ms;
 $m-item-single-height: mu(6);

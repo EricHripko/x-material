@@ -84,6 +84,9 @@ m-focus.animate {
   opacity: 1;
 }
 
+/*
+ * Divider between lists.
+ */
 m-divider {
   display: block;
   position: relative;
@@ -115,6 +118,28 @@ m-card {
   &.margin-bottom { margin-bottom: mu(1); }
 }
 
+/*
+ * Ink wash for when FAB is activated.
+ */
+div.wash {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  background-color: rgba(224, 224, 224, 0.5);
+
+  z-index: 50;
+  transition: opacity $m-anim-quick;
+}
+
+div.wash.show {
+  visibility: visible;
+  opacity: 1;
+}
+
 @keyframes appear {
   from {
     top: 50px;
@@ -136,5 +161,16 @@ m-card {
 @keyframes fade-in {
   from {
     opacity: 0;
+  }
+}
+
+@keyframes spin-reveal {
+  from {
+    transform: rotate(-90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
   }
 }

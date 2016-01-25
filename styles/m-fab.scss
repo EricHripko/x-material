@@ -40,15 +40,28 @@ m-fab {
 
   z-index: 4;
 
-  transition: transform $m-anim-quick-linear, opacity $m-anim-quick;
+  transition: transform $m-anim-quick-linear, opacity $m-anim-quick, box-shadow $m-anim-quick;
+
+  &.active {
+    z-index: 51;
+  }
 
   &.mini {
     @include m-fab($m-fab-mini-size);
-    transform: translate($m-fab-mini-size / 2, $m-fab-mini-size / 2);
   }
+
+  &.spin > m-icon {
+      animation: spin-reveal $m-anim-quick-time;
+  }
+}
+
+m-fab > m-fab {
+  display: none;
 }
 
 .fouc m-fab {
   transform: scale(1);
   opacity: 1;
+
+
 }
