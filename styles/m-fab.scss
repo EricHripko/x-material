@@ -36,9 +36,19 @@ m-fab {
   outline: none;
   border-radius: 100%;
 
+  transform: scale(0);
+
   z-index: 4;
+
+  transition: transform $m-anim-quick-linear, opacity $m-anim-quick;
 
   &.mini {
     @include m-fab($m-fab-mini-size);
+    transform: translate($m-fab-mini-size / 2, $m-fab-mini-size / 2);
   }
+}
+
+.fouc m-fab {
+  transform: scale(1);
+  opacity: 1;
 }

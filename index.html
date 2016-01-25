@@ -36,6 +36,9 @@
 
     <script type="text/javascript" src="js/m-subhead.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/m-subhead.css">
+
+    <script type="text/javascript" src="js/m-fab.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/m-fab.css">
 </head>
 <body>
 
@@ -44,12 +47,10 @@
 <div style="height: 56px;"></div>
 
 <br>
-<m-text-field type="text" hint="Phone*" floating input-icon="phone" validation-rule="^(?=\s*\S).*$" validation-message="Phone number is incorrect."></m-text-field>
-<m-text-field hint="Email" invalid input-icon="email" validation-message="Phone number is incorrect."></m-text-field>
-<m-text-field type="text" hint="Phone" input-icon="phone" disabled max-length=50></m-text-field>
+<m-fab style="position: absolute; left: 200px; top: 220px;" src="directions" theme-color="green"></m-fab>
 
 <br>
-<m-card style="width: 440px; height: 300px;" elevation=2>
+<m-card style="width: 440px; height: 300px;" elevation=2 class="reveal">
     <m-toolbar nav-icon="arrow_back" text="Compose"></m-toolbar>
     <m-text-field hint="To" class="full-width" max-length=50></m-text-field>
     <m-divider></m-divider>
@@ -58,9 +59,8 @@
     <m-text-view style="display: block; padding: 20px;" text-style="subheading" text-color="disabled">Body</m-text-view>
 </m-card>
 
-<m-button text="Sign in"></m-button>
 
-<m-subhead text="Recent chat" theme-color="teal"></m-subhead>
+<m-subhead text="Recent chat"></m-subhead>
 <m-item-single>
     <m-avatar theme-color="red">A</m-avatar>
     Abbey Christensen

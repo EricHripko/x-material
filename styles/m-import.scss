@@ -3,7 +3,8 @@
 }
 
 $m-anim-quick: ease-in-out 200ms;
-$m-anim-slow: 0.65s linear;
+$m-anim-quick-linear: linear 200ms;
+$m-anim-slow: linear 650ms;
 $m-item-single-height: mu(6);
 $m-subhead-height: mu(6);
 $m-avatar-size: mu(5);
