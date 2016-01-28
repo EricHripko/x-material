@@ -4,6 +4,7 @@ xm.ripple = {};
 xm.focus = {};
 xm.input = {};
 xm.wash = {};
+xm.reveal = {};
 
 // Set the background for the screen when ready
 document.addEventListener("DOMContentLoaded", function () {
@@ -49,6 +50,7 @@ var colors = {
     "blue-grey": {
         400: "#78909C",
         500: "#607D8B",
+        600: "#546E7A",
         700: "#455A64"
     },
     "teal": {
@@ -205,6 +207,17 @@ xm.focus.make = function (element) {
     xm.focus.create(element);
     // Animate
     element.shade.classList.add("animate");
+};
+
+// Produce a reveal animation for the element
+xm.reveal.show = function (element) {
+    // Save transition settings
+    var transition = element.style.transition;
+    element.style.transition = "none";
+    // Bounds
+    var bounds = element.getBoundingClientRect();
+    element.style.width = 0;
+    element.style.height = 0;
 };
 
 // Returns whether the key pressed should activate the element

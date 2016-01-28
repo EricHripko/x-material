@@ -69,6 +69,63 @@ xtag.register("m-fab", {
             // Need delay for animation to play
             var component = this;
             setTimeout(function () { component.classList.add("spin"); }, 10);
+        },
+        flingActions: function () {
+            // Size of the mini-FAB
+            var fabSize = 40;
+            // Gap between actions
+            var gap = 16;
+            // Delay between actions appearing
+            var delay = 100;
+
+            // Fling actions out
+            var action, i;
+            if(this._actions == undefined) {
+                // Find all associated actions
+                this._actions = this.querySelectorAll("m-fab");
+                if (this._actions.length == 0) {
+                    this._actions = undefined;
+                    return;
+                }
+
+                // Get the bounds of the current button
+                var bounds = this.getBoundingClientRect();
+
+                // Fling them out
+                for (i = 0; i < this._actions.length; i++) {
+                    action = this._actions[i];
+
+                    // Setup the action position
+                    action.style.position = "absolute";
+                    action.style.top = (bounds.bottom + gap * (i + 1) + fabSize * i) + "px";
+                    action.style.left = (bounds.left + (bounds.width - fabSize) / 2) + "px";
+                    // Display above ink wash layer and ensure that mini-FAB is displayed
+                    action.classList.add("active");
+                    action.classList.add("mini");
+                    action.classList.add("hidden");
+                    // Add the button
+                    document.body.appendChild(action);
+
+                    // Animate it
+                    (function (context) {
+                        setTimeout(function () {
+                            context.classList.remove("hidden");
+                        }, i * delay);
+                    })(action);
+                }
+
+                return;
+            }
+
+            // Hide the actions
+            for (i = 0; i < this._actions.length; i++) {
+                action = this._actions[i];
+
+                // Fold back to parent FAB, hide underneath the ink wash
+                action.classList.remove("active");
+                this.appendChild(action);
+            }
+            this._actions = undefined;
         }
     },
     events: {
@@ -80,6 +137,7 @@ xtag.register("m-fab", {
         tapend: function () {
             this.resetAnimation();
 
+            // Change icon and display screen ink wash
             if(this.toggle) {
                 // Swap icons if button is toggleable
                 var old = this.src;
@@ -90,6 +148,9 @@ xtag.register("m-fab", {
                 // Bring button above the wash layer
                 this.classList.toggle("active");
             }
+
+            // Display FAB actions
+            this.flingActions();
         },
         leave: function () {
             this.resetAnimation();

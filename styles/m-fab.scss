@@ -36,11 +36,11 @@ m-fab {
   outline: none;
   border-radius: 100%;
 
-  transform: scale(0);
+  transform: scale(1);
 
   z-index: 4;
 
-  transition: transform $m-anim-quick-linear, opacity $m-anim-quick, box-shadow $m-anim-quick;
+  transition: transform $m-anim-quick-linear, box-shadow $m-anim-quick;
 
   &.active {
     z-index: 51;
@@ -53,15 +53,12 @@ m-fab {
   &.spin > m-icon {
       animation: spin-reveal $m-anim-quick-time;
   }
+
+  &.hidden {
+    transform: scale(0);
+  }
 }
 
 m-fab > m-fab {
   display: none;
-}
-
-.fouc m-fab {
-  transform: scale(1);
-  opacity: 1;
-
-
 }
