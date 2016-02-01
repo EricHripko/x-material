@@ -155,6 +155,8 @@ div.wash.show {
   /* Make sure that ink is opaque */
   & > m-ink {
     opacity: 1;
+    transition: transform $m-anim-medium, opacity $m-anim-quick;
+
     &.animate {
       opacity: 1;
     }

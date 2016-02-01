@@ -47,15 +47,18 @@
 <div style="height: 56px;"></div>
 
 <br>
-<m-fab style="position: absolute; top: 75px; left: 50px;" src="share" toggle="clear" theme-color="blue">
+<m-fab style="position: absolute; bottom: 50px; right: 50px;" src="add" theme-color="blue">
+    <!--
+    toggle="clear"
     <m-fab src="email" theme-color="blue-grey"></m-fab>
     <m-fab src="message" theme-color="blue-grey"></m-fab>
+    -->
 </m-fab>
 
-<br>
+<!--<br>
 <m-fab style="" src="add" theme-color="pink-accent" class="mini"></m-fab>
-<br>
-<m-card style="width: 440px; height: 300px; position: absolute; left: 100px; top: 100px;" elevation=2 class="reveal">
+<br>-->
+<m-card style="width: 440px; height: 300px; position: absolute; left: 100px; top: 200px;" elevation=2 class="reveal">
     <m-toolbar nav-icon="arrow_back" text="Compose"></m-toolbar>
     <m-text-field hint="To" class="full-width" max-length=50></m-text-field>
     <m-divider></m-divider>
@@ -64,7 +67,7 @@
     <m-text-view style="display: block; padding: 20px;" text-style="subheading" text-color="disabled">Body</m-text-view>
 </m-card>
 
-<m-subhead text="Recent chat" theme-color="teal"></m-subhead>
+<m-subhead text="Recent chat" primary></m-subhead>
 <m-item-single>
     <m-avatar theme-color="red">A</m-avatar>
     Abbey Christensen
@@ -102,6 +105,19 @@
     <m-avatar>S</m-avatar>
     Sandra Adams
 </m-item-single>
+
+<script type="text/javascript">
+    var fab = document.querySelector("m-fab");
+    var card = document.querySelector("m-card");
+    xtag.addEvent(fab, "tapend", function () {
+        xm.morph.show(card);
+    });
+    xtag.addEvent(card, "tapend", function () {
+        xm.morph.hide(card);
+    });
+
+    xm.morph.create(fab, card);
+</script>
 
 </body>
 </html>

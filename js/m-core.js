@@ -66,6 +66,12 @@ var colors = {
         600: "#1E88E5",
         700: "#1976D2"
     },
+    "grey": {
+        400: "#BDBDBD",
+        500: "#9E9E9E",
+        600: "#757575",
+        700: "#616161"
+    },
     "light": {
         500: "white"
     },
@@ -159,6 +165,10 @@ xm.ripple.reset = function (element) {
     if(element.ink)
         element.ink.style.opacity = 0;
 };
+// Reverse the ripple in the element
+xm.ripple.reverse = function(element) {
+    element.ink.classList.remove("animate");
+};
 // Create the ripple in the element
 xm.ripple.make = function (event, element) {
     // Initialise the animation
@@ -220,12 +230,16 @@ xm.morph.create = function (parent, element) {
     morph.style.top = bounds.top + "px";
     morph.style.left = bounds.left + "px";
 
+    // Make sure parent is properly positioned
+    var parentBounds = parent.getBoundingClientRect();
+    parent.style.top = parentBounds.top + "px";
+    parent.style.left = parentBounds.left + "px";
     parent.classList.add("morph-originator");
-    element.style.opacity = 0;
 
     // Add it to the screen
     element._morph = morph;
     element._parent = parent;
+    element.style.opacity = 0;
     document.body.appendChild(morph);
 };
 xm.morph.show = function (element) {
@@ -248,20 +262,55 @@ xm.morph.show = function (element) {
                     parent.style.opacity = 0;
                     element.style.opacity = 1;
 
-                    // Remove the handler
-                    e.target.removeEventListener(e.type, arguments.callee);
+                    // Hide animation element and remove the handler
+                    if(e.propertyName == "opacity") {
+                        morph.style.display = "none";
+                        e.target.removeEventListener(e.type, arguments.callee);
+                    }
                 });
 
             // Remove the handler
             e.target.removeEventListener(e.type, arguments.callee);
         });
 
-    // Bounds of the parent
+    // Detect bounds
     var morphBounds = morph.getBoundingClientRect();
     var parentBounds = parent.getBoundingClientRect();
+    // Store parent original form
+    parent._bounds = parentBounds;
+    parent._originalElevation = parent.elevation;
+    // Start animation
     parent.style.top = (morphBounds.top + morphBounds.height / 2 - parentBounds.height / 2) + "px";
     parent.style.left = (morphBounds.left + morphBounds.width / 2 - parentBounds.width / 2) + "px";
     parent.elevation = 0;
+};
+xm.morph.hide = function (element) {
+    // Setup
+    var morph = element._morph;
+    var parent = element._parent;
+
+    // Reverse ripple effect
+    morph.style.display = "block";
+    setTimeout(function() {
+        morph.ink.style.opacity = 1;
+
+        morph.ink.addEventListener("transitionend",
+            function(e) {
+                xm.ripple.reverse(morph);
+
+                // Hide element and show parent
+                element.style.opacity = 0;
+                parent.style.opacity = 1;
+
+                // Remove the handler when ink disappears
+                if(e.propertyName == "transform") {
+                    parent.style.top = parent._bounds.top + "px";
+                    parent.style.left = parent._bounds.left + "px";
+                    parent.elevation = parent._originalElevation;
+                    e.target.removeEventListener(e.type, arguments.callee);
+                }
+            });
+    }, 10);
 };
 
 // Returns whether the key pressed should activate the element
