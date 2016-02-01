@@ -4,7 +4,7 @@ xm.ripple = {};
 xm.focus = {};
 xm.input = {};
 xm.wash = {};
-xm.reveal = {};
+xm.morph = {};
 
 // Set the background for the screen when ready
 document.addEventListener("DOMContentLoaded", function () {
@@ -210,14 +210,58 @@ xm.focus.make = function (element) {
 };
 
 // Produce a reveal animation for the element
-xm.reveal.show = function (element) {
-    // Save transition settings
-    var transition = element.style.transition;
-    element.style.transition = "none";
-    // Bounds
+xm.morph.create = function (parent, element) {
+    // Prepare for animation
     var bounds = element.getBoundingClientRect();
-    element.style.width = 0;
-    element.style.height = 0;
+    var morph = document.createElement("div");
+    morph.classList.add("morph");
+    morph.style.width = bounds.width + "px";
+    morph.style.height = bounds.height + "px";
+    morph.style.top = bounds.top + "px";
+    morph.style.left = bounds.left + "px";
+
+    parent.classList.add("morph-originator");
+    element.style.opacity = 0;
+
+    // Add it to the screen
+    element._morph = morph;
+    element._parent = parent;
+    document.body.appendChild(morph);
+};
+xm.morph.show = function (element) {
+    // Setup
+    var morph = element._morph;
+    var parent = element._parent;
+
+    // When parent arrives to the centre of target, start ink animation
+    parent.addEventListener("transitionend",
+        function (e) {
+            // Start ripple effect
+            morph.pressedColor = parent.style.backgroundColor;
+            xm.ripple.make({}, morph);
+
+            // When ink animation finishes, hide the layer to reveal the original element
+            morph.ink.addEventListener("transitionend",
+                function (e) {
+                    // Start ripple effect
+                    morph.ink.style.opacity = 0;
+                    parent.style.opacity = 0;
+                    element.style.opacity = 1;
+
+                    // Remove the handler
+                    e.target.removeEventListener(e.type, arguments.callee);
+                });
+
+            // Remove the handler
+            e.target.removeEventListener(e.type, arguments.callee);
+        });
+
+    // Bounds of the parent
+    var morphBounds = morph.getBoundingClientRect();
+    var parentBounds = parent.getBoundingClientRect();
+    parent.style.top = (morphBounds.top + morphBounds.height / 2 - parentBounds.height / 2) + "px";
+    parent.style.left = (morphBounds.left + morphBounds.width / 2 - parentBounds.width / 2) + "px";
+    parent.elevation = 0;
 };
 
 // Returns whether the key pressed should activate the element

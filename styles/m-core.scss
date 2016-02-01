@@ -106,6 +106,9 @@ m-divider {
   animation: enlarge-right 200ms;
 }
 
+/*
+ * Card and paper.
+ */
 m-card {
   display: block;
   margin: mu(1);
@@ -138,6 +141,31 @@ div.wash {
 div.wash.show {
   visibility: visible;
   opacity: 1;
+}
+
+/*
+ * Target of the morph animation.
+ */
+.morph {
+  position: absolute;
+
+  overflow: hidden;
+  z-index: 51;
+
+  /* Make sure that ink is opaque */
+  & > m-ink {
+    opacity: 1;
+    &.animate {
+      opacity: 1;
+    }
+  }
+}
+
+/*
+ * The originator of the morph animation.
+ */
+.morph-originator {
+  transition: top $m-anim-quick, left $m-anim-quick;
 }
 
 @keyframes appear {
