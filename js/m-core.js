@@ -240,18 +240,25 @@ xm.morph.create = function (parent, element) {
     element._morph = morph;
     element._parent = parent;
     element.style.opacity = 0;
+    element.style.display = "none";
     document.body.appendChild(morph);
 };
 xm.morph.show = function (element) {
+    // Make sure that we do not trigger animation whilst element is morphing
+    if(element._isMorphing)
+        return;
+    element._isMorphing = true;
+
     // Setup
     var morph = element._morph;
     var parent = element._parent;
+    morph.style.display = "block";
 
     // When parent arrives to the centre of target, start ink animation
     parent.addEventListener("transitionend",
         function (e) {
             // Start ripple effect
-            morph.pressedColor = parent.style.backgroundColor;
+            morph.pressedColor = window.getComputedStyle(parent, null).backgroundColor;
             xm.ripple.make({}, morph);
 
             // When ink animation finishes, hide the layer to reveal the original element
@@ -260,12 +267,14 @@ xm.morph.show = function (element) {
                     // Start ripple effect
                     morph.ink.style.opacity = 0;
                     parent.style.opacity = 0;
+                    element.style.removeProperty("display");
                     element.style.opacity = 1;
 
                     // Hide animation element and remove the handler
                     if(e.propertyName == "opacity") {
                         morph.style.display = "none";
                         e.target.removeEventListener(e.type, arguments.callee);
+                        element._isMorphing = false;
                     }
                 });
 
@@ -285,6 +294,11 @@ xm.morph.show = function (element) {
     parent.elevation = 0;
 };
 xm.morph.hide = function (element) {
+    // Make sure that we do not trigger animation whilst element is morphing
+    if(element._isMorphing)
+        return;
+    element._isMorphing = true;
+
     // Setup
     var morph = element._morph;
     var parent = element._parent;
@@ -302,12 +316,14 @@ xm.morph.hide = function (element) {
                 element.style.opacity = 0;
                 parent.style.opacity = 1;
 
-                // Remove the handler when ink disappears
+                // Clean up when ink disappears
                 if(e.propertyName == "transform") {
+                    element.style.display = "none";
                     parent.style.top = parent._bounds.top + "px";
                     parent.style.left = parent._bounds.left + "px";
                     parent.elevation = parent._originalElevation;
                     e.target.removeEventListener(e.type, arguments.callee);
+                    element._isMorphing = false;
                 }
             });
     }, 10);
