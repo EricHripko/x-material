@@ -1,0 +1,177 @@
+@import "m-import.scss";
+
+$m-tile-single-height: mu(6);
+$m-tile-double-height: mu(8.5);
+
+m-tile {
+  position: relative;
+  display: inline-block;
+
+  margin: mu(0.25);
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  overflow: hidden;
+
+  cursor: pointer;
+  outline: none;
+
+  & > m-text-view.primary {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: $m-tile-single-height;
+    line-height: $m-tile-single-height;
+
+    padding: 0 mu(2);
+
+    color: white;
+
+  }
+
+  & > m-text-view.hint {
+    display: none;
+  }
+
+  /*
+   * Image displayed on the tile.
+   */
+  & > m-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: $m-tile-single-height;
+
+    background-color: transparent !important;
+  }
+
+  /*
+   * Tile with a label that has a transparent background.
+   */
+  &.transparent {
+    & > m-image {
+      top: 0 !important;
+      bottom: 0 !important;
+    }
+
+    & > m-text-view.primary {
+      background-color: transparent !important;
+    }
+  }
+
+  /*
+   * Tile with a label that has a translucent background.
+   */
+  &.translucent {
+    & > m-text-view.primary {
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
+  }
+
+  /*
+   * Tile with a label that has a gradient background.
+   */
+  &.gradient {
+    /*
+     * Label is anchored at the bottom edge.
+     */
+    & > m-text-view.primary {
+      background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 1));
+    }
+
+    /*
+     * Label is anchored at the top edge.
+     */
+    &.top > m-text-view.primary {
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.75), transparent);
+    }
+  }
+
+  /*
+   * Non-translucent with label is anchored at the top edge.
+   */
+  &.top {
+    & > m-image {
+      top: $m-tile-single-height;
+      bottom: 0;
+    }
+
+    & > m-text-view.primary {
+      top: 0;
+    }
+  }
+
+  /*
+   * Two-line labels.
+   */
+  &.double {
+    /*
+     * Primary text.
+     */
+    & > m-text-view.primary {
+      height: $m-tile-double-height;
+    }
+
+
+    /*
+     * Hint text.
+     */
+    & > m-text-view.hint {
+      position: absolute;
+      bottom: mu(2);
+      left: 0;
+
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+
+      padding: 0 mu(2);
+
+      color: white;
+
+    }
+
+    /*
+     * Shift the image slightly up to accommodate the text.
+     */
+    & > m-image {
+      bottom: $m-tile-double-height;
+    }
+
+    /*
+     * Equally-sized primary and hint text.
+     */
+    &.equal {
+      & > m-text-view {
+        font-size: 14px !important;
+      }
+    }
+
+    /*
+     * Labels are anchored at the top.
+     */
+    &.top {
+      & > m-image {
+        top: $m-tile-double-height;
+        bottom: 0;
+      }
+
+      & > m-text-view.primary {
+        top: 0;
+      }
+
+      & > m-text-view.hint {
+        top: mu(5);
+        bottom: auto;
+      }
+    }
+  }
+}
