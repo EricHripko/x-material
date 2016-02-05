@@ -2,6 +2,12 @@
   @return $measure * 8px;
 }
 
+@mixin text-ellipsis() {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 $m-anim-quick-time: 200ms;
 $m-anim-quick: ease-in-out $m-anim-quick-time;
 $m-anim-quick-linear: linear 200ms;

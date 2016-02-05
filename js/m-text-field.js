@@ -26,7 +26,7 @@ xtag.register("m-text-field", {
         }
     },
     accessors: {
-        text: {
+        value: {
             attribute: {},
             get: function () {
                 return this.textView.value;
@@ -216,7 +216,7 @@ xtag.register("m-text-field", {
             }
 
             // Recover label
-            if(!this.text) {
+            if(!this.value) {
                 this.labelView.classList.remove("hidden");
             }
             // Remove the label and text/icon highlight
@@ -280,7 +280,7 @@ xtag.register("m-text-field", {
             }
 
             // Expand the label if no input was given
-            if(!this.text) {
+            if(!this.value) {
                 this.labelView.textStyle = "subheading";
                 this.labelView.classList.remove("collapsed");
 

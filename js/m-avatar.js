@@ -1,7 +1,8 @@
 xtag.register("m-avatar", {
+    mixins: ["m-element"],
     lifecycle: {
         created: function () {
-            this.style.backgroundColor = "#757575";
+            this.render();
         }
     },
     accessors: {
@@ -14,16 +15,11 @@ xtag.register("m-avatar", {
                 this._src = value;
                 this.style.background = "url('" + value + "')";
             }
-        },
-        themeColor: {
-            attribute: {},
-            get: function() {
-                return this._themeColor;
-            },
-            set: function(value) {
-                this._themeColor = value;
-                this.style.backgroundColor = colors[this.themeColor][400];
-            }
+        }
+    },
+    methods: {
+        render: function () {
+            this.style.backgroundColor = this.themeColor in colors ? colors[this.themeColor][400] : "#757575";
         }
     }
 });

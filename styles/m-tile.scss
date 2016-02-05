@@ -19,7 +19,11 @@ m-tile {
   cursor: pointer;
   outline: none;
 
+  transition: background $m-anim-quick;
+
   & > m-text-view.primary {
+    @include text-ellipsis;
+
     position: absolute;
     bottom: 0;
     left: 0;
@@ -34,6 +38,7 @@ m-tile {
 
     color: white;
 
+    transition: background $m-anim-quick;
   }
 
   & > m-text-view.hint {
@@ -125,6 +130,8 @@ m-tile {
      * Hint text.
      */
     & > m-text-view.hint {
+      @include text-ellipsis;
+      
       position: absolute;
       bottom: mu(2);
       left: 0;
