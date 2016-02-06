@@ -3,6 +3,10 @@
 $m-tile-single-height: mu(6);
 $m-tile-double-height: mu(8.5);
 
+.fouc m-tile {
+  animation: fade-in $m-anim-quick-time;
+}
+
 m-tile {
   position: relative;
   display: inline-block;

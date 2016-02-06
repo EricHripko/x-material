@@ -1,5 +1,9 @@
 @import "m-import.scss";
 
+.fouc m-item-single {
+  animation: fade-in $m-anim-quick-time;
+}
+
 m-item-single {
   display: inline-block;
   position: relative;
@@ -46,8 +50,4 @@ m-item-single {
     float: none;
     margin-right: 0;
   }
-}
-
-.fouc m-item-single {
-  animation: appear 200ms;
 }
