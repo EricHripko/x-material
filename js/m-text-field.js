@@ -33,6 +33,7 @@ xtag.register("m-text-field", {
             },
             set: function (value) {
                 this.textView.value = value;
+                this.render();
             }
         },
         hint: {
@@ -163,6 +164,22 @@ xtag.register("m-text-field", {
         }
     },
     methods: {
+        revealInput: function () {
+            // Collapse the label if floating
+            if(this.floating) {
+                this.labelView.textStyle = "caption";
+                this.labelView.classList.add("collapsed");
+                this.labelView.style.color = colors[this.themeColor][500];
+            }
+            // Hide the label if not floating
+            else {
+                this.labelView.classList.add("hidden");
+            }
+
+            // Display the input
+            this.textView.classList.add("visible");
+            this.textView.style.color = xm.current.text;
+        },
         render: function () {
             if(this.floating) {
                 this.renderFloating();
@@ -194,10 +211,12 @@ xtag.register("m-text-field", {
                 this.message.classList.remove("visible");
             }
 
+            // Lazy initialise the theme
+            if(!(this.themeColor in colors))
+                themeColor = this.themeColor = xm.current.color;
+
+            // Switch to active state
             if (this.collapsed || this.invalid) {
-                // Lazy initialise the theme
-                if(!(this.themeColor in colors))
-                    themeColor = this.themeColor = xm.current.color;
 
                 // Display the outline
                 this.activeBorder.style.borderBottomColor = themeColor in colors
@@ -214,6 +233,8 @@ xtag.register("m-text-field", {
                     this.icon.themeColor = themeColor;
                 return;
             }
+            if(this.value)
+                this.revealInput();
 
             // Recover label
             if(!this.value) {
@@ -251,17 +272,14 @@ xtag.register("m-text-field", {
                 this.message.classList.remove("visible");
             }
 
+            // Lazy initialise the theme
+            if(!(this.themeColor in colors))
+                themeColor = this.themeColor = xm.current.color;
+
             // Switch to active state
             if (this.collapsed || this.invalid) {
-                // Lazy initialise the theme
-                if(!(this.themeColor in colors))
-                    themeColor = this.themeColor = xm.current.color;
-
-                // Collapse the label
-                this.labelView.textStyle = "caption";
-                this.labelView.classList.add("collapsed");
-                if(themeColor in colors)
-                    this.labelView.style.color = colors[themeColor][500];
+                // Collapse label and reveal input
+                this.revealInput();
 
                 // Display the outline
                 this.activeBorder.style.borderBottomColor = themeColor in colors
@@ -269,15 +287,14 @@ xtag.register("m-text-field", {
                     : xm.current.divider;
                 this.activeBorder.classList.add("shown");
 
-                // Display the input
-                this.textView.classList.add("visible");
-                this.textView.style.color = xm.current.text;
 
                 // Highlight the icon if there's one
                 if(themeColor in colors && this.icon)
                     this.icon.themeColor = themeColor;
                 return;
             }
+            if(this.value)
+                this.revealInput();
 
             // Expand the label if no input was given
             if(!this.value) {
