@@ -49,7 +49,6 @@ xtag.register("m-icon", {
          */
         setPressedColor : function () {
             var color, alpha;
-            console.log(this.tint, this.icon.style.color);
             if(this.tint == "dark" || this.icon.style.color.indexOf("rgba(0") != -1) {
                 color = [0, 0, 0];
                 alpha = .12;

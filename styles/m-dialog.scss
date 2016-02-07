@@ -12,9 +12,6 @@ m-dialog {
   /* Space from top/bottom edge is minimum 3mu */
   max-height: calc(100% - #{mu(6)});
 
-  /* Accommodate the title */
-  padding-top: mu(8.5);
-
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -43,6 +40,9 @@ m-dialog {
   & > section {
     padding: mu(3);
     padding-top: 0;
+
+    /* Accommodate the title */
+    margin-top: mu(8.5);
   }
 
   /*
@@ -68,7 +68,10 @@ m-dialog {
    * Indicates a dialog without a title.
    */
   &.no-title {
-    padding-top: mu(3);
+    & > section {
+      /* Accommodate the title */
+      margin-top: mu(3);
+    }
 
     & > m-text-view {
       display: none;
