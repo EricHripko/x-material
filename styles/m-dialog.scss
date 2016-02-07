@@ -1,0 +1,77 @@
+@import "m-import.scss";
+
+m-dialog {
+  position: relative;
+
+  display: block;
+  box-sizing: border-box;
+
+  min-width: mu(35);
+  /* Space from left/right edge is minimum 5mu */
+  max-width: calc(100% - #{mu(10)});
+  /* Space from top/bottom edge is minimum 3mu */
+  max-height: calc(100% - #{mu(6)});
+
+  /* Accommodate the title */
+  padding-top: mu(8.5);
+
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+
+  /*
+   * Dialog title.
+   */
+  & > m-text-view.title {
+    @include text-ellipsis();
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: block;
+    padding: mu(3);
+    padding-bottom: mu(2.5);
+  }
+
+  /*
+   * Content section.
+   */
+  & > section {
+    padding: mu(3);
+    padding-top: 0;
+  }
+
+  /*
+   * Action for the dialog.
+   */
+  & > nav {
+    height: mu(4.5);
+    padding: mu(1);
+
+    text-align: right;
+
+    /*
+     * Button dimensions are condensed in the dialog.
+     */
+    & > m-button {
+      padding: 0 mu(1);
+
+      margin: 0 mu(0.5);
+    }
+  }
+
+  /*
+   * Indicates a dialog without a title.
+   */
+  &.no-title {
+    padding-top: mu(3);
+
+    & > m-text-view {
+      display: none;
+    }
+  }
+}

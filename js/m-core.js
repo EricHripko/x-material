@@ -22,7 +22,8 @@ var colors = {
     "green": {
         400: "#66BB6A",
         500: "#4CAF50",
-        600: "#43A047"
+        600: "#43A047",
+        700: "#388E3C"
     },
     "red": {
         300: "#E57373",
@@ -39,6 +40,10 @@ var colors = {
         700: "#C2185B"
     },
     "pink-accent": {
+        100: "FF80AB",
+        200: "#FF4081",
+        300: "#FF4081",
+        400: "#F50057",
         500: "#F50057",
         600: "#C51162",
         700: "#C51162"
@@ -68,6 +73,8 @@ var colors = {
         700: "#00796B"
     },
     "blue": {
+        200: "#90CAF9",
+        300: "#64B5F6",
         400: "#42A5F5",
         500: "#2196F3",
         600: "#1E88E5",
@@ -431,10 +438,19 @@ xtag.register("m-divider", {
     }
 });
 xtag.register("m-card", {
+    mixins: ["m-element"],
     lifecycle: {
         created: function () {
+        }
+    },
+    methods: {
+        render: function () {
+            // Default to current theme
+            var background = this.tint in colors ? colors[this.tint][400] : xm.current.card;
+            var style = this.theme in colors ? this.theme : xm.current.style;
             // Setup styles
-            this.style.backgroundColor = xm.current.card;
+            this.style.backgroundColor = background;
+            this.style.color = colors[style][500];
         }
     }
 });
