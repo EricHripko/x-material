@@ -1,0 +1,94 @@
+@import "m-import.scss";
+
+m-pick-date {
+  display: block;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /*
+   * Component header.
+   */
+  & > header {
+    display: block;
+
+    padding: mu(3);
+
+    /*
+     * Year and date labels.
+     */
+    & > m-text-view {
+      display: block;
+
+      cursor: pointer;
+
+      &.year {
+        margin-bottom: mu(1);
+      }
+    }
+
+  }
+
+  /*
+   * Calendar-like view.
+   */
+  & > section.date {
+    position: relative;
+
+    & > m-icon.control {
+      position: absolute;
+      top: mu(0.5);
+
+      cursor: pointer;
+
+      &.before {
+        left: 0;
+      }
+
+      &.after {
+        right: 0;
+      }
+    }
+
+    /*
+     * Month and year in the header.
+     */
+    & > m-text-view.date-header {
+      display: block;
+      height: mu(6);
+      line-height: mu(6);
+
+      text-align: center;
+
+      cursor: default;
+    }
+  }
+
+  /*
+   * Calendar with dates available for selection.
+   */
+  & > table.calendar {
+    width: 100%;
+
+    & th, & td {
+      text-align: center;
+
+      & > m-text-view {
+        display: block;
+        height: $m-icon-touch;
+        line-height: $m-icon-touch;
+
+        cursor: pointer;
+      }
+    }
+  }
+
+  /*
+   * Underlying input that dispatches the appropriate events.
+   */
+  & > input {
+    display: none;
+  }
+}
