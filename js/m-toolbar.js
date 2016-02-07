@@ -44,6 +44,7 @@ xtag.register("m-toolbar", {
                 // Add an icon
                 if(value) {
                     this.icon = document.createElement("m-icon");
+                    this.icon.selectable = true;
                     this.icon.classList.add("nav");
                     this.icon.src = value;
                     this.icon.tint = xm.current.appBarIcon;
@@ -58,19 +59,6 @@ xtag.register("m-toolbar", {
                     this.icon = undefined;
                 }
             }
-        }
-    },
-    events: {
-        "tapstart:delegate(m-icon)": function (e) {
-            // Animate ripple
-            this.pressedColor = colors[this.parentNode.tint][400];
-            xm.ripple.make(e, this);
-        },
-        "tapend:delegate(m-icon)": function (e) {
-            xm.ripple.reset(this);
-        },
-        "leave:delegate(m-icon)": function (e) {
-            xm.ripple.reset(this);
         }
     },
     methods: {

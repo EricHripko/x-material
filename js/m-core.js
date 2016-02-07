@@ -5,6 +5,7 @@ xm.focus = {};
 xm.input = {};
 xm.wash = {};
 xm.morph = {};
+xm.palette = {};
 
 // Set the background for the screen when ready
 document.addEventListener("DOMContentLoaded", function () {
@@ -92,9 +93,13 @@ var colors = {
         700: "#AFB42B"
     },
     "light": {
+        300: "rgba(255, 255, 255, 0.30)",
+        400: "rgba(255, 255, 255, 0.70)",
         500: "white"
     },
     "dark": {
+        300: "rgba(0, 0, 0, 0.38)",
+        400: "rgba(0, 0, 0, 0.54)",
         500: "rgba(0, 0, 0, .87)"
     }
 };
@@ -367,6 +372,14 @@ xm.wash.create = function () {
 xm.wash.toggle = function () {
     xm.wash.create();
     xm.wash.instance.classList.toggle("show");
+};
+
+// Convert the colour from hex representation to RGB
+xm.palette.hex2rgb = function (color) {
+    color = color.replace("#", "");
+    color = parseInt(color, 16);
+
+    return [color >> 16, color >> 8 & 0xFF, color & 0xFF];
 };
 
 // Mixin that provides common logic for all material elements

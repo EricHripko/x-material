@@ -2,12 +2,6 @@
   @return $measure * 8px;
 }
 
-@mixin text-ellipsis() {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
 $m-anim-quick-time: 200ms;
 $m-anim-quick: ease-in-out $m-anim-quick-time;
 $m-anim-quick-linear: linear 200ms;
@@ -19,3 +13,31 @@ $m-avatar-size: mu(5);
 $m-icon-size: mu(3);
 $m-icon-touch: mu(5);
 $m-toolbar-height: mu(7);
+
+@mixin text-ellipsis() {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin touch-icon() {
+  overflow: hidden;
+  height: $m-icon-touch;
+  width: $m-icon-touch;
+  line-height: $m-icon-touch;
+
+  text-align: center;
+
+  border-radius: 100%;
+  outline: none;
+
+  & > .material-icons {
+    line-height: $m-icon-touch;
+  }
+
+  & > m-focus {
+    border-radius: 100%;
+  }
+
+  z-index: 1;
+}
