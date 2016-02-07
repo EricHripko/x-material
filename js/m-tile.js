@@ -44,11 +44,13 @@ xtag.register("m-tile", {
     methods: {
         render: function () {
             // Default to grey theme
-            var theme = this.themeColor in colors ? this.themeColor : "grey";
+            var themeColor = this.tint in colors ? this.tint : "grey";
+            var style = this.theme in colors ? this.theme : xm.current.style;
             // Setup the tile & label backgrounds
-            this.style.backgroundColor = colors[theme][500];
-            this.textView.style.backgroundColor = colors[theme][700];
-            this.pressedColor = colors[theme][500];
+            this.style.backgroundColor = colors[themeColor][500];
+            this.textView.style.backgroundColor = colors[themeColor][700];
+            this.pressedColor = colors[themeColor][500];
+            this.textView.style.color = this.hintView.style.color = colors[style][500];
         }
     },
     events: {

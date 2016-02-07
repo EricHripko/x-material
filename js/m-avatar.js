@@ -19,7 +19,7 @@ xtag.register("m-avatar", {
     },
     methods: {
         render: function () {
-            this.style.backgroundColor = this.themeColor in colors ? colors[this.themeColor][400] : "#757575";
+            this.style.backgroundColor = this.tint in colors ? colors[this.tint][400] : "#757575";
         }
     }
 });

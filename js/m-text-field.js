@@ -169,7 +169,7 @@ xtag.register("m-text-field", {
             if(this.floating) {
                 this.labelView.textStyle = "caption";
                 this.labelView.classList.add("collapsed");
-                this.labelView.style.color = colors[this.themeColor][500];
+                this.labelView.style.color = colors[this.tint][500];
             }
             // Hide the label if not floating
             else {
@@ -198,7 +198,7 @@ xtag.register("m-text-field", {
             }
 
             // Choose red theme colour if input is in invalid state
-            var themeColor = !this.invalid ? this.themeColor : "red";
+            var themeColor = !this.invalid ? this.tint : "red";
 
             // Highlight message and counter in invalid state
             if(this.invalid) {
@@ -212,8 +212,8 @@ xtag.register("m-text-field", {
             }
 
             // Lazy initialise the theme
-            if(!(this.themeColor in colors))
-                themeColor = this.themeColor = xm.current.color;
+            if(!(this.tint in colors))
+                themeColor = this.tint = xm.current.color;
 
             // Switch to active state
             if (this.collapsed || this.invalid) {
@@ -250,7 +250,7 @@ xtag.register("m-text-field", {
         },
         renderFloating: function () {
             // Choose red theme colour if input is in invalid state
-            var themeColor = !this.invalid ? this.themeColor : "red";
+            var themeColor = !this.invalid ? this.tint : "red";
 
             // Set disabled border style and icon if necessary
             this.defaultBorder.style.borderBottomStyle = this.disabled ? "dashed" : "solid";
@@ -273,8 +273,8 @@ xtag.register("m-text-field", {
             }
 
             // Lazy initialise the theme
-            if(!(this.themeColor in colors))
-                themeColor = this.themeColor = xm.current.color;
+            if(!(this.tint in colors))
+                themeColor = this.tint = xm.current.color;
 
             // Switch to active state
             if (this.collapsed || this.invalid) {

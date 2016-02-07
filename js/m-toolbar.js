@@ -46,7 +46,7 @@ xtag.register("m-toolbar", {
                     this.icon = document.createElement("m-icon");
                     this.icon.classList.add("nav");
                     this.icon.src = value;
-                    this.icon.themeColor = xm.current.appBarIcon;
+                    this.icon.tint = xm.current.appBarIcon;
 
                     this.insertBefore(this.icon, this.textView);
                     return;
@@ -63,7 +63,7 @@ xtag.register("m-toolbar", {
     events: {
         "tapstart:delegate(m-icon)": function (e) {
             // Animate ripple
-            this.pressedColor = colors[this.parentNode.themeColor][400];
+            this.pressedColor = colors[this.parentNode.tint][400];
             xm.ripple.make(e, this);
         },
         "tapend:delegate(m-icon)": function (e) {
@@ -76,17 +76,17 @@ xtag.register("m-toolbar", {
     methods: {
         render: function() {
             // Identify rendering options
-            var opaque = this.opaque || this.themeColor in colors;
+            var opaque = this.opaque || this.tint in colors;
             var fallback = opaque ? xm.current.appBarBack : "transparent";
             // Perform rendering
             this.elevation = this.opaque ? this.defaultElevation : 0;
             this.textView.style.color = opaque ? xm.current.appBarFore : xm.current.text;
-            this.style.backgroundColor = this.themeColor in colors ? colors[this.themeColor][500] : fallback;
+            this.style.backgroundColor = this.tint in colors ? colors[this.tint][500] : fallback;
             this.textView.textStyle = this.classList.contains("fixed") ? "title" : "subheading";
             this.style.borderBottom = this.elevation > 0 ? "none" : "solid 1px " + xm.current.divider;
             // Icon rendering
             if(this.icon)
-                this.icon.themeColor = opaque ? xm.current.appBarIcon : "dark";
+                this.icon.tint = opaque ? xm.current.appBarIcon : "dark";
         }
     }
 });

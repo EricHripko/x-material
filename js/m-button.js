@@ -77,16 +77,16 @@ xtag.register("m-button", {
                 return;
             }
 
-            if(this.themeColor in colors) {
+            if(this.tint in colors) {
                 if(this.flat) {
                     this.style.backgroundColor = "transparent";
-                    this.textView.style.color = colors[this.themeColor][500];
-                    this.pressedColor = colors[this.themeColor][600];
+                    this.textView.style.color = colors[this.tint][500];
+                    this.pressedColor = colors[this.tint][600];
                 }
                 else {
-                    this.style.backgroundColor = colors[this.themeColor][500];
+                    this.style.backgroundColor = colors[this.tint][500];
                     this.textView.style.color = xm.current.appBarFore;
-                    this.pressedColor = colors[this.themeColor][600];
+                    this.pressedColor = colors[this.tint][600];
                 }
                 this.elevation = this.defaultElevation;
                 return;

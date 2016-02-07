@@ -29,7 +29,7 @@ xtag.register("m-image", {
     },
     methods: {
         render: function () {
-            this.style.backgroundColor = colors[this.themeColor in colors ? this.themeColor : "grey"][400];
+            this.style.backgroundColor = colors[this.tint in colors ? this.tint : "grey"][400];
         }
     }
 });

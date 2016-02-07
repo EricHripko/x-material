@@ -45,17 +45,17 @@ xtag.register("m-fab", {
     },
     methods: {
         render: function () {
-            if(this.themeColor in colors) {
-                this.style.backgroundColor = colors[this.themeColor][500];
+            if(this.tint in colors) {
+                this.style.backgroundColor = colors[this.tint][500];
                 if(this.iconView)
-                    this.iconView.themeColor = xm.current.appBarIcon;
-                this.pressedColor = colors[this.themeColor][600];
+                    this.iconView.tint = xm.current.appBarIcon;
+                this.pressedColor = colors[this.tint][600];
                 return;
             }
 
             this.style.backgroundColor = xm.current.elevatedBack;
             if(this.iconView)
-                this.iconView.themeColor = "dark";
+                this.iconView.tint = "dark";
             this.pressedColor = xm.current.elevatedPressed;
         },
         resetAnimation: function () {

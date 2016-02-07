@@ -384,19 +384,33 @@ xtag.mixins["m-element"] = {
             set: function(value) {
                 this._primary = value;
                 if(value)
-                    this.themeColor = xm.current.color;
+                    this.tint = xm.current.color;
 
                 if(this.render instanceof Function)
                     this.render();
             }
         },
-        themeColor: {
+        tint: {
             attribute: {},
             get: function() {
-                return this._themeColor;
+                return this._tint;
             },
             set: function(value) {
-                this._themeColor = value;
+                this._tint = value;
+
+                if(this.render instanceof Function)
+                    this.render();
+            }
+        },
+        theme: {
+            attribute: {},
+            get: function() {
+                return this._theme;
+            },
+            set: function(value) {
+                if(value != "light" && value != "dark")
+                    value = xm.current.style;
+                this._theme = value;
 
                 if(this.render instanceof Function)
                     this.render();
