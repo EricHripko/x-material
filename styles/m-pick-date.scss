@@ -8,6 +8,10 @@ m-pick-date {
   -ms-user-select: none;
   user-select: none;
 
+  transition: height $m-anim-quick;
+
+  overflow: hidden;
+
   /*
    * Component header.
    */
@@ -76,11 +80,16 @@ m-pick-date {
       text-align: center;
 
       & > m-text-view {
+        @include touch-icon();
         display: block;
-        height: $m-icon-touch;
-        line-height: $m-icon-touch;
 
         cursor: pointer;
+
+        &.chosen {
+          border-radius: 100%;
+        }
+
+        transition: background $m-anim-quick, color $m-anim-quick;
       }
     }
   }

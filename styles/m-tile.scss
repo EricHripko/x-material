@@ -133,7 +133,7 @@ m-tile {
      */
     & > m-text-view.hint {
       @include text-ellipsis;
-      
+
       position: absolute;
       bottom: mu(2);
       left: 0;

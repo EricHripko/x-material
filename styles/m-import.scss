@@ -21,6 +21,8 @@ $m-toolbar-height: mu(7);
 }
 
 @mixin touch-icon() {
+  position: relative;
+
   overflow: hidden;
   height: $m-icon-touch;
   width: $m-icon-touch;
