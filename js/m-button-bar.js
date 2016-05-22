@@ -31,7 +31,9 @@ xtag.register("m-button-bar", {
                     child.setAttribute("active", "active");
                 else
                     child.removeAttribute("active");
-                child.setAttribute("tint", active.getAttribute("selected-tint"));
+
+                if(active.getAttribute("selected-tint"))
+                    child.setAttribute("tint", active.getAttribute("selected-tint"));
 
                 if(child.render)
                     child.render();

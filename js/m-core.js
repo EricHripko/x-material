@@ -154,17 +154,21 @@ xm.Theme = function(color, style, toolbarStyle) {
         default:
             this.appBarBack = "#212121";
             this.appBarFore = "white";
+
             this.appBarIcon = "dark";
+            this.toolbar = "light";
             break;
         case "light":
             this.appBarBack = "#f5f5f5";
             this.appBarFore = "rgba(0, 0, 0, .87)";
             this.appBarIcon = "dark";
+            this.toolbar = "dark";
             break;
         case "dark":
             this.appBarBack = "#212121";
             this.appBarFore = "white";
             this.appBarIcon = "light";
+            this.toolbar = "light";
             break;
     }
 
