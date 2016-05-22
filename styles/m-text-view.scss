@@ -1,5 +1,8 @@
+@import "m-import.scss";
+
 m-text-view {
   font-family: 'Roboto', sans-serif;
+  transition: font-size $m-anim-quick;
 }
 
 m-text-view[text-style=display4], input.display4 {

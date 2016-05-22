@@ -65,13 +65,17 @@ xtag.register("m-icon", {
             this.pressedColor = "rgba(" + color[0] + "," + color[1] + "," + color[2] + "," + alpha + ")";
         },
         render: function () {
+            var tint = this.tint;
+            if(tint === "dark" || tint === "light")
+                tint += "-icon";
+
             if(this.inactive) {
-                this.icon.style.color = xm.current.iconInactive;
+                this.icon.style.color = colors[tint][400];
                 return;
             }
 
             if(this.tint in colors) {
-                this.icon.style.color = colors[this.tint][500];
+                this.icon.style.color = colors[tint][500];
                 this.setPressedColor();
                 return;
             }

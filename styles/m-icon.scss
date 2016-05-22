@@ -7,6 +7,7 @@ m-icon {
   font-size: 0;
   /* Fix for IE fonts in IE */
   font-feature-settings: 'liga';
+  outline: none;
 
   &[selectable] {
     @include touch-icon();
