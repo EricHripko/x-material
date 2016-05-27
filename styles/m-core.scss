@@ -119,6 +119,22 @@ m-card {
 
   &.margin-reset { margin: 0; }
   &.margin-bottom { margin-bottom: mu(1); }
+  &.tile { border-radius: 0; }
+}
+
+/*
+ * Button bar with single selection.
+ */
+m-button-bar {
+  display: block;
+  overflow: hidden;
+}
+
+m-button-bar.vertical {
+  & > * {
+    display: block;
+    float: none;
+  }
 }
 
 /*

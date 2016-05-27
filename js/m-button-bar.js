@@ -26,6 +26,7 @@ xtag.register("m-button-bar", {
          * @param active Active button.
          */
         setActive: function (active) {
+            var parent = this;
             this.getChildren().forEach(function (child) {
                 if(child == active)
                     child.setAttribute("active", "active");
@@ -37,6 +38,9 @@ xtag.register("m-button-bar", {
 
                 if(child.render)
                     child.render();
+
+                if(active.getAttribute("selected-tint"))
+                    parent.style.backgroundColor = colors[active.getAttribute("selected-tint")][400] || child.style.backgroundColor;
             });
         }
     },
