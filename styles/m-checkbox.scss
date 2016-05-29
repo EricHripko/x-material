@@ -1,0 +1,27 @@
+@import "m-import.scss";
+
+m-checkbox {
+  display: inline-block;
+  width: mu(3);
+  height: mu(3);
+
+  m-icon {
+    position: absolute;
+    top: mu(1);
+    left: mu(1);
+
+    width: mu(3);
+    height: mu(3);
+
+    transition: transform $m-anim-quick, opacity $m-anim-quick;
+    &.foreground { transform: scale(0); }
+    &.background { opacity: 1; }
+  }
+
+  &[checked] {
+    m-icon.foreground { transform: scale(1); }
+    m-icon.background { opacity: 0; }
+  }
+
+  @include touch-icon();
+}

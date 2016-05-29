@@ -70,7 +70,7 @@ xtag.register("m-icon", {
                 tint += "-icon";
 
             if(this.inactive) {
-                this.icon.style.color = colors[tint][400];
+                this.icon.style.color = tint in colors ? colors[tint][400] : xm.current.iconInactive;
                 return;
             }
 

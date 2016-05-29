@@ -1,6 +1,7 @@
 @import "m-import.scss";
 
 m-text-view {
+  display: inline-block;
   font-family: 'Roboto', sans-serif;
   transition: font-size $m-anim-quick;
 }
