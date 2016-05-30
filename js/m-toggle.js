@@ -51,11 +51,18 @@ xtag.register("m-toggle", {
     },
     methods: {
         render: function () {
-            this.icon.tint = this.active && !this.inactive ? this.tint : undefined;
-            this.icon.inactive = this.inactive;
-            this.icon.src = this.radio ? "radio_button_checked" : "check_box";
-            this.background.src = this.radio ? "radio_button_unchecked" : "check_box_outline_blank";
-            this.background.inactive = this.inactive;
+            this.icon.setAttribute("tint", this.active && !this.inactive ? this.tint : undefined);
+            this.icon.setAttribute("src", this.radio ? "radio_button_checked" : "check_box");
+            this.background.setAttribute("src", this.radio ? "radio_button_unchecked" : "check_box_outline_blank");
+
+            if(this.inactive) {
+                this.icon.setAttribute("inactive", "");
+                this.background.setAttribute("inactive", this.inactive);
+            }
+            else {
+                this.background.removeAttribute("inactive");
+                this.icon.removeAttribute("inactive");
+            }
         }
     },
     events: {
