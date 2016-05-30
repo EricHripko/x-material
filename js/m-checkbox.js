@@ -12,15 +12,15 @@ xtag.register("m-checkbox", {
         }
     },
     accessors: {
-        checked: {
+        active: {
             attribute: {
                 boolean: true
             },
             get: function () {
-                return this._checked;
+                return this._active;
             },
             set: function (value) {
-                this._checked = value;
+                this._active = value;
                 this.render();
             }
         },
@@ -51,7 +51,7 @@ xtag.register("m-checkbox", {
     },
     methods: {
         render: function () {
-            this.icon.tint = this.checked && !this.inactive ? this.tint : undefined;
+            this.icon.tint = this.active && !this.inactive ? this.tint : undefined;
             this.icon.inactive = this.inactive;
             this.icon.src = this.radio ? "radio_button_checked" : "check_box";
             this.background.src = this.radio ? "radio_button_unchecked" : "check_box_outline_blank";
@@ -72,7 +72,8 @@ xtag.register("m-checkbox", {
             xm.ripple.reset(this);
 
             this.classList.add("animate");
-            this.checked = !this.checked;
+            this.active = !this.active;
+            xtag.fireEvent(this, "MaterialButtonSelected");
         },
         focus: function () {
             xm.focus.make(this);

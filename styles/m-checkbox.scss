@@ -18,7 +18,7 @@ m-checkbox {
     &.background { opacity: 1; }
   }
 
-  &[checked] {
+  &[active] {
     m-icon.foreground { transform: scale(1); }
     m-icon.background { opacity: 0; }
   }
