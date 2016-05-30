@@ -44,26 +44,6 @@ xtag.register("m-icon", {
         }
     },
     methods: {
-        /*
-         * Set the pressed colour for the icon based on selected settings.
-         */
-        setPressedColor : function () {
-            var color, alpha;
-            if(this.tint == "dark" || this.icon.style.color.indexOf("rgba(0") != -1) {
-                color = [0, 0, 0];
-                alpha = .12;
-            }
-            else if(this.tint == "light" || this.icon.style.color == "white") {
-                color = [255, 255, 255];
-                alpha = .30;
-            }
-            else if(this.tint in colors) {
-                color = xm.palette.hex2rgb(colors[this.tint][500]);
-                alpha = .26;
-            }
-
-            this.pressedColor = "rgba(" + color[0] + "," + color[1] + "," + color[2] + "," + alpha + ")";
-        },
         render: function () {
             var tint = this.tint;
             if(tint === "dark" || tint === "light")

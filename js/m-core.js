@@ -82,6 +82,7 @@ var colors = {
         700: "#1976D2"
     },
     "grey": {
+        50:  "#FAFAFA",
         400: "#BDBDBD",
         500: "#9E9E9E",
         600: "#757575",
@@ -252,6 +253,7 @@ xm.focus.create = function (element) {
     // Initialise the animation
     if(!element.shade) {
         element.shade = document.createElement("m-focus");
+        element.shade.style.background = xm.current.style == "light" ? "rgba(0, 0, 0, 0.12)" : "rgba(255, 255, 255, 0.12)";
         element.appendChild(element.shade);
     }
 };
@@ -454,6 +456,32 @@ xtag.mixins["m-element"] = {
                 if(this.render instanceof Function)
                     this.render();
             }
+        }
+    },
+    methods: {
+        getPressedColor: function (tint) {
+            var color, alpha;
+            if(tint == "dark" || (this.icon && this.icon.style.color.indexOf("rgba(0") != -1)) {
+                color = [0, 0, 0];
+                alpha = .12;
+            }
+            else if(tint == "light" || (this.icon && this.icon.style.color == "white")) {
+                color = [255, 255, 255];
+                alpha = .30;
+            }
+            else {
+                tint = tint in colors ? tint : xm.current.color;
+                color = xm.palette.hex2rgb(colors[tint][500]);
+                alpha = .26;
+            }
+
+            return "rgba(" + color[0] + "," + color[1] + "," + color[2] + "," + alpha + ")";
+        },
+        /*
+         * Set the pressed colour for the icon based on selected settings.
+         */
+        setPressedColor : function () {
+            this.pressedColor = this.getPressedColor(this.tint);
         }
     }
 };

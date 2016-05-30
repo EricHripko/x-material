@@ -1,4 +1,4 @@
-xtag.register("m-checkbox", {
+xtag.register("m-toggle", {
     mixins: ["m-element"],
     content: "<m-icon class='background' src='check_box_outline_blank'></m-icon>\
               <m-icon class='foreground' src='check_box'></m-icon>",
@@ -71,7 +71,6 @@ xtag.register("m-checkbox", {
 
             xm.ripple.reset(this);
 
-            this.classList.add("animate");
             this.active = !this.active;
             xtag.fireEvent(this, "MaterialButtonSelected");
         },
