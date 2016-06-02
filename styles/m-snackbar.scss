@@ -1,0 +1,68 @@
+@import "m-import.scss";
+
+m-snackbar {
+  display: block;
+  min-width: mu(36);
+  max-width: mu(71);
+  height: mu(6);
+
+  position: fixed;
+  left: mu(16);
+  bottom: mu(-6);
+  z-index: 10;
+
+  box-sizing: border-box;
+  padding: 0 mu(3);
+
+  color: white;
+  border-radius: 2px 2px 0 0;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+
+  transition: bottom $m-anim-quick;
+
+  /*
+   * Text displayed on the snack bar.
+   */
+  & > m-text-view {
+    margin: mu(1.75) 0;
+
+    opacity: 0;
+    transition: opacity $m-anim-medium;
+  }
+
+  /*
+   * Action button.
+   */
+  & > m-button {
+    margin: mu(0.75) 0;
+    margin-left: mu(6);
+    float: right;
+
+    opacity: 0;
+    transition: opacity $m-anim-medium, margin $m-anim-medium;
+  }
+
+  /*
+   * State for when snack bar is displayed.
+   */
+  &.show {
+    bottom: 0;
+
+    & > m-text-view { opacity: 1; }
+    & > m-button { opacity: 1; }
+  }
+
+  /*
+   * State for when snack bar has no action button.
+   */
+  &.collapsed {
+    & > m-button {
+      display: none;
+    }
+  }
+}

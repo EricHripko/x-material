@@ -4,6 +4,9 @@ m-text-view {
   display: inline-block;
   font-family: 'Roboto', sans-serif;
   transition: font-size $m-anim-quick;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 m-text-view[text-style=display4], input.display4 {
@@ -44,6 +47,8 @@ m-text-view[text-style=subheading], input.subheading {
 m-text-view[text-style=body2], input.body2 {
   font-weight: 500;
   font-size: 14px;
+
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 
 m-text-view, m-text-view[text-style=body1], input.body1 {
@@ -60,4 +65,6 @@ m-text-view[text-style=button] {
   font-weight: 500;
   font-size: 14px;
   text-transform: uppercase;
+
+  -webkit-font-smoothing: subpixel-antialiased;
 }

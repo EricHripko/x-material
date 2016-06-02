@@ -121,7 +121,7 @@ var colors = {
 };
 
 // Material theme
-xm.Theme = function(color, style, toolbarStyle) {
+xm.Theme = function(color, accent, style, toolbarStyle) {
     // Setup general styles
     switch (style) {
         default:
@@ -182,6 +182,7 @@ xm.Theme = function(color, style, toolbarStyle) {
 
     // Set theme primary and accent colours
     this.color = color;
+    this.accent = accent;
     this.style = style;
 };
 
@@ -195,10 +196,11 @@ xm.getTheme = function () {
 
     // Set default options if nothing found
     var primary = metaValue("xm:primary") || "indigo";
+    var accent = metaValue("xm:accent") || "pink-accent";
     var style = metaValue("xm:style") || "light";
     var toolbar = metaValue("xm:toolbar") || "dark";
 
-    return new xm.Theme(primary, style, toolbar);
+    return new xm.Theme(primary, accent, style, toolbar);
 };
 
 // Setup the default current theme
@@ -425,7 +427,7 @@ xtag.mixins["m-element"] = {
             set: function(value) {
                 this._primary = value;
                 if(value)
-                    this.tint = xm.current.color;
+                    this.tint = this.alternative ? xm.current.accent : xm.current.color;
 
                 if(this.render instanceof Function)
                     this.render();

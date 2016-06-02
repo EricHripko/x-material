@@ -126,13 +126,16 @@ m-card {
 }
 
 /*
- * Button bar with single selection.
+ * Button bar with single selection and horizontal item alignment.
  */
 m-button-bar {
   display: block;
   overflow: hidden;
 }
 
+/*
+ * Button bar with vertical item alignment.
+ */
 m-button-bar.vertical {
   & > * {
     display: block;
