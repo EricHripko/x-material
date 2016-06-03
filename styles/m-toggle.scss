@@ -5,6 +5,13 @@ m-toggle {
   width: mu(3);
   height: mu(3);
 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  cursor: pointer;
+
   m-icon {
     position: absolute;
     top: mu(1);

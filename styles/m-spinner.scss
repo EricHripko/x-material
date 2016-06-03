@@ -1,0 +1,55 @@
+@import "m-import.scss";
+
+/*
+ * Spinner stylesheet was inspired by MaterialUI's CircularProgress
+ * https://github.com/callemall/material-ui/blob/master/src/CircularProgress/CircularProgress.js
+ */
+m-spinner {
+  display: block;
+  width: mu(5);
+  height: mu(5);
+
+  /*
+   * Indeterminate animation.
+   */
+  &[indeterminate] svg {
+    animation: spin 3s linear infinite;
+    transition-duration: 0ms;
+  }
+
+  /*
+   * Animated idicator.
+   */
+  svg {
+    width: mu(5);
+    height: mu(5);
+
+    shape-rendering: geometricPrecision;
+    stroke-dasharray: 0 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+
+    transition: all 500ms linear;
+
+    &.step1 {
+      stroke-dasharray: 50 200;
+      transition-duration: 250ms;
+    }
+
+    &.step2 {
+      stroke-dasharray: 90 200;
+      stroke-dashoffset: -35;
+      transition-duration: 700ms;
+    }
+
+    &.step3 {
+      stroke-dasharray: 90 200;
+      stroke-dashoffset: -125;
+      transition-duration: 600ms;
+    }
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

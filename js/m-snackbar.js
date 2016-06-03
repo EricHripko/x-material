@@ -76,7 +76,7 @@ xtag.register("m-snackbar", {
                 return this.actionButton.text;
             },
             set: function (value) {
-                this.actionButton.text = value;
+                this.actionButton.setAttribute("text", value);
                 this.render();
             }
         }
@@ -94,7 +94,7 @@ xtag.register("m-snackbar", {
             }
 
             // Show or hide button depending on whether the action was specified
-            if(this.actionButton.text)
+            if(this.actionButton.getAttribute("text"))
                 this.classList.remove("collapsed");
             else
                 this.classList.add("collapsed");

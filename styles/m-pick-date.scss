@@ -74,6 +74,7 @@ m-pick-date {
    * Calendar with dates available for selection.
    */
   & > table.calendar {
+    position: relative;
     width: 100%;
 
     & th, & td {
@@ -99,5 +100,14 @@ m-pick-date {
    */
   & > input {
     display: none;
+  }
+}
+
+@keyframes swipe-left {
+  from {
+    left: 0;
+  }
+  to {
+    left: -100%;
   }
 }
