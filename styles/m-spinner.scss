@@ -6,24 +6,26 @@
  */
 m-spinner {
   display: block;
-  width: mu(5);
-  height: mu(5);
+
+  position: relative;
+
+  transition: opacity $m-anim-quick;
 
   /*
    * Indeterminate animation.
    */
-  &[indeterminate] svg {
+  &[indeterminate] {
     animation: spin 3s linear infinite;
-    transition-duration: 0ms;
+
+    svg.progress {
+      transition-duration: 0ms;
+    }
   }
 
   /*
-   * Animated idicator.
+   * Animated indicator.
    */
-  svg {
-    width: mu(5);
-    height: mu(5);
-
+  svg.progress {
     shape-rendering: geometricPrecision;
     stroke-dasharray: 0 200;
     stroke-dashoffset: 0;
@@ -47,6 +49,21 @@ m-spinner {
       stroke-dashoffset: -125;
       transition-duration: 600ms;
     }
+  }
+
+  /*
+   * Layers.
+   */
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: mu(5);
+    height: mu(5);
+
+    margin-top: mu(-2.5);
+    margin-left: mu(-2.5);
   }
 }
 

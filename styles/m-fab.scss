@@ -40,7 +40,7 @@ m-fab {
 
   z-index: 4;
 
-  transition: transform $m-anim-quick-linear, box-shadow $m-anim-quick;
+  transition: transform $m-anim-quick-linear, box-shadow $m-anim-quick, background $m-anim-quick;
 
   &.active {
     z-index: 51;
