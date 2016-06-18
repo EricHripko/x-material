@@ -43,3 +43,31 @@ $m-toolbar-height: mu(7);
 
   z-index: 1;
 }
+
+@mixin grid($cells, $gutter) {
+  m-row {
+    display: flex;
+    flex-flow: row wrap;
+
+    m-cell {
+      display: block;
+
+      padding: 0 mu($gutter);
+      box-sizing: border-box;
+
+      background: #ccc;
+    }
+
+    @for $i from 1 through $cells {
+      m-cell[size="#{$i}"] {
+        width: #{100%/$cells*$i};
+      }
+    }
+
+    @for $i from $cells through 12 {
+      m-cell[size="#{$i}"] {
+        width: 100%;
+      }
+    }
+  }
+}

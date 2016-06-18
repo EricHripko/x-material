@@ -114,7 +114,6 @@ m-divider {
  */
 m-card {
   display: block;
-  margin: mu(1);
   border-radius: 2px;
 
   overflow: hidden;
@@ -191,6 +190,19 @@ div.wash.show {
  */
 .morph-originator {
   transition: top $m-anim-quick, left $m-anim-quick;
+}
+
+/*
+ * Grid.
+ */
+@include grid(12, 1.5);
+
+@media only screen and (max-width: 480px) {
+  @include grid(4, 1);
+}
+
+@media only screen and (min-width: 481px) and (max-width: 720px) {
+  @include grid(8, 1.5);
 }
 
 @keyframes appear {

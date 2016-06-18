@@ -71,6 +71,7 @@ xtag.register("m-nav-button", {
             if(this.colored) {
                 // Colour background: secondary by default, primary when selected
                 var style = this.theme in colors ? this.theme : xm.current.toolbar;
+                style = style == "dark" ? "light" : "dark";
 
                 if(this.active) {
                     this.style.backgroundColor = background;
